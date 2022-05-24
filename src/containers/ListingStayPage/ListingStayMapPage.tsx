@@ -51,12 +51,6 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
 
         {/* SECTION */}
         <SectionSubscribe2 className="py-24 lg:py-32" />
-
-        {/* SECTION */}
-        <div className="relative py-16 mb-24 lg:mb-32">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div>
       </div>
     </div>
   );

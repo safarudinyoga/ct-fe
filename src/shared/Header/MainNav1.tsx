@@ -36,7 +36,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
         </div>
       </div>
       <div className="bg-slate-200">
-        <div className="container">
+        <div className="container py-2">
           <Navigation />
         </div>
       </div>

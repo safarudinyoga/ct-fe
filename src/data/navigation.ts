@@ -196,7 +196,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/listing-flights",
     name: "Pesawat",
     isNew: true,
   },
@@ -208,13 +208,13 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/listing-real-estate",
     name: "Villa & Apartment",
     isNew: true,
   },
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/listing-car",
     name: "Rental Mobil",
     isNew: true,
   },

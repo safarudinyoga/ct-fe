@@ -7,7 +7,7 @@ const SiteHeader = () => {
   let location = useLocation();
 
   return location.pathname.includes("home-1-header-2") ? (
-    <Header2 />
+    <Header />
   ) : (
     <Header />
   );
