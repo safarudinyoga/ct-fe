@@ -25,7 +25,6 @@ import PageContact from "containers/PageContact/PageContact";
 import PageAbout from "containers/PageAbout/PageAbout";
 import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageLogin from "containers/PageLogin/PageLogin";
-import PageSubcription from "containers/PageSubcription/PageSubcription";
 import BlogPage from "containers/BlogPage/BlogPage";
 import BlogSingle from "containers/BlogPage/BlogSingle";
 import PageAddListing1 from "containers/PageAddListing1/PageAddListing1";
@@ -103,13 +102,13 @@ export const pages: Page[] = [
   { path: "/about", component: PageAbout },
   { path: "/signup", component: PageSignUp },
   { path: "/login", component: PageLogin },
-  { path: "/subscription", component: PageSubcription },
+  // { path: "/subscription", component: PageSubcription },
   //
 ];
 
 const Routes = () => {
   return (
-    <BrowserRouter basename="/chisfis">
+    <BrowserRouter basename="/caritempat/v2/">
       <ScrollToTop />
       <SiteHeader />
 

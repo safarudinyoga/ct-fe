@@ -64,18 +64,18 @@ const demoChildMenus: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/",
-    name: "Online Booking",
+    name: "Hotel",
   },
   {
     id: ncNanoId(),
     href: "/home-2",
-    name: "Real Estate",
+    name: "Rental Mobil",
     isNew: true,
   },
   {
     id: ncNanoId(),
     href: "/home-1-header-2",
-    name: "Home - Header 2",
+    name: "Tiket Pesawat",
     isNew: true,
   },
 ];
@@ -188,124 +188,72 @@ const templatesChildrenMenus: NavItemType[] = [
 export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
-    href: "/",
-    name: "Home",
-    type: "dropdown",
-    children: demoChildMenus,
+    // href: "/",
+    href: "/home-1-header-2",
+    name: "Hotel",
+    // children: demoChildMenus,
     isNew: true,
   },
   {
     id: ncNanoId(),
     href: "#",
-    name: "Five columns",
-    type: "megaMenu",
-    megaMenu: megaMenuDemo,
-  },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Listing Page",
-    type: "dropdown",
+    name: "Pesawat",
     isNew: true,
-    children: [
-      {
-        id: ncNanoId(),
-        href: "/listing-stay",
-        name: "Stay listing",
-        type: "dropdown",
-        children: [
-          { id: ncNanoId(), href: "/listing-stay", name: "Stay page" },
-          {
-            id: ncNanoId(),
-            href: "/listing-stay-map",
-            name: "Stay page (map)",
-          },
-          { id: ncNanoId(), href: "/listing-stay-detail", name: "Stay Detail" },
-        ],
-      },
-
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-experiences",
-        name: "Experiences listing",
-        type: "dropdown",
-        children: [
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences",
-            name: "Experiences page",
-          },
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences-map",
-            name: "Experiences page (map)",
-          },
-          {
-            id: ncNanoId(),
-            href: "/listing-experiences-detail",
-            name: "Experiences Detail",
-          },
-        ],
-      },
-
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-car",
-        name: "Cars listing",
-        type: "dropdown",
-        children: [
-          { id: ncNanoId(), href: "/listing-car", name: "Cars page" },
-          { id: ncNanoId(), href: "/listing-car-map", name: "Cars page (map)" },
-          { id: ncNanoId(), href: "/listing-car-detail", name: "Car Detail" },
-        ],
-      },
-
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-real-estate",
-        name: "Real Estate Listings",
-        isNew: true,
-        type: "dropdown",
-        children: [
-          {
-            id: ncNanoId(),
-            href: "/listing-real-estate",
-            name: "Real Estate Listings",
-            isNew: true,
-          },
-          {
-            id: ncNanoId(),
-            href: "/listing-real-estate-map",
-            name: "Real Estate Maps",
-            isNew: true,
-          },
-        ],
-      },
-      //
-      {
-        id: ncNanoId(),
-        href: "/listing-flights",
-        name: "Flights listing",
-        isNew: true,
-      },
-    ],
   },
   {
     id: ncNanoId(),
     href: "#",
-    name: "Templates",
-    type: "dropdown",
-    children: templatesChildrenMenus,
+    name: "Kereta",
+    isNew: true,
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "Villa & Apartment",
+    isNew: true,
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "Rental Mobil",
+    isNew: true,
+  },
+  {
+    id: ncNanoId(),
+    href: "/listing-experiences",
+    name: "Food & Beverage",
+    // children: templatesChildrenMenus,
   },
 
   {
     id: ncNanoId(),
     href: "#",
-    name: "Other pages",
-    type: "dropdown",
-    children: otherPageChildMenus,
+    name: "Event",
+  },
+];
+
+export const NAVIGATION_TOP: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/https://play.google.com/store/apps/details?id=com.digitcode.ct",
+    name: "Unduh Aplikasi",
+    isNew: true,
+    targetBlank: true,
+    type: "icon",
+    icon: "las la-mobile text-primary"
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "Daftar Jadi Partner",
+    type: "icon",
+    icon: "las la-handshake"
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "Pesanan Saya",
+    type: "icon",
+    icon: "las la-shopping-cart"
   },
 ];

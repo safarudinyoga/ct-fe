@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export interface HeaderProps {}
+export interface HeaderProps { }
 
 const Header: FC<HeaderProps> = () => {
   const [isTop, setisTop] = useState(true);
@@ -34,7 +34,7 @@ const Header: FC<HeaderProps> = () => {
       className="nc-Header lg:sticky lg:top-0 w-full lg:left-0 lg:right-0 z-40"
     >
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Caritempat</title>
       </Helmet>
 
       {/* NAV */}

@@ -2,6 +2,8 @@ import Logo from "shared/Logo/Logo";
 import SocialsList1 from "shared/SocialsList1/SocialsList1";
 import { CustomLink } from "data/types";
 import React from "react";
+import googlePlay from "images/google-play.png";
+import appStore from "images/app-store.png";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -12,46 +14,43 @@ export interface WidgetFooterMenu {
 const widgetMenus: WidgetFooterMenu[] = [
   {
     id: "5",
-    title: "Getting started",
+    title: "Perusahaan",
     menus: [
-      { href: "#", label: "Installation" },
-      { href: "#", label: "Release Notes" },
-      { href: "#", label: "Upgrade Guide" },
-      { href: "#", label: "Browser Support" },
-      { href: "#", label: "Editor Support" },
+      { href: "#", label: "Blog" },
+      { href: "#", label: "Karir" },
+      { href: "#", label: "Corporate" },
+      { href: "#", label: "Partner" },
+      { href: "#", label: "Perlindungan" },
     ],
   },
   {
     id: "1",
-    title: "Explore",
+    title: "Produk",
     menus: [
-      { href: "#", label: "Design features" },
-      { href: "#", label: "Prototyping" },
-      { href: "#", label: "Design systems" },
-      { href: "#", label: "Pricing" },
-      { href: "#", label: "Security" },
+      { href: "#", label: "Hotel" },
+      { href: "#", label: "Tiket Pesawat" },
+      { href: "#", label: "Tiket Kereta Api" },
+      { href: "#", label: "Sewa Mobil" },
+      { href: "#", label: "F&B" },
     ],
   },
   {
     id: "2",
-    title: "Resources",
+    title: "Dukungan",
     menus: [
-      { href: "#", label: "Best practices" },
-      { href: "#", label: "Support" },
-      { href: "#", label: "Developers" },
-      { href: "#", label: "Learn design" },
-      { href: "#", label: "Releases" },
+      { href: "#", label: "Pusat Bantuan" },
+      { href: "#", label: "Kebijakan Privasi" },
+      { href: "#", label: "Syarat & Ketentuan" },
+      { href: "#", label: "Kebijakan Pengembalian" },
+      { href: "#", label: "Daftarkan Hotel Anda" },
     ],
   },
   {
     id: "4",
-    title: "Community",
+    title: "Download",
     menus: [
-      { href: "#", label: "Discussion Forums" },
-      { href: "#", label: "Code of Conduct" },
-      { href: "#", label: "Community Resources" },
-      { href: "#", label: "Contributing" },
-      { href: "#", label: "Concurrent Mode" },
+      { href: "#", icon: googlePlay, label: "" },
+      { href: "#", icon: appStore, label: "" },
     ],
   },
 ];
@@ -73,6 +72,9 @@ const Footer: React.FC = () => {
               >
                 {item.label}
               </a>
+              {menu.title == "Download" ? (
+                <img src={item.icon} alt="" className="block max-h-12" />
+              ) : null}
             </li>
           ))}
         </ul>
@@ -92,6 +94,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
         {widgetMenus.map(renderWidgetMenuItem)}
+      </div>
+      <div className="text-center items-center col mt-28">
+        <span className="text-center"> &copy; PT Cari Tempat Indonesia. All Rights </span>
       </div>
     </div>
   );

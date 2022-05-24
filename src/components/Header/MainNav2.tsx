@@ -16,9 +16,8 @@ export interface MainNav2Props {
 const MainNav2: FC<MainNav2Props> = ({ isTop }) => {
   return (
     <div
-      className={`nc-MainNav1 nc-MainNav2 relative z-10 ${
-        isTop ? "onTop " : "notOnTop backdrop-filter"
-      }`}
+      className={`nc-MainNav1 nc-MainNav2 relative z-10 ${isTop ? "onTop " : "notOnTop backdrop-filter"
+        }`}
     >
       <div className="container py-5 relative flex justify-between items-center space-x-4 xl:space-x-8">
         <div className="flex justify-start flex-grow items-center space-x-3 sm:space-x-8 lg:space-x-10">

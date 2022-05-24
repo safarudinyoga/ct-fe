@@ -19,7 +19,8 @@ export interface NavItemType {
   targetBlank?: boolean;
   children?: NavItemType[];
   megaMenu?: MegamenuItem[];
-  type?: "dropdown" | "megaMenu" | "none";
+  type?: "dropdown" | "megaMenu" | "icon" | "none";
+  icon?: string;
 }
 
 export interface NavigationItemProps {
@@ -121,6 +122,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
       </Popover>
     );
   };
+
   const renderMegaMenuNavlink = (item: NavItemType) => {
     return (
       <li key={item.id}>
@@ -147,9 +149,8 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
     return (
       <Popover
         as="li"
-        className={`menu-item menu-dropdown relative ${
-          menuDropdown.isNew ? "menuIsNew_lv1" : ""
-        }`}
+        className={`menu-item menu-dropdown relative ${menuDropdown.isNew ? "menuIsNew_lv1" : ""
+          }`}
         onMouseEnter={() => onMouseEnterMenu(menuDropdown.id)}
         onMouseLeave={() => onMouseLeaveMenu(menuDropdown.id)}
       >
@@ -295,11 +296,36 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
     );
   };
 
+  // ===================== MENU MAIN ICON =====================
+  const renderMenuIconItem = (item: NavItemType) => {
+    return (
+      <NavLink
+        exact
+        strict
+        target={item.targetBlank ? "_blank" : undefined}
+        rel="noopener noreferrer"
+        className="group px-3 py-1.5  border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-large hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        to={{
+          pathname: item.href || undefined,
+        }}
+        activeClassName="!font-semibold !text-neutral-800 bg-neutral-100 dark:bg-neutral-800 dark:!text-neutral-100"
+      >
+        {item.type && (
+          <i className={`${item.icon} mr-1`}>
+          </i>
+        )}
+        {item.name}
+      </NavLink>
+    );
+  };
+
   switch (menuItem.type) {
     case "megaMenu":
       return renderMegaMenu(menuItem);
     case "dropdown":
       return renderDropdownMenu(menuItem);
+    case "icon":
+      return renderMenuIconItem(menuItem);
     default:
       return <li className="menu-item">{renderMainItem(menuItem)}</li>;
   }

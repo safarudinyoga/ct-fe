@@ -2,6 +2,7 @@
 export interface CustomLink {
   label: string;
   href: string;
+  icon?: string;
   targetBlank?: boolean;
 }
 

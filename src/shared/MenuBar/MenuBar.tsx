@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import NavMobile from "shared/Navigation/NavMobile";
 
-export interface MenuBarProps {}
+export interface MenuBarProps { }
 const MenuBar: React.FC<MenuBarProps> = () => {
   const [isVisable, setIsVisable] = useState(false);
 
@@ -18,7 +18,7 @@ const MenuBar: React.FC<MenuBarProps> = () => {
       <Transition appear show={isVisable} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-50 overflow-y-auto"
+          className="fixed inset-0 z-40 overflow-y-auto"
           onClose={handleCloseMenu}
         >
           <div className="fixed left-0 top-0 bottom-0 w-full md:w-auto z-max outline-none focus:outline-none">

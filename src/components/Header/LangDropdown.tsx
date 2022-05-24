@@ -2,44 +2,24 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { GlobeAltIcon } from "@heroicons/react/outline";
 import { Fragment } from "react";
+import flagId from 'images/id.png'
+import flagEn from 'images/eng.png'
 
 export const headerLanguage = [
   {
-    id: "English",
-    name: "English",
-    description: "United State",
+    id: "ID",
+    name: "Indonesia",
+    description: "",
     href: "##",
+    icon: flagId,
     active: true,
   },
   {
-    id: "Vietnamese",
-    name: "Vietnamese",
-    description: "Vietnamese",
+    id: "EN",
+    name: "English",
+    description: "",
     href: "##",
-  },
-  {
-    id: "Francais",
-    name: "Francais",
-    description: "Belgique",
-    href: "##",
-  },
-  {
-    id: "Francais",
-    name: "Francais",
-    description: "Canada",
-    href: "##",
-  },
-  {
-    id: "Francais",
-    name: "Francais",
-    description: "Belgique",
-    href: "##",
-  },
-  {
-    id: "Francais",
-    name: "Francais",
-    description: "Canada",
-    href: "##",
+    icon: flagEn,
   },
 ];
 
@@ -56,7 +36,7 @@ export default function LangDropdown() {
             >
               <GlobeAltIcon className="w-[18px] h-[18px] opacity-80" />
 
-              <span className="ml-2">Language</span>
+              <span className="ml-2">Bahasa</span>
               <ChevronDownIcon
                 className={`${open ? "-rotate-180" : "text-opacity-70"}
                   ml-2 h-4 w-4  group-hover:text-opacity-80 transition ease-in-out duration-150`}
@@ -72,25 +52,22 @@ export default function LangDropdown() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-10 w-screen max-w-[280px] px-4 mt-3 right-0 sm:px-0">
+              <Popover.Panel className="absolute z-10 w-screen max-w-[280px] px-2 mt-3 right-0 sm:px-0">
                 <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-7 lg:grid-cols-2">
+                  <div className="relative grid gap-5 bg-white dark:bg-neutral-800 p-7 lg:grid-cols-2">
                     {headerLanguage.map((item, index) => (
                       <a
                         key={index}
                         href={item.href}
                         onClick={() => close()}
-                        className={`flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${
-                          item.active
-                            ? "bg-gray-100 dark:bg-neutral-700"
-                            : "opacity-80"
-                        }`}
+                        className={`flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${item.active
+                          ? "bg-gray-100 dark:bg-neutral-700"
+                          : "opacity-80"
+                          }`}
                       >
-                        <div className="">
+                        <div className="row-start-1">
+                          <img src={item.icon} alt="flag" className="w-7 h-5 object-fill" />
                           <p className="text-sm font-medium ">{item.name}</p>
-                          <p className="text-xs text-gray-500 dark:text-neutral-400">
-                            {item.description}
-                          </p>
                         </div>
                       </a>
                     ))}

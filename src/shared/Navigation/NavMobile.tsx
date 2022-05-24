@@ -3,12 +3,11 @@ import ButtonClose from "shared/ButtonClose/ButtonClose";
 import Logo from "shared/Logo/Logo";
 import { Disclosure } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
-import { NavItemType } from "./NavigationItem";
-import { NAVIGATION_DEMO } from "data/navigation";
+import NavigationItemWithRouter, { NavItemType } from "./NavigationItem";
+import { NAVIGATION_DEMO, NAVIGATION_TOP } from "data/navigation";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import SocialsList from "shared/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -116,16 +115,8 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <div className="py-6 px-5">
         <Logo />
         <div className="flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm">
-          <span>
-            Discover the most outstanding articles on all topics of life. Write
-            your stories and share them
-          </span>
-
           <div className="flex justify-between items-center mt-4">
             <SocialsList itemClass="w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300" />
-            <span className="block">
-              <SwitchDarkMode className="bg-neutral-100 dark:bg-neutral-800" />
-            </span>
           </div>
         </div>
         <span className="absolute right-2 top-2 p-1">
@@ -135,9 +126,14 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5 space-x-4">
-        <a href="/#" target="_blank" rel="noopener noreferrer">
-          <ButtonPrimary>Get Template</ButtonPrimary>
+      <ul className="flex">
+        {NAVIGATION_TOP.map((item) => (
+          <NavigationItemWithRouter key={item.id} menuItem={item} />
+        ))}
+      </ul>
+      <div className="flex items-center justify-between py-6 px-6 space-x-4">
+        <a href="/#" target="_blank" rel="noopener noreferrer p-3">
+          <ButtonPrimary className="w-20">Sign In</ButtonPrimary>
         </a>
       </div>
     </div>

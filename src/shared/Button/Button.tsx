@@ -21,7 +21,7 @@ export interface ButtonProps {
 const Button: FC<ButtonProps> = ({
   className = "text-neutral-700 dark:text-neutral-200",
   translate = "",
-  sizeClass = "px-4 py-3 sm:px-6",
+  sizeClass = "px-2 py-2 sm:px-6",
   fontSize = "text-sm sm:text-base font-medium",
   disabled = false,
   href,
@@ -29,7 +29,7 @@ const Button: FC<ButtonProps> = ({
   targetBlank,
   type,
   loading,
-  onClick = () => {},
+  onClick = () => { },
 }) => {
   const CLASSES =
     `nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors ${fontSize} ${sizeClass} ${translate} ${className} ` +

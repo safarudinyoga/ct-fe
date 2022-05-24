@@ -100,7 +100,7 @@ function PageHome2() {
   return (
     <div className="nc-PageHome2 relative overflow-hidden">
       <Helmet>
-        <title>Chisfis || Real Estate React Template</title>
+        <title>Caritempat</title>
       </Helmet>
       {/* GLASSMOPHIN */}
       {/* <BgGlassmorphism /> */}
