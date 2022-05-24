@@ -1,74 +1,69 @@
 import SectionHero from "components/SectionHero/SectionHero";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import React from "react";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionOurFeatures from "components/SectionOurFeatures/SectionOurFeatures";
 import SectionGridFeaturePlaces from "./SectionGridFeaturePlaces";
-import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 import { TaxonomyType } from "data/types";
-import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
 import SectionGridCategoryBox from "components/SectionGridCategoryBox/SectionGridCategoryBox";
 import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
-import SectionVideos from "./SectionVideos";
-import SectionClientSay from "components/SectionClientSay/SectionClientSay";
 import { Helmet } from "react-helmet";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
     href: "/listing-stay",
-    name: "New Yourk",
+    name: "Bali",
     taxonomy: "category",
-    count: 188288,
+    count: 225,
     thumbnail:
-      "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/fc/79/ec/we-looking-so-beautiful.jpg?w=300&h=300",
   },
   {
     id: "2",
     href: "/listing-stay",
-    name: "Singapore",
+    name: "Lembang",
     taxonomy: "category",
-    count: 188288,
+    count: 152,
     thumbnail:
-      "https://images.pexels.com/photos/7740160/pexels-photo-7740160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://asset.kompas.com/crops/Dgq6wRKvCca6RoBzlCV4sbY28PU=/0x175:900x775/750x500/data/photo/2022/01/06/61d6a990c4220.jpg",
   },
   {
     id: "2",
     href: "/listing-stay",
-    name: "Paris",
+    name: "Tasikmalaya",
     taxonomy: "category",
-    count: 188288,
+    count: 78,
     thumbnail:
-      "https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://www.gotravelly.com/blog/wp-content/uploads/2018/08/tonjong-canyon-cipajutah.jpg",
   },
   {
     id: "2",
     href: "/listing-stay",
-    name: "London",
+    name: "Raja Ampat",
     taxonomy: "category",
-    count: 188288,
+    count: 55,
     thumbnail:
-      "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      "https://phinemo.com/wp-content/uploads/2018/01/wisata-raja-ampat-3.jpg",
   },
   {
     id: "2",
     href: "/listing-stay",
-    name: "Tokyo",
+    name: "Tasikmalaya",
     taxonomy: "category",
-    count: 188288,
+    count: 88,
     thumbnail:
-      "https://images.pexels.com/photos/4151484/pexels-photo-4151484.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      "https://indonesia.tripcanvas.co/id/wp-content/uploads/sites/2/2020/05/6-c-1-Dengdeng-by-tedy_syah23.jpg",
   },
   {
     id: "2",
     href: "/listing-stay",
-    name: "Maldives",
+    name: "Labuan Bajo",
     taxonomy: "category",
-    count: 188288,
+    count: 46,
     thumbnail:
-      "https://images.pexels.com/photos/3250613/pexels-photo-3250613.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://sgp1.digitaloceanspaces.com/tz-mag-id/wp-content/uploads/2021/09/040409090505/Penginapan-Labuan-Bajo-36.jpg",
   },
 ];
 
@@ -149,7 +144,7 @@ function PageHome() {
         </div>
 
         {/* SECTION */}
-        <SectionHowItWork />
+        {/* <SectionHowItWork /> */}
 
         {/* SECTION 1 */}
         <div className="relative py-16">
@@ -163,15 +158,6 @@ function PageHome() {
             sliderStyle="style2"
             uniqueClassName="PageHome_s2"
           />
-        </div>
-
-        {/* SECTION */}
-        <SectionSubscribe2 />
-
-        {/* SECTION */}
-        <div className="relative py-16">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
         </div>
 
         {/* SECTION */}
@@ -193,13 +179,8 @@ function PageHome() {
         />
 
         {/* SECTION */}
-        <SectionVideos />
+        <SectionSubscribe2 />
 
-        {/* SECTION */}
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionClientSay uniqueClassName="PageHome_" />
-        </div>
       </div>
     </div>
   );

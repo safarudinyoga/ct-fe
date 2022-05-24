@@ -5,20 +5,20 @@ import StaySearchForm from "./StaySearchForm";
 import RentalCarSearchForm from "./RentalCarSearchForm";
 import FlightSearchForm from "./FlightSearchForm";
 
-export type SearchTab = "Stays" | "Experiences" | "Cars" | "Flights";
+export type SearchTab = "Hotel" | "Villa" | "Mobil" | "Pesawat" | "Kereta" | "Apartment";
 
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Stays" | "Experiences" | "Cars" | "Flights";
+  currentPage?: "Hotel" | "Villa" | "Mobil" | "Pesawat" | "Kereta" | "Apartment";
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
   className = "",
-  currentTab = "Stays",
+  currentTab = "Hotel",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Stays", "Experiences", "Cars", "Flights"];
+  const tabs: SearchTab[] = ["Hotel", "Villa", "Mobil", "Pesawat", "Kereta", "Apartment"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
@@ -29,11 +29,10 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           return (
             <li
               onClick={() => setTabActive(tab)}
-              className={`flex-shrink-0 flex items-center cursor-pointer text-sm lg:text-base font-medium ${
-                active
-                  ? ""
-                  : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-400"
-              } `}
+              className={`flex-shrink-0 flex items-center cursor-pointer text-sm lg:text-base font-medium ${active
+                ? ""
+                : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-400"
+                } `}
               key={tab}
             >
               {active && (
@@ -50,14 +49,18 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   const renderForm = () => {
     const isArchivePage = !!currentPage && !!currentTab;
     switch (tabActive) {
-      case "Stays":
+      case "Hotel":
         return <StaySearchForm haveDefaultValue={isArchivePage} />;
-      case "Experiences":
+      case "Villa":
         return <ExperiencesSearchForm haveDefaultValue={isArchivePage} />;
-      case "Cars":
+      case "Mobil":
         return <RentalCarSearchForm haveDefaultValue={isArchivePage} />;
-      case "Flights":
+      case "Pesawat":
         return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+      case "Kereta":
+        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+      case "Apartment":
+        return <ExperiencesSearchForm haveDefaultValue={isArchivePage} />;
 
       default:
         return null;
