@@ -27,7 +27,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
           <div className="hidden items-center xl:flex space-x-1">
             <div className="px-1" />
             <LangDropdown />
-            <ButtonPrimary href="/login">Sign up</ButtonPrimary>
+            <ButtonPrimary href="/login">Sign In</ButtonPrimary>
           </div>
           <div className="flex items-center xl:hidden">
             <div className="px-1" />
