@@ -50,7 +50,7 @@ const DEMO_CATS: TaxonomyType[] = [
   {
     id: "2",
     href: "/listing-stay",
-    name: "Tasikmalaya",
+    name: "Garut",
     taxonomy: "category",
     count: 88,
     thumbnail:
@@ -137,14 +137,11 @@ function PageHome() {
         {/* SECTION2 */}
         <SectionOurFeatures />
 
-        {/* SECTION */}
+        {/* SECTION POPULAR DESTINASI */}
         <div className="relative py-16">
           <BackgroundSection />
           <SectionGridFeaturePlaces />
         </div>
-
-        {/* SECTION */}
-        {/* <SectionHowItWork /> */}
 
         {/* SECTION 1 */}
         <div className="relative py-16">
@@ -169,17 +166,17 @@ function PageHome() {
           <SectionBecomeAnAuthor />
         </div>
 
-        {/* SECTION 1 */}
+        {/* SECTION 1  GROUP BY PRICE TERMURAH*/}
         <SectionSliderNewCategories
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
+          heading="Explore by cheaps of stays"
+          subHeading="Explore houses based on 10 cheaps of stays"
           categoryCardType="card5"
           itemPerRow={5}
           uniqueClassName="PageHome_s3"
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 /> */}
 
       </div>
     </div>

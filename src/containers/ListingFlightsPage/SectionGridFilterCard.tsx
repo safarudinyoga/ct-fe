@@ -11,7 +11,7 @@ export interface SectionGridFilterCardProps {
 const DEMO_DATA: FlightCardProps["data"][] = [
   {
     id: "1",
-    price: "$4,100",
+    price: "Rp. 4,100",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
       name: "Korean Air",
@@ -19,7 +19,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "2",
-    price: "$3,380",
+    price: "Rp. 3,380",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
       name: "Singapore Airlines",
@@ -27,7 +27,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "3",
-    price: "$2,380",
+    price: "Rp. 2,380",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
       name: "Philippine Airlines",
@@ -35,7 +35,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "1",
-    price: "$4,100",
+    price: "Rp. 4,100",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
       name: "Korean Air",
@@ -43,7 +43,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "2",
-    price: "$3,380",
+    price: "Rp. 3,380",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
       name: "Singapore Airlines",
@@ -51,7 +51,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "1",
-    price: "$4,100",
+    price: "Rp. 4,100",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
       name: "Korean Air",
@@ -59,7 +59,7 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
   {
     id: "2",
-    price: "$3,380",
+    price: "Rp. 3,380",
     airlines: {
       logo: "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
       name: "Singapore Airlines",
@@ -67,16 +67,23 @@ const DEMO_DATA: FlightCardProps["data"][] = [
   },
 ];
 
+const DEMO_DATA_2: FlightCardProps["data"][] = [];
+
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
 }) => {
+  if (DEMO_DATA_2.length == 0) {
+    return (
+      <></>
+    )
+  }
   return (
     <div
-      className={`nc-SectionGridFilterCard ${className}`}
+      className={`nc-SectionGridFilterCard Rp. {className} mb-5`}
       data-nc-id="SectionGridFilterCard"
     >
       <Heading2
-        heading="Singapore - Tokyo"
+        heading="Jakarta - Surabaya"
         subHeading={
           <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
             22 flights
@@ -90,7 +97,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
         <TabFilters />
       </div>
       <div className="lg:p-10 lg:bg-neutral-50 lg:dark:bg-black/20 grid grid-cols-1 gap-6  rounded-3xl">
-        {DEMO_DATA.map((item, index) => (
+        {DEMO_DATA_2.map((item, index) => (
           <FlightCard key={index} data={item} />
         ))}
 

@@ -1,40 +1,71 @@
+import SectionHero from "components/SectionHero/SectionHero";
 import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import React, { useEffect } from "react";
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionOurFeatures from "components/SectionOurFeatures/SectionOurFeatures";
-import SectionHowItWork from "components/SectionHowItWork/SectionHowItWork";
+import SectionGridFeaturePlaces from "./SectionGridFeaturePlaces";
 import BackgroundSection from "components/BackgroundSection/BackgroundSection";
+import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 import { TaxonomyType } from "data/types";
-import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
+import SectionGridCategoryBox from "components/SectionGridCategoryBox/SectionGridCategoryBox";
+import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
 import { Helmet } from "react-helmet";
-import SectionHero2 from "components/SectionHero2/SectionHero2";
-//
-import logo1 from "images/logos/nomal/1.png";
-import logo1Dark from "images/logos/dark/1.png";
-//
-import logo2 from "images/logos/nomal/2.png";
-import logo2Dark from "images/logos/dark/2.png";
-//
-import logo3 from "images/logos/nomal/3.png";
-import logo3Dark from "images/logos/dark/3.png";
-//
-import logo4 from "images/logos/nomal/4.png";
-import logo4Dark from "images/logos/dark/4.png";
-//
-import logo5 from "images/logos/nomal/5.png";
-import logo5Dark from "images/logos/dark/5.png";
-//
 
-import HIW1img from "images/HIW2-1.png";
-import HIW2img from "images/HIW2-2.png";
-import HIW3img from "images/HIW2-3.png";
-import HIW1imgDark from "images/HIW2-1-dark.png";
-import HIW2imgDark from "images/HIW2-2-dark.png";
-import HIW3imgDark from "images/HIW2-3-dark.png";
-import rightImgPng from "images/our-features-2.png";
-
-import SectionGridFeatureProperty from "./SectionGridFeatureProperty";
-import SectionDowloadApp from "./SectionDowloadApp";
+const DEMO_CATS: TaxonomyType[] = [
+  {
+    id: "1",
+    href: "/listing-stay",
+    name: "Bali",
+    taxonomy: "category",
+    count: 225,
+    thumbnail:
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/fc/79/ec/we-looking-so-beautiful.jpg?w=300&h=300",
+  },
+  {
+    id: "2",
+    href: "/listing-stay",
+    name: "Lembang",
+    taxonomy: "category",
+    count: 152,
+    thumbnail:
+      "https://asset.kompas.com/crops/Dgq6wRKvCca6RoBzlCV4sbY28PU=/0x175:900x775/750x500/data/photo/2022/01/06/61d6a990c4220.jpg",
+  },
+  {
+    id: "2",
+    href: "/listing-stay",
+    name: "Tasikmalaya",
+    taxonomy: "category",
+    count: 78,
+    thumbnail:
+      "https://www.gotravelly.com/blog/wp-content/uploads/2018/08/tonjong-canyon-cipajutah.jpg",
+  },
+  {
+    id: "2",
+    href: "/listing-stay",
+    name: "Raja Ampat",
+    taxonomy: "category",
+    count: 55,
+    thumbnail:
+      "https://phinemo.com/wp-content/uploads/2018/01/wisata-raja-ampat-3.jpg",
+  },
+  {
+    id: "2",
+    href: "/listing-stay",
+    name: "Garut",
+    taxonomy: "category",
+    count: 88,
+    thumbnail:
+      "https://indonesia.tripcanvas.co/id/wp-content/uploads/sites/2/2020/05/6-c-1-Dengdeng-by-tedy_syah23.jpg",
+  },
+  {
+    id: "2",
+    href: "/listing-stay",
+    name: "Labuan Bajo",
+    taxonomy: "category",
+    count: 46,
+    thumbnail:
+      "https://sgp1.digitaloceanspaces.com/tz-mag-id/wp-content/uploads/2021/09/040409090505/Penginapan-Labuan-Bajo-36.jpg",
+  },
+];
 
 const DEMO_CATS_2: TaxonomyType[] = [
   {
@@ -85,120 +116,68 @@ const DEMO_CATS_2: TaxonomyType[] = [
 ];
 
 function PageHome2() {
-  useEffect(() => {
-    const $body = document.querySelector("body");
-    if ($body) {
-      $body.className = "theme-cyan-blueGrey";
-    }
-    return () => {
-      if ($body) {
-        $body.className = "";
-      }
-    };
-  }, []);
-
   return (
-    <div className="nc-PageHome2 relative overflow-hidden">
+    <div className="nc-PageHome relative overflow-hidden">
       <Helmet>
         <title>Caritempat</title>
       </Helmet>
       {/* GLASSMOPHIN */}
-      {/* <BgGlassmorphism /> */}
+      <BgGlassmorphism />
 
       <div className="container relative space-y-24 mb-24 lg:space-y-32 lg:mb-32">
-        <SectionHero2 className="lg:mt-2" />
+        {/* SECTION HERO */}
+        <SectionHero className="pt-10 lg:pt-20 pb-16" />
 
         {/* SECTION 1 */}
-        <div className="ncSectionLogos grid grid-cols-3 lg:grid-cols-5 gap-5 sm:gap-16">
-          <div className="flex items-end justify-center">
-            <img className="block dark:hidden" src={logo1} alt="logo1" />
-            <img className="hidden dark:block" src={logo1Dark} alt="logo1" />
-          </div>
-          <div className="flex items-end justify-center">
-            <img className="block dark:hidden" src={logo4} alt="logo4" />
-            <img className="hidden dark:block" src={logo4Dark} alt="logo4" />
-          </div>
-          <div className="flex items-end justify-center">
-            <img className="block dark:hidden" src={logo2} alt="logo2" />
-            <img className="hidden dark:block" src={logo2Dark} alt="logo2" />
-          </div>
-          <div className="flex items-end justify-center">
-            <img className="block dark:hidden" src={logo3} alt="logo3" />
-            <img className="hidden dark:block" src={logo3Dark} alt="logo3" />
-          </div>
+        <SectionSliderNewCategories
+          categories={DEMO_CATS}
+          uniqueClassName="PageHome_s1"
+        />
 
-          <div className="flex items-end justify-center">
-            <img className="block dark:hidden" src={logo5} alt="logo5" />
-            <img className="hidden dark:block" src={logo5Dark} alt="logo5" />
-          </div>
+        {/* SECTION2 */}
+        <SectionOurFeatures />
+
+        {/* SECTION POPULAR DESTINASI */}
+        <div className="relative py-16">
+          <BackgroundSection />
+          <SectionGridFeaturePlaces />
+        </div>
+
+        {/* SECTION 1 */}
+        <div className="relative py-16">
+          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+          <SectionSliderNewCategories
+            categories={DEMO_CATS_2}
+            categoryCardType="card4"
+            itemPerRow={4}
+            heading="Suggestions for discovery"
+            subHeading="Popular places to stay that Chisfis recommends for you"
+            sliderStyle="style2"
+            uniqueClassName="PageHome_s2"
+          />
         </div>
 
         {/* SECTION */}
-        <SectionHowItWork
-          data={[
-            {
-              id: 1,
-              img: HIW1img,
-              imgDark: HIW1imgDark,
-              title: "Smart search",
-              desc: "Name the area or type of home you are looking for the search bar. Our app will find you the perfect match.",
-            },
-            {
-              id: 2,
-              img: HIW2img,
-              imgDark: HIW2imgDark,
-              title: "Choose property",
-              desc: "From the number of options our app will provide, you can select any property that you like to explore.",
-            },
-            {
-              id: 3,
-              img: HIW3img,
-              imgDark: HIW3imgDark,
-              title: "Book you property",
-              desc: "Find a home or space from our search bar. Enter your specific location, property type and price range.",
-            },
-          ]}
-        />
+        <SectionGridCategoryBox />
 
         {/* SECTION */}
         <div className="relative py-16">
           <BackgroundSection />
-          <SectionGridFeatureProperty />
+          <SectionBecomeAnAuthor />
         </div>
 
-        {/* SECTION2 */}
-        <SectionOurFeatures type="type2" rightImg={rightImgPng} />
-
-        {/* SECTION */}
-        <SectionDowloadApp />
-
-        {/* SECTION 1 */}
+        {/* SECTION 1  GROUP BY PRICE TERMURAH*/}
         <SectionSliderNewCategories
-          categories={DEMO_CATS_2}
-          categoryCardType="card4"
-          itemPerRow={4}
-          heading="Suggestions for discovery"
-          subHeading="Popular places to stay that Chisfis recommends for you"
-          uniqueClassName="PageHome2_s1"
-        />
-
-        {/* SECTION */}
-        <div className="relative py-16">
-          <BackgroundSection className="bg-neutral-100 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox boxCard="box2" />
-        </div>
-
-        {/* SECTION 1 */}
-        <SectionSliderNewCategories
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
+          heading="Explore by cheaps of stays"
+          subHeading="Explore houses based on 10 cheaps of stays"
           categoryCardType="card5"
           itemPerRow={5}
-          uniqueClassName="PageHome2_s2"
+          uniqueClassName="PageHome_s3"
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 /> */}
+
       </div>
     </div>
   );

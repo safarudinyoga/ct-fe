@@ -188,16 +188,15 @@ const templatesChildrenMenus: NavItemType[] = [
 export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
-    // href: "/",
-    href: "/home-1-header-2",
-    name: "Hotel",
-    // children: demoChildMenus,
+    href: "/listing-flights",
+    name: "Pesawat",
     isNew: true,
   },
   {
     id: ncNanoId(),
-    href: "/listing-flights",
-    name: "Pesawat",
+    // href: "/",
+    href: "/home-1-header-2",
+    name: "Hotel",
     isNew: true,
   },
   {
@@ -222,7 +221,6 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     id: ncNanoId(),
     href: "/listing-experiences",
     name: "Food & Beverage",
-    // children: templatesChildrenMenus,
   },
 
   {

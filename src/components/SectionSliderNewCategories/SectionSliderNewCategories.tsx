@@ -140,7 +140,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   };
 
   return (
-    <div className={`nc-SectionSliderNewCategories ${className}`}>
+    <div className={`nc-SectionSliderNewCategories ${className} mt-10 pb-10`}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
         <Heading
           desc={subHeading}

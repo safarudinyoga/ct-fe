@@ -42,7 +42,6 @@ const stopPoints = [
     name: "Any number of stops",
   },
 ];
-
 //
 const TabFilters = () => {
   const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
@@ -112,8 +111,7 @@ const TabFilters = () => {
               <Tab
                 key={category}
                 className={({ selected }) =>
-                  `w-full py-2.5 text-sm leading-5 font-medium text-primary-700 rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 ${
-                    selected ? "bg-white shadow" : " hover:bg-white/[0.15]"
+                  `w-full py-2.5 text-sm leading-5 font-medium text-primary-700 rounded-lg focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60 ${selected ? "bg-white shadow" : " hover:bg-white/[0.15]"
                   }`
                 }
               >
@@ -151,19 +149,19 @@ const TabFilters = () => {
                         setCatTimes((catTimes) =>
                           !idx
                             ? {
-                                ...catTimes,
-                                "Take Off": {
-                                  ...posts,
-                                  Departure: val,
-                                },
-                              }
+                              ...catTimes,
+                              "Take Off": {
+                                ...posts,
+                                Departure: val,
+                              },
+                            }
                             : {
-                                ...catTimes,
-                                Landing: {
-                                  ...posts,
-                                  Departure: val,
-                                },
-                              }
+                              ...catTimes,
+                              Landing: {
+                                ...posts,
+                                Departure: val,
+                              },
+                            }
                         )
                       }
                       allowCross={false}
@@ -185,19 +183,19 @@ const TabFilters = () => {
                         setCatTimes((catTimes) =>
                           !idx
                             ? {
-                                ...catTimes,
-                                "Take Off": {
-                                  ...posts,
-                                  Arrival: val,
-                                },
-                              }
+                              ...catTimes,
+                              "Take Off": {
+                                ...posts,
+                                Arrival: val,
+                              },
+                            }
                             : {
-                                ...catTimes,
-                                Landing: {
-                                  ...posts,
-                                  Arrival: val,
-                                },
-                              }
+                              ...catTimes,
+                              Landing: {
+                                ...posts,
+                                Arrival: val,
+                              },
+                            }
                         )
                       }
                       allowCross={false}
@@ -208,6 +206,7 @@ const TabFilters = () => {
             })}
           </Tab.Panels>
         </Tab.Group>
+
       </div>
     );
   };
@@ -220,10 +219,9 @@ const TabFilters = () => {
             <Popover.Button
               className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none
                ${open ? "!border-primary-500 " : ""}
-                ${
-                  !!airlinesStates.length
-                    ? "!border-primary-500 bg-primary-50"
-                    : ""
+                ${!!airlinesStates.length
+                  ? "!border-primary-500 bg-primary-50"
+                  : ""
                 }
                 `}
             >
@@ -304,10 +302,9 @@ const TabFilters = () => {
             <Popover.Button
               className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none 
               ${open ? "!border-primary-500 " : ""}
-                ${
-                  !!stopPontsStates.length
-                    ? "!border-primary-500 bg-primary-50"
-                    : ""
+                ${!!stopPontsStates.length
+                  ? "!border-primary-500 bg-primary-50"
+                  : ""
                 }
                 `}
             >
@@ -377,9 +374,8 @@ const TabFilters = () => {
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none ${
-                open ? "!border-primary-500 " : ""
-              }`}
+              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none ${open ? "!border-primary-500 " : ""
+                }`}
             >
               <span>Flight time</span>
               <i className="las la-angle-down ml-2"></i>
@@ -397,6 +393,52 @@ const TabFilters = () => {
                 <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900   border border-neutral-200 dark:border-neutral-700">
                   <div className="relative flex flex-col px-5 py-6 space-y-5">
                     {renderTabsTimeFlightTab()}
+                  </div>
+                  <div className="p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
+                    <ButtonThird onClick={close} sizeClass="px-4 py-2 sm:px-5">
+                      Clear
+                    </ButtonThird>
+                    <ButtonPrimary
+                      onClick={close}
+                      sizeClass="px-4 py-2 sm:px-5"
+                    >
+                      Apply
+                    </ButtonPrimary>
+                  </div>
+                </div>
+              </Popover.Panel>
+            </Transition>
+          </>
+        )}
+      </Popover>
+    );
+  };
+
+  const renderChangeDate = () => {
+    return (
+      <Popover className="relative">
+        {({ open, close }) => (
+          <>
+            <Popover.Button
+              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 focus:outline-none ${open ? "!border-primary-500 " : ""
+                }`}
+            >
+              <span>Ubah Pencarian</span>
+              <i className="las la-angle-down ml-2"></i>
+            </Popover.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 translate-y-1"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 translate-y-1"
+            >
+              <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
+                <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900   border border-neutral-200 dark:border-neutral-700">
+                  <div className="relative flex flex-col px-5 py-6 space-y-5">
+
                   </div>
                   <div className="p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
                     <ButtonThird onClick={close} sizeClass="px-4 py-2 sm:px-5">
@@ -585,11 +627,10 @@ const TabFilters = () => {
   const renderTabOnSale = () => {
     return (
       <div
-        className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border focus:outline-none cursor-pointer transition-all ${
-          isOnSale
-            ? "border-primary-500 bg-primary-50 text-primary-700"
-            : "border-neutral-300 dark:border-neutral-700"
-        }`}
+        className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border focus:outline-none cursor-pointer transition-all ${isOnSale
+          ? "border-primary-500 bg-primary-50 text-primary-700"
+          : "border-neutral-300 dark:border-neutral-700"
+          }`}
         onClick={() => setIsOnSale(!isOnSale)}
       >
         <span>On sale</span>
@@ -839,13 +880,14 @@ const TabFilters = () => {
   return (
     <div className="flex lg:space-x-4">
       {/* FOR DESKTOP */}
-      <div className="hidden lg:flex space-x-4">
+      <div className="hidden lg:flex space-x-5">
         {renderTabsTypeOfAirlines()}
         {renderTabsTripTime()}
         {renderTabsStopPoints()}
         {renderTabsPriceRage()}
         {renderTabsTimeFlight()}
         {renderTabOnSale()}
+        {/* {renderChangeDate()} */}
       </div>
 
       {/* FOR RESPONSIVE MOBILE */}

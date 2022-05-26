@@ -4,6 +4,7 @@ import { CustomLink } from "data/types";
 import React from "react";
 import googlePlay from "images/google-play.png";
 import appStore from "images/app-store.png";
+import SocialsList from "shared/SocialsList/SocialsList";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -73,7 +74,16 @@ const Footer: React.FC = () => {
                 {item.label}
               </a>
               {menu.title == "Download" ? (
-                <img src={item.icon} alt="" className="block max-h-12" />
+                <>
+                  <img src={item.icon} alt="" className="block max-h-12" />
+                  {item.icon == appStore ? (
+                    <div className="flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm">
+                      <div className="flex justify-between items-center mt-4">
+                        <SocialsList itemClass="w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300" />
+                      </div>
+                    </div>
+                  ) : null}
+                </>
               ) : null}
             </li>
           ))}
@@ -90,13 +100,25 @@ const Footer: React.FC = () => {
             <Logo />
           </div>
           <div className="col-span-2 flex items-center md:col-span-3">
-            <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" />
+            <span className="block text-neutral-500 dark:text-neutral-400">
+              Dahlia Town House,
+              <br />Jl. Lb. Bulus III No.A3
+              <br />DKI Jakarta 12440
+              <br /><br />
+              <a href="http://wa.me/628111612118" target="_blank" className="mt-2">
+                +62 811-1612-118
+              </a>
+              <br />
+              <a href="mailto:contact@caritempat.co.id" target="_blank">
+                contact@caritempat.co.id
+              </a>
+            </span>
           </div>
         </div>
         {widgetMenus.map(renderWidgetMenuItem)}
       </div>
       <div className="text-center items-center col mt-28">
-        <span className="text-center"> &copy; PT Cari Tempat Indonesia. All Rights </span>
+        <span className="text-center"> &copy; PT Akez Adaphan Hospitaliti. All Rights </span>
       </div>
     </div>
   );

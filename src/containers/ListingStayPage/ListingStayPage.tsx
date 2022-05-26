@@ -48,7 +48,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
         </div>
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-32" />
+        {/* <SectionSubscribe2 className="py-24 lg:py-32" /> */}
 
         {/* SECTION */}
         <div className="relative py-16 mb-24 lg:mb-32">

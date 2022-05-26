@@ -19,12 +19,15 @@
     "address": "8953 Golf Course Terrace",
     "reviewStart": 5.0,
     "reviewCount": 126,
-    "price": "$124",
+    "price": "Rp. 124.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.2094559, "lng": 61.5594641 }
+    "map": {
+      "lat": 55.2094559,
+      "lng": 61.5594641
+    }
   },
   {
     "id": "12a181b6-114c-45fa-a0cf-f4285bc7d952",
@@ -46,12 +49,15 @@
     "address": "2606 Straubel Crossing",
     "reviewStart": 4.6,
     "reviewCount": 217,
-    "price": "$382",
+    "price": "Rp. 382.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.1972153, "lng": 61.4407266 }
+    "map": {
+      "lat": 55.1972153,
+      "lng": 61.4407266
+    }
   },
   {
     "id": "6132eeac-7895-4bc0-8c32-1155f01cd386",
@@ -73,12 +79,15 @@
     "address": "14 Petterle Trail",
     "reviewStart": 3.8,
     "reviewCount": 534,
-    "price": "$105",
+    "price": "Rp. 105.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.247483, "lng": 61.5229791 }
+    "map": {
+      "lat": 55.247483,
+      "lng": 61.5229791
+    }
   },
   {
     "id": "53912695-20f7-4037-8a11-a99fd2b652cd",
@@ -100,12 +109,15 @@
     "address": "34591 Dawn Park",
     "reviewStart": 3.1,
     "reviewCount": 527,
-    "price": "$266",
+    "price": "Rp. 266.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.2342034, "lng": 61.5409607 }
+    "map": {
+      "lat": 55.2342034,
+      "lng": 61.5409607
+    }
   },
   {
     "id": "5553f2f0-cfc6-4c8e-a6df-14245134fa24",
@@ -127,12 +139,15 @@
     "address": "5970 Manley Terrace",
     "reviewStart": 3.6,
     "reviewCount": 169,
-    "price": "$268",
+    "price": "Rp. 268.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 55.2288039, "lng": 61.6050232 }
+    "map": {
+      "lat": 55.2288039,
+      "lng": 61.6050232
+    }
   },
   {
     "id": "650a163a-e910-43cb-abca-e11ecccbcae4",
@@ -154,12 +169,15 @@
     "address": "3 Buhler Point",
     "reviewStart": 3.5,
     "reviewCount": 33,
-    "price": "$321",
+    "price": "Rp. 321.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.1952216, "lng": 61.6115793 }
+    "map": {
+      "lat": 55.1952216,
+      "lng": 61.6115793
+    }
   },
   {
     "id": "697dc331-7038-4ee3-ad3f-51ae9536d97e",
@@ -181,12 +199,15 @@
     "address": "35 Kedzie Parkway",
     "reviewStart": 4.2,
     "reviewCount": 468,
-    "price": "$127",
+    "price": "Rp. 127.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.2211607, "lng": 61.5065318 }
+    "map": {
+      "lat": 55.2211607,
+      "lng": 61.5065318
+    }
   },
   {
     "id": "3e8f789e-fb11-45d2-9afd-2f2740e80411",
@@ -208,12 +229,15 @@
     "address": "466 Glendale Place",
     "reviewStart": 4.5,
     "reviewCount": 524,
-    "price": "$46",
+    "price": "Rp. 46.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.2126851, "lng": 61.4912261 }
+    "map": {
+      "lat": 55.2126851,
+      "lng": 61.4912261
+    }
   },
   {
     "id": "933ec23b-463e-41dd-9e3c-737ef9b508bb",
@@ -235,12 +259,15 @@
     "address": "50 Schiller Drive",
     "reviewStart": 3.4,
     "reviewCount": 42,
-    "price": "$200",
+    "price": "Rp. 200.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.185907, "lng": 61.4864299 }
+    "map": {
+      "lat": 55.185907,
+      "lng": 61.4864299
+    }
   },
   {
     "id": "913bca21-1b8e-4321-8e5f-26776875d668",
@@ -262,12 +289,15 @@
     "address": "4561 Debs Center",
     "reviewStart": 4.1,
     "reviewCount": 469,
-    "price": "$342",
+    "price": "Rp. 342.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 55.1735735, "lng": 61.4991107 }
+    "map": {
+      "lat": 55.1735735,
+      "lng": 61.4991107
+    }
   },
   {
     "id": "13c7e75e-a892-46e2-85ab-6b65d7976fab",
@@ -289,12 +319,15 @@
     "address": "9976 Brentwood Trail",
     "reviewStart": 3.4,
     "reviewCount": 513,
-    "price": "$122",
+    "price": "Rp. 122.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "c9ddbe20-f1f8-4a37-a2d5-9f1b5f3dd35e",
@@ -316,12 +349,15 @@
     "address": "0 Graceland Alley",
     "reviewStart": 3.2,
     "reviewCount": 220,
-    "price": "$144",
+    "price": "Rp. 144.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "cc7cfa04-e20d-4487-8b2c-10d71a71c7a9",
@@ -343,12 +379,15 @@
     "address": "84 Golf Course Plaza",
     "reviewStart": 3.8,
     "reviewCount": 502,
-    "price": "$326",
+    "price": "Rp. 326.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "e00c8d43-f25c-4736-8a9e-4ffe0dbeeb86",
@@ -370,12 +409,15 @@
     "address": "9 1st Point",
     "reviewStart": 4.7,
     "reviewCount": 218,
-    "price": "$285",
+    "price": "Rp. 285.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "378db053-8191-46ad-a7e0-5a6328f8af21",
@@ -397,12 +439,15 @@
     "address": "7050 6th Point",
     "reviewStart": 4.2,
     "reviewCount": 31,
-    "price": "$315",
+    "price": "Rp. 315.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "3d520211-dffd-4245-9790-15d382a8cb1f",
@@ -424,12 +469,15 @@
     "address": "79 Elgar Hill",
     "reviewStart": 4.6,
     "reviewCount": 55,
-    "price": "$207",
+    "price": "Rp. 207.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "feac0e7d-3839-4e47-b9b7-0a531daabe4c",
@@ -451,12 +499,15 @@
     "address": "0 Waxwing Circle",
     "reviewStart": 3.5,
     "reviewCount": 472,
-    "price": "$264",
+    "price": "Rp. 264.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "bac8b4a0-c573-4d89-bc91-d53be1cb4e16",
@@ -478,12 +529,15 @@
     "address": "72 Petterle Parkway",
     "reviewStart": 4.8,
     "reviewCount": 230,
-    "price": "$240",
+    "price": "Rp. 240.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "4688ad16-b471-485d-8c20-34c32436607f",
@@ -505,12 +559,15 @@
     "address": "7 Johnson Alley",
     "reviewStart": 4.0,
     "reviewCount": 406,
-    "price": "$353",
+    "price": "Rp. 353.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "b488141f-bb19-44ba-b121-a838ab377100",
@@ -532,12 +589,15 @@
     "address": "96834 Dayton Lane",
     "reviewStart": 3.5,
     "reviewCount": 320,
-    "price": "$220",
+    "price": "Rp. 220.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "6d04d1de-5a4a-45bd-b2cd-196a2be83738",
@@ -559,12 +619,15 @@
     "address": "62624 Hazelcrest Point",
     "reviewStart": 3.2,
     "reviewCount": 471,
-    "price": "$106",
+    "price": "Rp. 106.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "c34a2139-d208-4471-9682-0b03acad0b3b",
@@ -586,12 +649,15 @@
     "address": "60007 Mcbride Trail",
     "reviewStart": 4.1,
     "reviewCount": 237,
-    "price": "$239",
+    "price": "Rp. 239.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "fe95c1c7-73c9-4931-8133-dc15360ed064",
@@ -613,12 +679,15 @@
     "address": "4213 Canary Circle",
     "reviewStart": 3.1,
     "reviewCount": 60,
-    "price": "$391",
+    "price": "Rp. 391.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "4a6d099c-26b4-421c-95ed-22f8ccff98f9",
@@ -640,12 +709,15 @@
     "address": "40 Northwestern Circle",
     "reviewStart": 4.9,
     "reviewCount": 309,
-    "price": "$349",
+    "price": "Rp. 349.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "4cde8010-0484-4825-89da-c8e210a5a836",
@@ -667,12 +739,15 @@
     "address": "2758 Memorial Parkway",
     "reviewStart": 4.5,
     "reviewCount": 492,
-    "price": "$249",
+    "price": "Rp. 249.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "f0b09079-3d2c-4b8c-8c01-1e8ea0790092",
@@ -694,12 +769,15 @@
     "address": "1 Orin Junction",
     "reviewStart": 4.5,
     "reviewCount": 347,
-    "price": "$185",
+    "price": "Rp. 185.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "f90ea3f8-0794-4a62-8137-f64dba231a30",
@@ -721,12 +799,15 @@
     "address": "544 East Lane",
     "reviewStart": 3.3,
     "reviewCount": 459,
-    "price": "$40",
+    "price": "Rp. 40.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "f1f59d2a-898d-4697-a4f2-8f321e511bd7",
@@ -748,12 +829,15 @@
     "address": "1261 Comanche Road",
     "reviewStart": 5.0,
     "reviewCount": 280,
-    "price": "$255",
+    "price": "Rp. 255.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": "-10% today",
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "63a2ac87-0102-4d4f-89f4-a99eb48ed376",
@@ -775,12 +859,15 @@
     "address": "012 Tennessee Crossing",
     "reviewStart": 3.3,
     "reviewCount": 113,
-    "price": "$379",
+    "price": "Rp. 379.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "1793eb23-38f4-4c41-8c6d-ec2ced79e9e6",
@@ -802,12 +889,15 @@
     "address": "03 5th Plaza",
     "reviewStart": 3.1,
     "reviewCount": 57,
-    "price": "$45",
+    "price": "Rp. 45.000",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "12d3b3e3-c1b4-458f-89b8-a89fabc90622",
@@ -829,12 +919,15 @@
     "address": "610 Knutson Parkway",
     "reviewStart": 4.1,
     "reviewCount": 426,
-    "price": "$396.91",
+    "price": "Rp. 396.000.91",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "7f898656-b678-4eb7-9914-f3372982e35b",
@@ -856,12 +949,15 @@
     "address": "3239 Dovetail Plaza",
     "reviewStart": 4.2,
     "reviewCount": 377,
-    "price": "$328.05",
+    "price": "Rp. 328.000.05",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "e1e472c2-e863-4f69-9c95-60e075406628",
@@ -883,12 +979,15 @@
     "address": "2739 Warbler Court",
     "reviewStart": 3.1,
     "reviewCount": 182,
-    "price": "$250.98",
+    "price": "Rp. 250.000.98",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "96f2d787-5397-478d-a430-a49d3cb18208",
@@ -910,12 +1009,15 @@
     "address": "153 Truax Terrace",
     "reviewStart": 4.4,
     "reviewCount": 69,
-    "price": "$192.48",
+    "price": "Rp. 192.000.48",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "5e4fcc0f-e131-4b8e-bdab-150dbe44b51d",
@@ -937,12 +1039,15 @@
     "address": "05121 Kensington Point",
     "reviewStart": 3.3,
     "reviewCount": 25,
-    "price": "$206.86",
+    "price": "Rp. 206.000.86",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "e44d18e0-3e2e-431a-bb24-5f9655893c7d",
@@ -964,12 +1069,15 @@
     "address": "309 Arapahoe Road",
     "reviewStart": 4.8,
     "reviewCount": 459,
-    "price": "$32.44",
+    "price": "Rp. 32.000.44",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "cd067713-b063-4f1d-9bdb-97ab62e58f72",
@@ -991,12 +1099,15 @@
     "address": "1 Westport Lane",
     "reviewStart": 3.2,
     "reviewCount": 420,
-    "price": "$323.30",
+    "price": "Rp. 323.000.30",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "175d38eb-8bda-43e0-bab4-593a4754b453",
@@ -1018,12 +1129,15 @@
     "address": "3413 Nancy Crossing",
     "reviewStart": 4.5,
     "reviewCount": 527,
-    "price": "$47.34",
+    "price": "Rp. 47.000.34",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "19375ada-62f9-414d-83c7-a1e8b6a492c8",
@@ -1045,12 +1159,15 @@
     "address": "25935 Clemons Junction",
     "reviewStart": 4.5,
     "reviewCount": 388,
-    "price": "$53.98",
+    "price": "Rp. 53.000.98",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": true,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   },
   {
     "id": "69eb36e7-0743-47f6-a970-3f8ecdb76a9d",
@@ -1072,11 +1189,14 @@
     "address": "4792 Warrior Avenue",
     "reviewStart": 3.9,
     "reviewCount": 244,
-    "price": "$223.42",
+    "price": "Rp. 223.000.42",
     "gearshift": "Auto gearbox",
     "seats": 4,
     "saleOff": null,
     "isAds": null,
-    "map": { "lat": 59.955413, "lng": 30.337844 }
+    "map": {
+      "lat": 59.955413,
+      "lng": 30.337844
+    }
   }
 ]

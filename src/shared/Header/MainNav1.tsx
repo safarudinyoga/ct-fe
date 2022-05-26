@@ -7,6 +7,7 @@ import MenuBar from "shared/MenuBar/MenuBar";
 // import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import Navbar from "shared/Navigation/Navbar";
 import LangDropdown from "components/Header/LangDropdown";
+import CurrencyDropdown from "components/Header/CurrencyDropdown";
 
 export interface MainNav1Props {
   isTop: boolean;
@@ -26,6 +27,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-1">
             <div className="px-1" />
+            <CurrencyDropdown />
             <LangDropdown />
             <ButtonPrimary href="/login">Sign In</ButtonPrimary>
           </div>

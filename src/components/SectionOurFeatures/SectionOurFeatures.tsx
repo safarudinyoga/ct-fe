@@ -16,53 +16,45 @@ const SectionOurFeatures: FC<SectionOurFeaturesProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionOurFeatures relative flex flex-col items-center ${
-        type === "type1" ? "lg:flex-row" : "lg:flex-row-reverse"
-      } ${className}`}
+      className={`nc-SectionOurFeatures relative flex flex-col items-center ${type === "type1" ? "lg:flex-row" : "lg:flex-row-reverse"
+        } ${className}`}
       data-nc-id="SectionOurFeatures"
     >
       <div className="flex-grow">
         <NcImage src={rightImg} />
       </div>
       <div
-        className={`max-w-2xl flex-shrink-0 mt-10 lg:mt-0 lg:w-2/5 ${
-          type === "type1" ? "lg:pl-16" : "lg:pr-16"
-        }`}
+        className={`max-w-2xl flex-shrink-0 mt-10 lg:mt-0 lg:w-2/5 ${type === "type1" ? "lg:pl-16" : "lg:pr-16"
+          }`}
       >
         <span className="uppercase text-sm text-gray-400 tracking-widest">
           BENnefits
         </span>
-        <h2 className="font-semibold text-4xl mt-5">Happening cities </h2>
+        <h2 className="font-semibold text-3xl mt-5">Simplenya di Caritempat.id </h2>
 
         <ul className="space-y-10 mt-16">
           <li className="space-y-4">
-            <Badge name="Advertising" />
-            <span className="block text-xl font-semibold">
-              Cost-effective advertising
-            </span>
+            <Badge color="green" name="Simple Booking Process " />
             <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
-              With a free listing, you can advertise your rental with no upfront
-              costs
+              Pemesanan tanpa ribet di mana pun dan kapan pun.
             </span>
           </li>
           <li className="space-y-4">
-            <Badge color="green" name="Exposure " />
-            <span className="block text-xl font-semibold">
-              Reach millions with Chisfis
-            </span>
+            <Badge color="red" name="Simple Reschedule" />
             <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
-              Millions of people are searching for unique places to stay around
-              the world
+              Memudahkan kamu mengatur ulang penerbangan.
             </span>
           </li>
           <li className="space-y-4">
-            <Badge color="red" name="Secure" />
-            <span className="block text-xl font-semibold">
-              Secure and simple
-            </span>
+            <Badge color="yellow" name="Simple Refund" />
             <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
-              A Holiday Lettings listing gives you a secure and easy way to take
-              bookings and payments online
+              Refund tiket tanpa ribet dari aplikasi maupun website.
+            </span>
+          </li>
+          <li className="space-y-4">
+            <Badge name="Simple Profile" />
+            <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
+              Pesan lebih cepat, isi data penumpang dengan sekali klik.
             </span>
           </li>
         </ul>

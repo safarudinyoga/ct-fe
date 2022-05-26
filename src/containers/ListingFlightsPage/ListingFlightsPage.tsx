@@ -77,7 +77,7 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({
       </Helmet>
       <BgGlassmorphism />
 
-      <div className="container relative">
+      <div className="container relativ">
         {/* SECTION HERO */}
         <SectionHeroArchivePage
           currentPage="Pesawat"
@@ -88,7 +88,7 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({
               <span className="ml-2.5">1599 flights</span>
             </>
           }
-          className="pt-10 pb-24 lg:pb-32 lg:pt-16 "
+          className="pt-10 lg:pt-16"
         />
 
         {/* SECTION */}
@@ -105,7 +105,7 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-32" />
+        {/* <SectionSubscribe2 className="py-24 lg:py-32" /> */}
       </div>
     </div>
   );

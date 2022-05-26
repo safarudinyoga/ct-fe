@@ -5,20 +5,20 @@ import StaySearchForm from "./StaySearchForm";
 import RentalCarSearchForm from "./RentalCarSearchForm";
 import FlightSearchForm from "./FlightSearchForm";
 
-export type SearchTab = "Hotel" | "Villa" | "Mobil" | "Pesawat" | "Kereta";
+export type SearchTab = "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Hotel" | "Villa" | "Mobil" | "Pesawat" | "Kereta";
+  currentPage?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
   className = "",
-  currentTab = "Hotel",
+  currentTab = "Pesawat",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Hotel", "Villa", "Mobil", "Pesawat", "Kereta"];
+  const tabs: SearchTab[] = ["Pesawat", "Hotel", "Villa", "Mobil", "Kereta"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
@@ -49,14 +49,14 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   const renderForm = () => {
     const isArchivePage = !!currentPage && !!currentTab;
     switch (tabActive) {
+      case "Pesawat":
+        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
       case "Hotel":
         return <StaySearchForm haveDefaultValue={isArchivePage} />;
       case "Villa":
         return <ExperiencesSearchForm haveDefaultValue={isArchivePage} />;
       case "Mobil":
         return <RentalCarSearchForm haveDefaultValue={isArchivePage} />;
-      case "Pesawat":
-        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
       case "Kereta":
         return <FlightSearchForm haveDefaultValue={isArchivePage} />;
       // case "Apartment":
