@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 export interface IPrivateRouterProps {
-  children: React.ReactNode
+  component: React.ComponentType<any>
 }
 
 const PrivateRouter = ({ component: Component, ...rest }: IPrivateRouterProps) => (
@@ -21,8 +21,8 @@ const PrivateRouter = ({ component: Component, ...rest }: IPrivateRouterProps) =
       ) : (
         <Redirect
           to={{
-            pathname: MENU.LOGIN,
-            state: { from: props.location },
+            // pathname: MENU.LOGIN,
+            // state: { from: props.location },
           }}
         />
       )
