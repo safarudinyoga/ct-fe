@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
-import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
 import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
@@ -43,10 +42,18 @@ import ListingRealEstatePage from "containers/ListingRealEstatePage/ListingRealE
 import SiteHeader from "containers/SiteHeader";
 import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage";
 
+//dev
+import PageHome from "pages/HomePage/HomePage";
+import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
+
 export const pages: Page[] = [
+  //dev
   { path: "/", exact: true, component: PageHome },
+  { path: "/listing-hotels", component: ListingHotel },
+  //
+
+  
   { path: "/#", exact: true, component: PageHome },
-  { path: "/home-1-header-2", exact: true, component: ListingStayPage },
   { path: "/home-2", component: PageHome2 },
   //
   { path: "/listing-stay", component: ListingStayPage },

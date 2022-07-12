@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
+import { store } from './state';
 //
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -13,7 +14,6 @@ import "./fonts/line-awesome-1.3.0/css/line-awesome.css";
 //
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import store from './store'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
