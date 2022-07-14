@@ -15,7 +15,7 @@ const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
     >
       <Helmet>
         <title>Caritempat</title>
-      </Helmet>
+      </Helmet> 
       <BgGlassmorphism />
 
       <div className="container relative overflow-hidden">

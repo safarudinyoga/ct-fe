@@ -7,6 +7,7 @@ export interface LocationStates {
   "/home-1-header-2"?: {};
 
   "/listing-hotels"?: {};
+  "/listing-hotel-map"?: {};
   //
   "/listing-flights"?: {};
   //

@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import imagePng from "images/hero-right2.png";
 import HeroSearchFormLength from "page-components/HeroSearchFormLength/HeroSearchFormLength";
-
 export interface SectionHeroArchivePageProps {
   className?: string;
   currentPage: "Hotel" | "Villa" | "Mobil" | "Pesawat" | "Kereta";

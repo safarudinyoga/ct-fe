@@ -45,11 +45,13 @@ import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage
 //dev
 import PageHome from "pages/HomePage/HomePage";
 import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
+import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
 
 export const pages: Page[] = [
   //dev
   { path: "/", exact: true, component: PageHome },
   { path: "/listing-hotels", component: ListingHotel },
+  { path: "/listing-hotel-map", component: ListingHotelMap },
   //
 
   
