@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
 import { ActionType } from "../action-types"
 import { Action } from "../actions/index"
-import Axios from "axios"
+import axios from "axios"
 
 const url =  "https://api.caritempat.id"
 
@@ -11,7 +11,7 @@ export const callApiSearch = (params: string) => {
             type: ActionType.FETCH_SEARCH_PENDING
         })
 
-        return Axios.get(url + `/user/guest/hotel/search?q=${params}`)
+        return axios.get(url + `/user/guest/hotel/search?q=${params}`)
             .then((res: any) => {
                 let data = res.data
                 console.log('search: ', data)
@@ -23,7 +23,7 @@ export const callApiSearch = (params: string) => {
             .catch((err:any) => {
                 throw(err)
             })
-        
+
     }
 }
 

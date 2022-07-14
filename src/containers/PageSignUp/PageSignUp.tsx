@@ -1,35 +1,39 @@
-import React, { FC } from "react";
-import facebookSvg from "images/Facebook.svg";
-import twitterSvg from "images/Twitter.svg";
+import React, { FC, useRef, useEffect } from "react";
 import googleSvg from "images/Google.svg";
 import { Helmet } from "react-helmet";
 import Input from "shared/Input/Input";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { Link } from "react-router-dom";
+import { TextError } from "shared/TextError";
+import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 export interface PageSignUpProps {
   className?: string;
 }
 
-const loginSocials = [
-  {
-    name: "Continue with Facebook",
-    href: "#",
-    icon: facebookSvg,
-  },
-  {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
-    name: "Continue with Google",
-    href: "#",
-    icon: googleSvg,
-  },
-];
-
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
+  const ref = useRef<any>(null)
+
+  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Invalid email format').required('Email is Required!'),
+      password: Yup.string().required('Password is Required!')
+    }),
+    onSubmit: (val) => {
+      console.log(val);
+    }
+  })
+
+  const googleResponse = (response: GoogleLoginResponse) => {
+    console.log(response);
+  }
+
   return (
     <div className={`nc-PageSignUp  ${className}`} data-nc-id="PageSignUp">
       <Helmet>
@@ -41,22 +45,31 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
         </h2>
         <div className="max-w-md mx-auto space-y-6 ">
           <div className="grid gap-3">
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
-              >
-                <img
-                  className="flex-shrink-0"
-                  src={item.icon}
-                  alt={item.name}
-                />
-                <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
-                  {item.name}
-                </h3>
-              </a>
-            ))}
+            <div
+              className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px] cursor-pointer"
+              onClick={() => ref.current.querySelector('button').click()}
+            >
+              <img
+                className="flex-shrink-0"
+                src={googleSvg}
+                alt='Continue with Google'
+              />
+              <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+                Continue with Google
+              </h3>
+            </div>
+            <div ref={ref}>
+              <GoogleLogin
+                clientId="617246850621-95f9qhmehd380g2df86pjhrqc84n8nij.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={(response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+                  googleResponse(response as GoogleLoginResponse)
+                }}
+                onFailure={googleResponse}
+                cookiePolicy={'single_host_origin'}
+                className='hidden'
+              />
+            </div>
           </div>
           {/* OR */}
           <div className="relative text-center">
@@ -66,22 +79,39 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Email address
               </span>
               <Input
+                name="email"
+                id="email"
                 type="email"
+                value={values.email}
                 placeholder="example@example.com"
-                className="mt-1"
+                onChange={handleChange}
+                className={errors.email && touched.email ? 'is-invalid mt-1' : 'mt-1'}
               />
+              {errors.email && touched.email &&
+                <TextError>{errors.email}</TextError>
+              }
             </label>
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
               </span>
-              <Input type="password" className="mt-1" />
+              <Input
+                name="password"
+                id="password"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                className={errors.password && touched.password ? 'is-invalid mt-1' : 'mt-1'}
+              />
+              {errors.password && touched.password &&
+                <TextError>{errors.password}</TextError>
+              }
             </label>
             <ButtonPrimary type="submit">Continue</ButtonPrimary>
           </form>

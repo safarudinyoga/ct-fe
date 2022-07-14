@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import googleSvg from "images/Google.svg";
@@ -7,21 +7,16 @@ import Input from "shared/Input/Input";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { TextError } from "shared/TextError";
+import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 export interface PageLoginProps {
   className?: string;
 }
 
-const loginSocials = [
-  {
-    name: "Continue with Google",
-    href: "#",
-    icon: googleSvg,
-  },
-];
-
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
+  const ref = useRef<any>(null)
+  const [first, setfirst] = useState<any>(second)
 
-  const { handleChange, handleSubmit, values, errors, touched, setValues } = useFormik({
+  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: {
       email: '',
       password: ''
@@ -35,6 +30,10 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
     }
   })
 
+  const googleResponse = (response: GoogleLoginResponse) => {
+    console.log(response);
+  }
+
   return (
     <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
       <Helmet>
@@ -46,22 +45,31 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
         </h2>
         <div className="max-w-md mx-auto space-y-6">
           <div className="grid gap-3">
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
-              >
-                <img
-                  className="flex-shrink-0"
-                  src={item.icon}
-                  alt={item.name}
-                />
-                <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
-                  {item.name}
-                </h3>
-              </a>
-            ))}
+            <div
+              className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px] cursor-pointer"
+              onClick={() => ref.current.querySelector('button').click()}
+            >
+              <img
+                className="flex-shrink-0"
+                src={googleSvg}
+                alt='Continue with Google'
+              />
+              <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+                Continue with Google
+              </h3>
+            </div>
+            <div ref={ref}>
+              <GoogleLogin
+                clientId="617246850621-95f9qhmehd380g2df86pjhrqc84n8nij.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={(response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+                  googleResponse(response as GoogleLoginResponse)
+                }}
+                onFailure={googleResponse}
+                cookiePolicy={'single_host_origin'}
+                className='hidden'
+              />
+            </div>
           </div>
           {/* OR */}
           <div className="relative text-center">
@@ -71,7 +79,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
           {/* FORM */}
-          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit} autoComplete='off'>
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Email address
