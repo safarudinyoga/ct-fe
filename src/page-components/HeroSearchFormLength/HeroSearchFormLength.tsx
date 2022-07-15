@@ -3,7 +3,6 @@ import "react-dates/initialize";
 import StaySearchForm from "../StaySearchForm/StaySearchForm";
 
 export type SearchTab = "Pesawat";
-
 export interface HeroSearchFormLengthProps {
   className?: string;
   currentPage?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
@@ -13,9 +12,6 @@ const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
   className = "",
   currentPage,
 }) => {
-//   const tabs: SearchTab[] = ["Pesawat"];
-
-
   const renderForm = () => {
     switch (currentPage) {
       case "Hotel":

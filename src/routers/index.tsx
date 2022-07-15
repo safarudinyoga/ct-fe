@@ -22,7 +22,7 @@ import AccountSavelists from "containers/AccountPage/AccountSavelists";
 import AccountBilling from "containers/AccountPage/AccountBilling";
 import PageContact from "containers/PageContact/PageContact";
 import PageAbout from "containers/PageAbout/PageAbout";
-import PageSignUp from "containers/PageSignUp/PageSignUp";
+// import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageLogin from "containers/PageLogin/PageLogin";
 import BlogPage from "containers/BlogPage/BlogPage";
 import BlogSingle from "containers/BlogPage/BlogSingle";
@@ -45,14 +45,18 @@ import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage
 //dev
 import PageHome from "pages/HomePage/HomePage";
 import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
+import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
+import Register from "pages/Register";
+import OTP from "pages/OTP";
 
 export const pages: Page[] = [
   //dev
   { path: "/", exact: true, component: PageHome },
   { path: "/listing-hotels", component: ListingHotel },
+  { path: "/listing-hotel-map", component: ListingHotelMap },
   //
 
-  
+
   { path: "/#", exact: true, component: PageHome },
   { path: "/home-2", component: PageHome2 },
   //
@@ -107,8 +111,9 @@ export const pages: Page[] = [
   //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
-  { path: "/signup", component: PageSignUp },
+  { path: "/signup", component: Register },
   { path: "/login", component: PageLogin },
+  { path: "/otp", component: OTP },
   // { path: "/subscription", component: PageSubcription },
   //
 ];

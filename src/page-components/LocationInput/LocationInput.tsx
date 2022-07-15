@@ -3,7 +3,10 @@ import { FC } from "react";
 import { useEffect } from "react";
 import ClearDataButton from "components/HeroSearchForm/ClearDataButton";
 import { useRef } from "react";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from 'state';
+import { RootState } from 'state/reducers';
 export interface LocationInputProps {
   defaultValue: string;
   onChange?: (value: string) => void;
@@ -28,6 +31,19 @@ const LocationInput: FC<LocationInputProps> = ({
 
   const [value, setValue] = useState(defaultValue);
   const [showPopover, setShowPopover] = useState(autoFocus);
+
+  const state = useSelector((state: RootState) => state.hotel)
+  const dispatch = useDispatch();
+  const { onClickListSearch } = bindActionCreators(actionCreators, dispatch)
+
+  useEffect(() => {
+    console.log('state.dataHoteldiInput: ', state.dataHotel)
+  }, [state.dataHotel])
+ 
+  useEffect(() => {
+    console.log('state.dataHoteldiInputLength: ', typeof(state.dataHotel))
+    console.log('state.dataHoteldiInputLength: ', state.dataHotel?.length)
+  }, [])
 
   useEffect(() => {
     setValue(defaultValue);
@@ -118,48 +134,49 @@ const LocationInput: FC<LocationInputProps> = ({
   };
 
   const renderSearchValue = () => {
-    return (
-      <>
-        {[
-          "Ha Noi, Viet Nam",
-          "San Diego, CA",
-          "Humboldt Park, Chicago, IL",
-          "Bangor, Northern Ireland",
-        ].map((item) => (
-          <span
-            onClick={() => handleSelectLocation(item)}
-            key={item}
-            className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 sm:py-5 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
-          >
-            <span className="block text-neutral-400">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 sm:h-6 sm:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </span>
-            <span className="block font-medium text-neutral-700 dark:text-neutral-200">
-              {item}
-            </span>
-          </span>
-        ))}
-      </>
-    );
+    if (state.dataHotel?.length !== 0) {
+      return (
+        <>
+          {state.dataHotel?.map((item, index) => (
+            <div className="grid grid-cols-8 mb-1 hover:bg-neutral-100" key={index} onClick={()=>{
+              handleSelectLocation(item.name || ''); 
+              onClickListSearch(item.name || '');
+            }}>
+              <div className="text-center pt-3">
+                i
+              </div>
+              <div className="col-span-7">
+                <div className="row font-semibold">
+                  {item.name}
+                </div>
+                <div className="row text-slate-400">
+                  {item.additionalInfo}
+                </div>
+              </div>
+            </div>
+          ))}
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          <div className="grid grid-cols-8 mb-1">
+            <div className="text-center">
+              i
+            </div>
+            <div className="col-span-7">
+              <div className="row font-semibold">
+                Oops, tidak ada hasil ditemukan
+              </div>
+              <div className="row">
+                Coba ubah kata kunci yang sesuai
+              </div>
+            </div>
+          </div>
+        </>
+      )
+    }
   };
 
   return (

@@ -7,6 +7,7 @@ export interface LocationStates {
   "/home-1-header-2"?: {};
 
   "/listing-hotels"?: {};
+  "/listing-hotel-map"?: {};
   //
   "/listing-flights"?: {};
   //
@@ -57,6 +58,7 @@ export interface LocationStates {
   "/forgot-pass"?: {};
   "/page404"?: {};
   "/subscription"?: {};
+  "/otp"?: {};
 }
 
 export type PathName = keyof LocationStates;
