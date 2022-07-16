@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-services
+  name: home-services
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: frontend-services
+      app: home-services
   template:
     metadata:
       labels:
-        app: frontend-services
+        app: home-services
     spec:
       containers:
-      - name: frontend-services
-        image: asia-southeast2-docker.pkg.dev/calm-suprstate-352907/caritempat/frontend-services:latest
+      - name: home-services
+        image: asia-southeast2-docker.pkg.dev/calm-suprstate-352907/caritempat/home-services:latest
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
-            name: frontend-services
+            name: home-services
         ports:
         - containerPort: 3000
       imagePullSecrets:
@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-services
+  name: home-services
   namespace: default
 spec:
   type: ClusterIP
@@ -36,4 +36,27 @@ spec:
     - port: 3000
       targetPort: 3000
   selector:
-    app: frontend-services
+    app: home-services
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-home
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: caritempat.id
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: home-page
+            port:
+              number: 3000
+  ingressClassName: nginx
