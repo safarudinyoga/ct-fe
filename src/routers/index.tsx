@@ -54,6 +54,7 @@ export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
   { path: "/listing-hotels", component: ListingHotel },
   { path: "/listing-hotel-map", component: ListingHotelMap },
+  { path: "/listing-hotel-detail", component: ListingHotelDetail },
   //
 
 

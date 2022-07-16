@@ -14,7 +14,6 @@ export const callApiSearch = (params: string) => {
         return axios.get(url + `/user/guest/hotel/search?q=${params}`)
             .then((res: any) => {
                 let data = res.data
-                console.log('search: ', data)
                 dispatch({
                     type: ActionType.FETCH_SEARCH_SUCCESS,
                     payload: data,
@@ -34,31 +33,34 @@ export interface getListHotelProps {
     room: number
 }
 
-export const getListHotel = (data: getListHotelProps) => {
+export const getListHotel = (data: getListHotelProps, slug: string) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
             type: ActionType.FETCH_LIST_HOTEL_PENDING,
             payload: data
         });
-        let slug = "sahid-bandar-lampung"
-        console.log('dataPost: ', data)
-        return axios.get(url + `/user/guest/hotel/availability/${slug}`, {
+        let slugParam;
+        if(slug.length > 0) {
+            slugParam = slug
+        }
+        else {
+            slugParam = ':?'
+        }
+        return Axios.get(url + `/user/guest/hotel/availability/${slugParam}`, {
             params: data
         })
         .then((res: any) => {
             let data = res.data
-            console.log('getListHotel: ', data)
-            alert('successCallAPI')
             dispatch({
                 type: ActionType.FETCH_LIST_HOTEL_SUCCESS,
-                // payload: data,
                 payload: data,
+                slug: slug
             });
         })
         .catch((err:any) => {
-            console.log(err)
             dispatch({
                 type: ActionType.FETCH_LIST_HOTEL_FAILED,
+                errorMessage: err.response.data.message
             });
             throw(err)
         });
@@ -101,11 +103,26 @@ export const onChangeRoom = (params: number) => {
     }
 }
 
-export const onClickListSearch = (params: string) => {
+export interface onChangeDateProps {
+    startDate: moment.Moment | null,
+    endDate: moment.Moment | null
+}
+
+export const onChangeDate = (params: onChangeDateProps) => {
+    return (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionType.ONCHANGE_DATE,
+            payload: params
+        });
+    }
+}
+
+export const onClickListSearch = (params: string, slug: string) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
             type: ActionType.ONCLICK_LIST_SEARCH,
-            payload: params || ''
+            payload: params || '',
+            slug: slug || ''
         })
     }
 }

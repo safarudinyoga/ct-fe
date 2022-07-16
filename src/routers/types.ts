@@ -8,6 +8,7 @@ export interface LocationStates {
 
   "/listing-hotels"?: {};
   "/listing-hotel-map"?: {};
+  "/listing-hotel-detail"?: {};
   //
   "/listing-flights"?: {};
   //

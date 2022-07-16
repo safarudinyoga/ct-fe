@@ -66,32 +66,41 @@ export interface GetListHotelSuccessPayload {
             ]
         },
     ],
-    data: [
-        {
+    // data: [
+    data: {
+        id: number,
+        name: string,
+        description: string,
+        slug: string,
+        stars: number,
+        address: string,
+        images: string,
+        facilities: [
             id: number,
             name: string,
-            description: string,
-            slug: string,
-            stars: number,
-            address: string,
-            images: string,
+            active: boolean,
+            created_at: "string",
+            updated_at: "string",
             facilities: [
                 id: number,
                 group_id: number,
                 name: string,
                 active: boolean,
-                created_at: "string",
-                updated_at: "string"
-            ],
-        }
-    ]
+                created_at: string,
+                updated_at: string
+            ]
+        ],
+    }
+    // ]
 }
 interface GetListHotelSuccess {
     type: ActionType.FETCH_LIST_HOTEL_SUCCESS,
-    payload: GetListHotelSuccessPayload
+    payload: GetListHotelSuccessPayload,
+    slug: string
 };
 interface GetListHotelFailed {
-    type: ActionType.FETCH_LIST_HOTEL_FAILED
+    type: ActionType.FETCH_LIST_HOTEL_FAILED,
+    errorMessage: string
 };
 
 interface OnChangeInputValue {
@@ -111,9 +120,18 @@ interface onChangeRoom {
     type: ActionType.ONCHANGE_ROOM,
     payload: number
 }
+interface onChangeDate {
+    type: ActionType.ONCHANGE_DATE,
+    payload: {
+        startDate: moment.Moment | null,
+        endDate: moment.Moment | null
+    }
+}
+
 interface OnClickListSearch {
     type: ActionType.ONCLICK_LIST_SEARCH,
-    payload: string
+    payload: string,
+    slug: string
 }
 
 export type Action =  
@@ -127,4 +145,5 @@ export type Action =
     | onChangeAdult
     | onChangeChildren
     | onChangeRoom
+    | onChangeDate
     | OnClickListSearch

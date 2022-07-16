@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from "react";
-import BackgroundSection from "components/BackgroundSection/BackgroundSection";
-import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
-import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
-import SectionHeroArchivePage from "../../page-components/SectionHeroArchivePage/SectionHeroArchivePage";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
-import SectionGridHasMap from "../../page-components/SectionGridHasMap/SectionGridHasMap";
+// import BackgroundSection from "components/BackgroundSection/BackgroundSection";
+import BgGlassmorphism from "page-components/BgGlassmorphism/BgGlassmorphism";
+// import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
+import SectionHeroArchivePage from "page-components/SectionHeroArchivePage/SectionHeroArchivePage";
+// import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+// import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
+import SectionGridHasMap from "page-components/SectionGridHasMap/SectionGridHasMap";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,10 +23,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
   const state = useSelector((state: RootState) => state.hotel)
   const dispatch = useDispatch();
   const { callApiSearch, onChangeInputValue } = bindActionCreators(actionCreators, dispatch)
-
-  useEffect(() => {
-    console.log('hasilDataListHotel: ', state.dataListHotel)
-  }, [state.dataListHotel])
+  
   return (
     <div
       className={`nc-ListingStayMapPage relative ${className}`}

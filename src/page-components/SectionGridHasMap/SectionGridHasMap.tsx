@@ -24,10 +24,6 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const dispatch = useDispatch();
   const { callApiSearch, onChangeInputValue } = bindActionCreators(actionCreators, dispatch)
 
-//   useEffect(() => {
-//     console.log()
-//   })
-
   return (
     <div>
       <div className="relative flex min-h-screen">
