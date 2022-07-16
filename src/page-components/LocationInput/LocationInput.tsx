@@ -36,14 +36,6 @@ const LocationInput: FC<LocationInputProps> = ({
   const dispatch = useDispatch();
   const { onClickListSearch } = bindActionCreators(actionCreators, dispatch)
 
-  useEffect(() => {
-    console.log('state.dataHoteldiInput: ', state.dataHotel)
-  }, [state.dataHotel])
- 
-  useEffect(() => {
-    console.log('state.dataHoteldiInputLength: ', typeof(state.dataHotel))
-    console.log('state.dataHoteldiInputLength: ', state.dataHotel?.length)
-  }, [])
 
   useEffect(() => {
     setValue(defaultValue);
@@ -92,43 +84,9 @@ const LocationInput: FC<LocationInputProps> = ({
   const renderRecentSearches = () => {
     return (
       <>
-        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
-          Pencarian Populer
+        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
+          Ketikkan lokasi yang anda cari...
         </h3>
-        <div className="mt-2">
-          {[
-            "Tasikmalaya, Jawa Barat",
-            "Bandung, Jawa Barat",
-            "Surabaya, Jawa Timur",
-            "Lombok, Nusa Tenggara Barat",
-          ].map((item) => (
-            <span
-              onClick={() => handleSelectLocation(item)}
-              key={item}
-              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 sm:py-5 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
-            >
-              <span className="block text-neutral-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 sm:h-6 w-4 sm:w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </span>
-              <span className=" block font-medium text-neutral-700 dark:text-neutral-200">
-                {item}
-              </span>
-            </span>
-          ))}
-        </div>
       </>
     );
   };
@@ -140,7 +98,7 @@ const LocationInput: FC<LocationInputProps> = ({
           {state.dataHotel?.map((item, index) => (
             <div className="grid grid-cols-8 mb-1 hover:bg-neutral-100" key={index} onClick={()=>{
               handleSelectLocation(item.name || ''); 
-              onClickListSearch(item.name || '');
+              onClickListSearch(item.name || '', item.slug || '');
             }}>
               <div className="text-center pt-3">
                 i
