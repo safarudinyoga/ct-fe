@@ -19,3 +19,7 @@
   @include typograph($size: 12px, $weight: 400, $color: #AC2C24 !important);
   float: left;
 }
+
+.hidden {
+  display: none !important;
+}

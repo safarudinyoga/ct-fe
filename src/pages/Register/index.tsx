@@ -3,30 +3,50 @@ import googleSvg from "images/Google.svg";
 import { Helmet } from "react-helmet";
 import Input from "shared/Input/Input";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { TextError } from "shared/TextError";
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { postRegister } from "state/action-creators/register";
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from 'state/action-creators/register'
+import { RootState } from 'state/reducers';
 
 export interface PageSignUpProps {
   className?: string;
 }
 
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
+  const dispatch = useDispatch();
+  const history = useHistory()
+
   const ref = useRef<any>(null)
+  const { postRegister } = bindActionCreators(actionCreators, dispatch)
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: {
+      name: '',
+      phone: '',
       email: '',
       password: ''
     },
     validationSchema: Yup.object({
+      name: Yup.string().required('Password is Required!'),
+      phone: Yup.string().required('Password is Required!'),
       email: Yup.string().email('Invalid email format').required('Email is Required!'),
-      password: Yup.string().required('Password is Required!')
+      password: Yup.string().required('Password is Required!'),
     }),
     onSubmit: (val) => {
       console.log(val);
+
+      const payload = {
+        ...val,
+        action_url: "http://app_user"
+      }
+
+      postRegister(payload)
     }
   })
 
@@ -80,6 +100,40 @@ const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
           </div>
           {/* FORM */}
           <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
+            <label className="block">
+              <span className="text-neutral-800 dark:text-neutral-200">
+                Name
+              </span>
+              <Input
+                name="name"
+                id="name"
+                type="name"
+                value={values.name}
+                placeholder="John Doe"
+                onChange={handleChange}
+                className={errors.name && touched.name ? 'is-invalid mt-1' : 'mt-1'}
+              />
+              {errors.name && touched.name &&
+                <TextError>{errors.name}</TextError>
+              }
+            </label>
+            <label className="block">
+              <span className="text-neutral-800 dark:text-neutral-200">
+                Phone Number
+              </span>
+              <Input
+                name="phone"
+                id="phone"
+                type="phone"
+                value={values.phone}
+                placeholder="08************"
+                onChange={handleChange}
+                className={errors.phone && touched.phone ? 'is-invalid mt-1' : 'mt-1'}
+              />
+              {errors.phone && touched.phone &&
+                <TextError>{errors.phone}</TextError>
+              }
+            </label>
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
                 Email address
