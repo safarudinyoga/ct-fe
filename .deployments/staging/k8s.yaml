@@ -17,9 +17,6 @@ spec:
       - name: home-services
         image: asia-southeast2-docker.pkg.dev/calm-suprstate-352907/caritempat/home-services:latest
         imagePullPolicy: Always
-        envFrom:
-        - configMapRef:
-            name: home-services
         ports:
         - containerPort: 3000
       imagePullSecrets:
