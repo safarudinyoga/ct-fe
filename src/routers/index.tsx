@@ -46,6 +46,7 @@ import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage
 import PageHome from "pages/HomePage/HomePage";
 import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
 import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
+import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 
