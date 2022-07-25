@@ -195,7 +195,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
     // href: "/",
-    href: "/home-1-header-2",
+    href: "/listing-hotels",
     name: "Hotel",
     isNew: true,
   },

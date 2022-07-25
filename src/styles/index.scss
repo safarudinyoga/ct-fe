@@ -5,5 +5,21 @@
 @import "./_dates";
 //
 @import "./header";
+@import './_mixins.sass';
 
 @import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
+.is-invalid {
+  border: 1px solid #dc3545 !important;
+}
+
+.global-error-message {
+  margin-top: 0.25rem;
+  margin-bottom: 0 !important;
+  @include typograph($size: 12px, $weight: 400, $color: #AC2C24 !important);
+  float: left;
+}
+
+.hidden {
+  display: none !important;
+}

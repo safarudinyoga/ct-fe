@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
-import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
 import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
@@ -23,7 +22,7 @@ import AccountSavelists from "containers/AccountPage/AccountSavelists";
 import AccountBilling from "containers/AccountPage/AccountBilling";
 import PageContact from "containers/PageContact/PageContact";
 import PageAbout from "containers/PageAbout/PageAbout";
-import PageSignUp from "containers/PageSignUp/PageSignUp";
+// import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageLogin from "containers/PageLogin/PageLogin";
 import BlogPage from "containers/BlogPage/BlogPage";
 import BlogSingle from "containers/BlogPage/BlogSingle";
@@ -43,10 +42,24 @@ import ListingRealEstatePage from "containers/ListingRealEstatePage/ListingRealE
 import SiteHeader from "containers/SiteHeader";
 import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage";
 
+//dev
+import PageHome from "pages/HomePage/HomePage";
+import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
+import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
+import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
+import Register from "pages/Register";
+import OTP from "pages/OTP";
+
 export const pages: Page[] = [
+  //dev
   { path: "/", exact: true, component: PageHome },
+  { path: "/listing-hotels", component: ListingHotel },
+  { path: "/listing-hotel-map", component: ListingHotelMap },
+  { path: "/listing-hotel-detail", component: ListingHotelDetail },
+  //
+
+
   { path: "/#", exact: true, component: PageHome },
-  { path: "/home-1-header-2", exact: true, component: ListingStayPage },
   { path: "/home-2", component: PageHome2 },
   //
   { path: "/listing-stay", component: ListingStayPage },
@@ -100,8 +113,9 @@ export const pages: Page[] = [
   //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
-  { path: "/signup", component: PageSignUp },
+  { path: "/signup", component: Register },
   { path: "/login", component: PageLogin },
+  { path: "/otp", component: OTP },
   // { path: "/subscription", component: PageSubcription },
   //
 ];
