@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import AnyReactComponent from "components/AnyReactComponent/AnyReactComponent";
-import StayCardH from "components/StayCardH/StayCardH";
+import StayCardH from "page-components/StayCardH";
 import GoogleMapReact from "google-map-react";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import ButtonClose from "shared/ButtonClose/ButtonClose";
 import Checkbox from "shared/Checkbox/Checkbox";
 import Pagination from "shared/Pagination/Pagination";
-import TabFilters from "containers/ListingStayPage/TabFilters";
+import TabFilters from "page-components/TabFilters";
 import Heading2 from "components/Heading/Heading2";
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,10 +29,11 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
       <div className="relative flex min-h-screen">
         {/* CARDSSSS */}
         <div className="min-h-screen w-full xl:w-[780px] 2xl:w-[880px] flex-shrink-0 xl:px-8 ">
-          <Heading2 />
+          {/* <Heading2 /> */}
           <div className="mb-8 lg:mb-11">
             <TabFilters />
           </div>
+          <span className="mb-5">Room Groups</span>
           <div className="grid grid-cols-1 gap-8">
             {DEMO_STAYS.map((item) => (
               <div
@@ -44,9 +45,9 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               </div>
             ))}
           </div>
-          <div className="flex mt-16 justify-center items-center">
+          {/* <div className="flex mt-16 justify-center items-center">
             <Pagination />
-          </div>
+          </div> */}
         </div>
 
         {!showFullMapFixed && (

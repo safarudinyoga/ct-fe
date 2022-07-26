@@ -29,6 +29,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from 'state';
 import { RootState } from 'state/reducers';
+import { useHistory, useLocation } from "react-router-dom";
+import SectionGridHasMap from "page-components/SectionGridHasMap/SectionGridHasMap";
 
 export interface ListingStayDetailPageProps {
   className?: string;
@@ -77,10 +79,80 @@ const Amenities_demos = [
   { name: "la-infinity", icon: "la-infinity" },
 ];
 
+export interface FacilitiesProps {
+  active: boolean,
+  created_at: string,
+  group_id: number,
+  id: number,
+  name: string,
+  updated_at: string
+}
+export interface UserProp {
+  id: number,
+  name: string,
+  address: string,
+  description: string,
+  // facilities: data.facilities,
+  stars: number,
+  slug: string,
+  // address: string,
+  // description: string,
+  // id: number,
+  // images: string,
+  // name: string,
+  // slug: string,
+  // stars: number,
+  facilities: [
+    {
+      id: number,
+      name: string,
+      active: boolean,
+      created_at: string,
+      updated_at: string,
+      facilities: FacilitiesProps[],
+      room_groups: [
+        {
+          code: string,
+          description: string,
+          id: string,
+          name: string,
+          size: number,
+          thumbnail: string,
+          rooms: [
+            {
+              breakfast: false,
+              code: string,
+              name: string,
+              price: number,
+              provider: string,
+              ratekey: string,
+              refundable: true,
+              reschedule: false,
+              search_id: number
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
 const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
   className = "",
   isPreviewMode,
 }) => {
+
+  let location = useLocation().state as UserProp;
+  let data = location
+  let allFacilities = location.facilities
+  let hotelFacilities = location.facilities[0].facilities
+  // let room = allFacilities
+  // let data = location.detail
+  console.log('location: ', location)
+  console.log('allfacilities: ', allFacilities)
+  console.log('hotelFacilities: ', hotelFacilities)
+  // console.log('data: ', data)
   const [isOpen, setIsOpen] = useState(false);
   const [openFocusIndex, setOpenFocusIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState<DateRage>({
@@ -96,6 +168,10 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
 //   const { callApiSearch, onChangeInputValue, getListHotel, onChangeDate } = bindActionCreators(actionCreators, dispatch)
 
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
+
+  useEffect(() => {
+    console.log('redux: ', state.dataListDetailHotel)
+  }, [])
 
   const windowSize = useWindowSize();
 
@@ -132,29 +208,31 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
       <div className="listingSection__wrap !space-y-6">
         {/* 1 */}
         <div className="flex justify-between items-center">
-          <Badge name="Wooden house" />
-          <LikeSaveBtns />
+          {/* <Badge name="Wooden house" /> */}
+          {/* <LikeSaveBtns /> */}
         </div>
 
         {/* 2 */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
-          {state.dataListDetailHotel.name}
+          {data.name}
         </h2>
 
         {/* 3 */}
         <div className="flex items-center space-x-4">
-          <StartRating />
+          <StartRating 
+            point={data.stars}
+          />
           <span>·</span>
           <span>
             <i className="las la-map-marker-alt"></i>
             <span className="ml-1">
-                {state.dataListDetailHotel.address}
+                {data.address}
             </span>
           </span>
         </div>
 
         {/* 4 */}
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Avatar hasChecked sizeClass="h-10 w-10" radius="rounded-full" />
           <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
             Hosted by{" "}
@@ -162,7 +240,7 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
               Kevin Francis
             </span>
           </span>
-        </div>
+        </div> */}
 
         {/* 5 */}
         <div className="w-full border-b border-neutral-100 dark:border-neutral-700" />
@@ -205,7 +283,7 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         <div className="text-neutral-6000 dark:text-neutral-300">
           <span className="text-justify">
-            {state.dataListDetailHotel.description}
+            {data.description}
           </span>
           {/* <br />
           <br />
@@ -228,17 +306,84 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
     return (
       <div className="listingSection__wrap">
         <div>
-          <h2 className="text-2xl font-semibold">Amenities </h2>
+          <h2 className="text-2xl font-semibold">Hotel Facilities </h2>
           <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            About the property's amenities and services
+            About the facilities in hotel
           </span>
         </div>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* 6 */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
-          {Amenities_demos.filter((_, i) => i < 12).map((item) => (
+          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
             <div key={item.name} className="flex items-center space-x-3">
-              <i className={`text-3xl las ${item.icon}`}></i>
+              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
+              <i className={`text-3xl las`}>i</i>
+              <span className=" ">{item.name}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ----- */}
+        <div className="w-14 border-b border-neutral-200"></div>
+        <div>
+          <ButtonSecondary onClick={openModalAmenities}>
+            View more 20 amenities
+          </ButtonSecondary>
+        </div>
+        {renderMotalAmenities()}
+      </div>
+    );
+  };
+
+  const renderSection4 = () => {
+    return (
+      <div className="listingSection__wrap">
+        <div>
+          <h2 className="text-2xl font-semibold">Room Facilities </h2>
+          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
+            About the facilities in room
+          </span>
+        </div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+        {/* 6 */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
+          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
+            <div key={item.name} className="flex items-center space-x-3">
+              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
+              <i className={`text-3xl las`}>i</i>
+              <span className=" ">{item.name}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ----- */}
+        <div className="w-14 border-b border-neutral-200"></div>
+        <div>
+          <ButtonSecondary onClick={openModalAmenities}>
+            View more 20 amenities
+          </ButtonSecondary>
+        </div>
+        {renderMotalAmenities()}
+      </div>
+    );
+  };
+
+  const renderSection5 = () => {
+    return (
+      <div className="listingSection__wrap">
+        <div>
+          <h2 className="text-2xl font-semibold">Bathroom Amenities </h2>
+          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
+            About the facilities in bathroom
+          </span>
+        </div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+        {/* 6 */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
+          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
+            <div key={item.name} className="flex items-center space-x-3">
+              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
+              <i className={`text-3xl las`}>i</i>
               <span className=" ">{item.name}</span>
             </div>
           ))}
@@ -307,7 +452,7 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
                     </span>
                   </div>
                   <div className="px-8 overflow-auto text-neutral-700 dark:text-neutral-300 divide-y divide-neutral-200">
-                    {Amenities_demos.filter((_, i) => i < 1212).map((item) => (
+                    {/* {Amenities_demos.filter((_, i) => i < 1212).map((item) => (
                       <div
                         key={item.name}
                         className="flex items-center py-6 space-x-8"
@@ -317,6 +462,18 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
                         ></i>
                         <span>{item.name}</span>
                       </div>
+                    ))} */}
+                    {hotelFacilities.map((a, index) => (
+                       <div
+                       key={a.name}
+                       className="flex items-center py-6 space-x-8"
+                     >
+                       <i
+                        //  className={`text-4xl text-neutral-6000 las ${item.icon}`}
+                         className={`text-4xl text-neutral-6000 las`}
+                       >i</i>
+                       <span>{a.name}</span>
+                     </div>
                     ))}
                   </div>
                 </div>
@@ -328,49 +485,49 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
     );
   };
 
-  const renderSection4 = () => {
-    return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <div>
-          <h2 className="text-2xl font-semibold">Room Rates </h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            Prices may increase on weekends or holidays
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        {/* CONTENT */}
-        <div className="flow-root">
-          <div className="text-sm sm:text-base text-neutral-6000 dark:text-neutral-300 -mb-4">
-            <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-              <span>Monday - Thursday</span>
-              <span>$199</span>
-            </div>
-            <div className="p-4  flex justify-between items-center space-x-4 rounded-lg">
-              <span>Monday - Thursday</span>
-              <span>$199</span>
-            </div>
-            <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-              <span>Friday - Sunday</span>
-              <span>$219</span>
-            </div>
-            <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-              <span>Rent by month</span>
-              <span>-8.34 %</span>
-            </div>
-            <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-              <span>Minimum number of nights</span>
-              <span>1 night</span>
-            </div>
-            <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-              <span>Max number of nights</span>
-              <span>90 nights</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  // const renderSection4 = () => {
+  //   return (
+  //     <div className="listingSection__wrap">
+  //       {/* HEADING */}
+  //       <div>
+  //         <h2 className="text-2xl font-semibold">Room Rates </h2>
+  //         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
+  //           Prices may increase on weekends or holidays
+  //         </span>
+  //       </div>
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+  //       {/* CONTENT */}
+  //       <div className="flow-root">
+  //         <div className="text-sm sm:text-base text-neutral-6000 dark:text-neutral-300 -mb-4">
+  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Monday - Thursday</span>
+  //             <span>$199</span>
+  //           </div>
+  //           <div className="p-4  flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Monday - Thursday</span>
+  //             <span>$199</span>
+  //           </div>
+  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Friday - Sunday</span>
+  //             <span>$219</span>
+  //           </div>
+  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Rent by month</span>
+  //             <span>-8.34 %</span>
+  //           </div>
+  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Minimum number of nights</span>
+  //             <span>1 night</span>
+  //           </div>
+  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
+  //             <span>Max number of nights</span>
+  //             <span>90 nights</span>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   const renderSectionCheckIndate = () => {
     return (
@@ -406,232 +563,152 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
     );
   };
 
-  const renderSection5 = () => {
-    return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <h2 className="text-2xl font-semibold">Host Information</h2>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+  // const renderSection5 = () => {
+  //   return (
+  //     <div className="listingSection__wrap">
+  //       {/* HEADING */}
+  //       <h2 className="text-2xl font-semibold">Host Information</h2>
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
-        {/* host */}
-        <div className="flex items-center space-x-4">
-          <Avatar
-            hasChecked
-            hasCheckedClass="w-4 h-4 -top-0.5 right-0.5"
-            sizeClass="h-14 w-14"
-            radius="rounded-full"
-          />
-          <div>
-            <a className="block text-xl font-medium" href="##">
-              Kevin Francis
-            </a>
-            <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
-              <StartRating />
-              <span className="mx-2">·</span>
-              <span> 12 places</span>
-            </div>
-          </div>
-        </div>
+  //       {/* host */}
+  //       <div className="flex items-center space-x-4">
+  //         <Avatar
+  //           hasChecked
+  //           hasCheckedClass="w-4 h-4 -top-0.5 right-0.5"
+  //           sizeClass="h-14 w-14"
+  //           radius="rounded-full"
+  //         />
+  //         <div>
+  //           <a className="block text-xl font-medium" href="##">
+  //             Kevin Francis
+  //           </a>
+  //           <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+  //             <StartRating />
+  //             <span className="mx-2">·</span>
+  //             <span> 12 places</span>
+  //           </div>
+  //         </div>
+  //       </div>
 
-        {/* desc */}
-        <span className="block text-neutral-6000 dark:text-neutral-300">
-          Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-          accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-          garden and barbecue facilities...
-        </span>
+  //       {/* desc */}
+  //       <span className="block text-neutral-6000 dark:text-neutral-300">
+  //         Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
+  //         accommodation, an outdoor swimming pool, a bar, a shared lounge, a
+  //         garden and barbecue facilities...
+  //       </span>
 
-        {/* info */}
-        <div className="block text-neutral-500 dark:text-neutral-400 space-y-2.5">
-          <div className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span>Joined in March 2016</span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-              />
-            </svg>
-            <span>Response rate - 100%</span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+  //       {/* info */}
+  //       <div className="block text-neutral-500 dark:text-neutral-400 space-y-2.5">
+  //         <div className="flex items-center space-x-3">
+  //           <svg
+  //             xmlns="http://www.w3.org/2000/svg"
+  //             className="h-6 w-6"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             stroke="currentColor"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               strokeWidth={1.5}
+  //               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+  //             />
+  //           </svg>
+  //           <span>Joined in March 2016</span>
+  //         </div>
+  //         <div className="flex items-center space-x-3">
+  //           <svg
+  //             xmlns="http://www.w3.org/2000/svg"
+  //             className="h-6 w-6"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             stroke="currentColor"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               strokeWidth={1.5}
+  //               d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+  //             />
+  //           </svg>
+  //           <span>Response rate - 100%</span>
+  //         </div>
+  //         <div className="flex items-center space-x-3">
+  //           <svg
+  //             xmlns="http://www.w3.org/2000/svg"
+  //             className="h-6 w-6"
+  //             fill="none"
+  //             viewBox="0 0 24 24"
+  //             stroke="currentColor"
+  //           >
+  //             <path
+  //               strokeLinecap="round"
+  //               strokeLinejoin="round"
+  //               strokeWidth={1.5}
+  //               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+  //             />
+  //           </svg>
 
-            <span>Fast response - within a few hours</span>
-          </div>
-        </div>
+  //           <span>Fast response - within a few hours</span>
+  //         </div>
+  //       </div>
 
-        {/* == */}
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div>
-          <ButtonSecondary href="##">See host profile</ButtonSecondary>
-        </div>
-      </div>
-    );
-  };
+  //       {/* == */}
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+  //       <div>
+  //         <ButtonSecondary href="##">See host profile</ButtonSecondary>
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  // const renderSection6 = () => {
+  //   return (
+  //     <div className="listingSection__wrap">
+  //       {/* HEADING */}
+  //       <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
+  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+
+  //       {/* Content */}
+  //       <div className="space-y-5">
+  //         <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" />
+  //         <div className="relative">
+  //           <Input
+  //             fontClass=""
+  //             sizeClass="h-16 px-4 py-3"
+  //             rounded="rounded-3xl"
+  //             placeholder="Share your thoughts ..."
+  //           />
+  //           <ButtonCircle
+  //             className="absolute right-2 top-1/2 transform -translate-y-1/2"
+  //             size=" w-12 h-12 "
+  //           >
+  //             <ArrowRightIcon className="w-5 h-5" />
+  //           </ButtonCircle>
+  //         </div>
+  //       </div>
+
+  //       {/* comment */}
+  //       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+  //         <CommentListing className="py-8" />
+  //         <CommentListing className="py-8" />
+  //         <CommentListing className="py-8" />
+  //         <CommentListing className="py-8" />
+  //         <div className="pt-8">
+  //           <ButtonSecondary>View more 20 reviews</ButtonSecondary>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   const renderSection6 = () => {
     return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-        {/* Content */}
-        <div className="space-y-5">
-          <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" />
-          <div className="relative">
-            <Input
-              fontClass=""
-              sizeClass="h-16 px-4 py-3"
-              rounded="rounded-3xl"
-              placeholder="Share your thoughts ..."
-            />
-            <ButtonCircle
-              className="absolute right-2 top-1/2 transform -translate-y-1/2"
-              size=" w-12 h-12 "
-            >
-              <ArrowRightIcon className="w-5 h-5" />
-            </ButtonCircle>
-          </div>
-        </div>
-
-        {/* comment */}
-        <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
-          <CommentListing className="py-8" />
-          <div className="pt-8">
-            <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-          </div>
-        </div>
+      <div>
+        <SectionGridHasMap/>
       </div>
-    );
-  };
-
-  const renderSection7 = () => {
-    return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <div>
-          <h2 className="text-2xl font-semibold">Location</h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            San Diego, CA, United States of America (SAN-San Diego Intl.)
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
-
-        {/* MAP */}
-        <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3">
-          <div className="rounded-xl overflow-hidden">
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
-              }}
-              yesIWantToUseGoogleMapApiInternals
-              defaultZoom={15}
-              defaultCenter={{
-                lat: 55.9607277,
-                lng: 36.2172614,
-              }}
-            >
-              <LocationMarker lat={55.9607277} lng={36.2172614} />
-            </GoogleMapReact>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderSection8 = () => {
-    return (
-      <div className="listingSection__wrap">
-        {/* HEADING */}
-        <h2 className="text-2xl font-semibold">Things to know</h2>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
-
-        {/* CONTENT */}
-        <div>
-          <h4 className="text-lg font-semibold">Cancellation policy</h4>
-          <span className="block mt-3 text-neutral-500 dark:text-neutral-400">
-            Refund 50% of the booking value when customers cancel the room
-            within 48 hours after successful booking and 14 days before the
-            check-in time. <br />
-            Then, cancel the room 14 days before the check-in time, get a 50%
-            refund of the total amount paid (minus the service fee).
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
-
-        {/* CONTENT */}
-        <div>
-          <h4 className="text-lg font-semibold">Check-in time</h4>
-          <div className="mt-3 text-neutral-500 dark:text-neutral-400 max-w-md text-sm sm:text-base">
-            <div className="flex space-x-10 justify-between p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-              <span>Check-in</span>
-              <span>08:00 am - 12:00 am</span>
-            </div>
-            <div className="flex space-x-10 justify-between p-3">
-              <span>Check-out</span>
-              <span>02:00 pm - 04:00 pm</span>
-            </div>
-          </div>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
-
-        {/* CONTENT */}
-        <div>
-          <h4 className="text-lg font-semibold">Special Note</h4>
-          <div className="prose sm:prose">
-            <ul className="mt-3 text-neutral-500 dark:text-neutral-400 space-y-2">
-              <li>
-                Ban and I will work together to keep the landscape and
-                environment green and clean by not littering, not using
-                stimulants and respecting people around.
-              </li>
-              <li>Do not sing karaoke past 11:30</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    );
-  };
+    )
+  }
 
   const renderSidebar = () => {
     return (
@@ -774,55 +851,13 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
           {renderSection2()}
           {renderSection3()}
           {renderSection4()}
-          {/* {renderSectionCheckIndate()} */}
-          {/* {renderSection5()} */}
-          {/* {renderSection6()} */}
-          {/* {renderSection7()} */}
-          {/* {renderSection8()} */}
+          {renderSection5()}
+          {renderSection6()}
         </div>
-
-        {/* SIDEBAR */}
         <div className="block flex-grow mt-14 lg:mt-0">
           <div className="sticky top-24">{renderSidebar()}</div>
         </div>
       </main>
-
-      {/* STICKY FOOTER MOBILE */}
-      {!isPreviewMode && (
-        <div className="block lg:hidden fixed bottom-0 inset-x-0 py-4 bg-white text-neutral-900 border-t border-neutral-200 z-20">
-          <div className="container flex items-center justify-between">
-            <span className="text-2xl font-semibold">
-              $311
-              <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
-                /night
-              </span>
-            </span>
-
-            <ButtonPrimary href="##">Reserve</ButtonPrimary>
-          </div>
-        </div>
-      )}
-
-      {/* OTHER SECTION */}
-      {!isPreviewMode && (
-        <div className="container py-24 lg:py-32">
-          {/* SECTION 1 */}
-          <div className="relative py-16">
-            <BackgroundSection />
-            <SectionSliderNewCategories
-              heading="Explore by types of stays"
-              subHeading="Explore houses based on 10 types of stays"
-              categoryCardType="card5"
-              itemPerRow={5}
-              sliderStyle="style2"
-              uniqueClassName={"ListingStayDetailPage1"}
-            />
-          </div>
-
-          {/* SECTION */}
-          <SectionSubscribe2 className="pt-24 lg:pt-32" />
-        </div>
-      )}
     </div>
   );
 };

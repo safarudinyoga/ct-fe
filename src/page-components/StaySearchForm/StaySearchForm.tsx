@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from 'state';
 import { RootState } from 'state/reducers';
+import Axios from 'axios';
+import { useHistory } from "react-router-dom";
 var debounce = require('lodash.debounce');
 export interface DateRage {
   startDate: moment.Moment | null;
@@ -23,6 +25,7 @@ export interface StaySearchFormProps {
 const StaySearchForm: FC<StaySearchFormProps> = ({
   currentPage
 }) => {
+  const history = useHistory()
   const [locationInputValue, setLocationInputValue] = useState("");
   const [guestValue, setGuestValue] = useState({});
   const [dateFocused, setDateFocused] = useState<FocusedInputShape | null>(null);
@@ -44,12 +47,44 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
     setDateRangeValue(defaultDateRange)
   }, [])
   const handleListHotel = () => {
-    let data = {
-      adult: state.adult,
-      children: state.children,
-      room: state.room
+    if(locationInputValue == "") {
+      alert('Pilih Lokasi')
     }
-    getListHotel(data, state.slug)
+    else {
+      if (state.slug == '') {
+        alert('tampilkan list')
+      }
+      else {
+        let data = {
+          adult: state.adult,
+          children: state.children,
+          room: state.room
+        }
+        getListHotel(data, state.slug)
+        return Axios.get(`https://api.caritempat.id/user` + `/guest/hotel/availability/${state.slug}`, {
+            params: data
+        })
+        .then((res: any) => {
+          let data = res.data.data
+          let params = {
+            id: data.id,
+            name: data.name,
+            address: data.address,
+            description: data.description,
+            facilities: data.facilities,
+            stars: data.stars,
+            slug: data.slug,
+          }
+          history.push({
+            pathname: '/listing-hotel-detail',
+            state: params
+          })
+        })
+        .catch((err:any) => {
+            throw(err)
+        });
+      }
+    }
   }
 
   useEffect(() => {
@@ -71,7 +106,8 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
 
   const renderForm = () => {
     return (
-      <form className="w-full relative mt-8 flex flex-col md:flex-row  rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700 md:divide-y-0">
+      <>
+      <div className="w-full relative mt-8 flex flex-col md:flex-row  rounded-3xl lg:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700 md:divide-y-0">
         <LocationInput
           defaultValue={locationInputValue}
           onChange={debouncedChangeHandler}
@@ -95,7 +131,9 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
             onClick={handleListHotel}
           />
         </div>
-      </form>
+      </div>
+      {/* <button onClick={handleListHotel}>tes</button> */}
+      </>
     );
   };
 
