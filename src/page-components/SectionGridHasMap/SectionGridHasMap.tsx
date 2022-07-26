@@ -1,7 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import AnyReactComponent from "components/AnyReactComponent/AnyReactComponent";
 import StayCardH from "page-components/StayCardH";
-import GoogleMapReact from "google-map-react";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import ButtonClose from "shared/ButtonClose/ButtonClose";
 import Checkbox from "shared/Checkbox/Checkbox";
@@ -14,10 +12,10 @@ import { actionCreators } from 'state';
 import { RootState } from 'state/reducers';
 
 const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
-
 export interface SectionGridHasMapProps {}
 
-const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
+const SectionGridHasMap: FC<SectionGridHasMapProps> = location => {
+  console.log('p.sectionGridlocation: ', location)
   const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
   const [showFullMapFixed, setShowFullMapFixed] = useState(false);
   const state = useSelector((state: RootState) => state.hotel)
@@ -35,19 +33,11 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
           </div>
           <span className="mb-5">Room Groups</span>
           <div className="grid grid-cols-1 gap-8">
-            {DEMO_STAYS.map((item) => (
               <div
-                key={item.id}
-                onMouseEnter={() => setCurrentHoverID((_) => item.id)}
-                onMouseLeave={() => setCurrentHoverID((_) => -1)}
               >
-                <StayCardH data={item} />
+                <StayCardH {...location} />
               </div>
-            ))}
           </div>
-          {/* <div className="flex mt-16 justify-center items-center">
-            <Pagination />
-          </div> */}
         </div>
 
         {!showFullMapFixed && (
@@ -81,26 +71,6 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
                 label="Search as I move the map"
               />
             </div>
-
-            {/* BELLOW IS MY GOOGLE API KEY -- PLEASE DELETE AND TYPE YOUR API KEY */}
-            {/* <GoogleMapReact
-              defaultZoom={12}
-              defaultCenter={DEMO_STAYS[0].map}
-              bootstrapURLKeys={{
-                key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
-              }}
-              yesIWantToUseGoogleMapApiInternals
-            >
-              {DEMO_STAYS.map((item) => (
-                <AnyReactComponent
-                  isSelected={currentHoverID === item.id}
-                  key={item.id}
-                  lat={item.map.lat}
-                  lng={item.map.lng}
-                  listing={item}
-                />
-              ))}
-            </GoogleMapReact> */}
           </div>
         </div>
       </div>

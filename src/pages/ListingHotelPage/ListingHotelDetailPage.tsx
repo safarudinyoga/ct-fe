@@ -1,35 +1,19 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ArrowRightIcon } from "@heroicons/react/outline";
-import LocationMarker from "components/AnyReactComponent/LocationMarker";
-import CommentListing from "components/CommentListing/CommentListing";
-import FiveStartIconForRate from "components/FiveStartIconForRate/FiveStartIconForRate";
 import GuestsInput from "components/HeroSearchForm/GuestsInput";
 import StayDatesRangeInput from "components/HeroSearchForm/StayDatesRangeInput";
 import { DateRage } from "components/HeroSearchForm/StaySearchForm";
 import StartRating from "components/StartRating/StartRating";
-import GoogleMapReact from "google-map-react";
 import useWindowSize from "hooks/useWindowResize";
 import moment from "moment";
 import { DayPickerRangeController, FocusedInputShape } from "react-dates";
-import Avatar from "shared/Avatar/Avatar";
-import Badge from "shared/Badge/Badge";
-import ButtonCircle from "shared/Button/ButtonCircle";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
 import ButtonClose from "shared/ButtonClose/ButtonClose";
-import Input from "shared/Input/Input";
 import NcImage from "shared/NcImage/NcImage";
-import LikeSaveBtns from "containers/ListingDetailPage/LikeSaveBtns";
-import ModalPhotos from "containers/ListingDetailPage/ModalPhotos";
-import BackgroundSection from "components/BackgroundSection/BackgroundSection";
-import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
-import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from 'state';
 import { RootState } from 'state/reducers';
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SectionGridHasMap from "page-components/SectionGridHasMap/SectionGridHasMap";
 
 export interface ListingStayDetailPageProps {
@@ -49,36 +33,6 @@ const PHOTOS: string[] = [
   "https://images.pexels.com/photos/2677398/pexels-photo-2677398.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
 ];
 
-const Amenities_demos = [
-  { name: "la-key", icon: "la-key" },
-  { name: "la-luggage-cart", icon: "la-luggage-cart" },
-  { name: "la-shower", icon: "la-shower" },
-  { name: "la-smoking", icon: "la-smoking" },
-  { name: "la-snowflake", icon: "la-snowflake" },
-  { name: "la-spa", icon: "la-spa" },
-  { name: "la-suitcase", icon: "la-suitcase" },
-  { name: "la-suitcase-rolling", icon: "la-suitcase-rolling" },
-  { name: "la-swimmer", icon: "la-swimmer" },
-  { name: "la-swimming-pool", icon: "la-swimming-pool" },
-  { name: "la-tv", icon: "la-tv" },
-  { name: "la-umbrella-beach", icon: "la-umbrella-beach" },
-  { name: "la-utensils", icon: "la-utensils" },
-  { name: "la-wheelchair", icon: "la-wheelchair" },
-  { name: "la-wifi", icon: "la-wifi" },
-  { name: "la-baby-carriage", icon: "la-baby-carriage" },
-  { name: "la-bath", icon: "la-bath" },
-  { name: "la-bed", icon: "la-bed" },
-  { name: "la-briefcase", icon: "la-briefcase" },
-  { name: "la-car", icon: "la-car" },
-  { name: "la-cocktail", icon: "la-cocktail" },
-  { name: "la-coffee", icon: "la-coffee" },
-  { name: "la-concierge-bell", icon: "la-concierge-bell" },
-  { name: "la-dice", icon: "la-dice" },
-  { name: "la-dumbbell", icon: "la-dumbbell" },
-  { name: "la-hot-tub", icon: "la-hot-tub" },
-  { name: "la-infinity", icon: "la-infinity" },
-];
-
 export interface FacilitiesProps {
   active: boolean,
   created_at: string,
@@ -92,16 +46,8 @@ export interface UserProp {
   name: string,
   address: string,
   description: string,
-  // facilities: data.facilities,
   stars: number,
   slug: string,
-  // address: string,
-  // description: string,
-  // id: number,
-  // images: string,
-  // name: string,
-  // slug: string,
-  // stars: number,
   facilities: [
     {
       id: number,
@@ -109,28 +55,28 @@ export interface UserProp {
       active: boolean,
       created_at: string,
       updated_at: string,
-      facilities: FacilitiesProps[],
-      room_groups: [
+      facilities: FacilitiesProps[]
+    }
+  ],
+  room_groups: [
+    {
+      code: string,
+      description: string,
+      id: string,
+      name: string,
+      size: number,
+      thumbnail: string,
+      rooms: [
         {
+          breakfast: false,
           code: string,
-          description: string,
-          id: string,
           name: string,
-          size: number,
-          thumbnail: string,
-          rooms: [
-            {
-              breakfast: false,
-              code: string,
-              name: string,
-              price: number,
-              provider: string,
-              ratekey: string,
-              refundable: true,
-              reschedule: false,
-              search_id: number
-            }
-          ]
+          price: number,
+          provider: string,
+          ratekey: string,
+          refundable: true,
+          reschedule: false,
+          search_id: number
         }
       ]
     }
@@ -147,12 +93,7 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
   let data = location
   let allFacilities = location.facilities
   let hotelFacilities = location.facilities[0].facilities
-  // let room = allFacilities
-  // let data = location.detail
-  console.log('location: ', location)
-  console.log('allfacilities: ', allFacilities)
-  console.log('hotelFacilities: ', hotelFacilities)
-  // console.log('data: ', data)
+  let roomGroups = location.room_groups
   const [isOpen, setIsOpen] = useState(false);
   const [openFocusIndex, setOpenFocusIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState<DateRage>({
@@ -165,8 +106,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
 
   const state = useSelector((state: RootState) => state.hotel)
   const dispatch = useDispatch();
-//   const { callApiSearch, onChangeInputValue, getListHotel, onChangeDate } = bindActionCreators(actionCreators, dispatch)
-
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
   useEffect(() => {
@@ -206,69 +145,36 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
   const renderSection1 = () => {
     return (
       <div className="listingSection__wrap !space-y-6">
-        {/* 1 */}
-        <div className="flex justify-between items-center">
-          {/* <Badge name="Wooden house" /> */}
-          {/* <LikeSaveBtns /> */}
-        </div>
-
-        {/* 2 */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
           {data.name}
         </h2>
-
-        {/* 3 */}
         <div className="flex items-center space-x-4">
-          <StartRating 
-            point={data.stars}
-          />
-          <span>·</span>
-          <span>
             <i className="las la-map-marker-alt"></i>
             <span className="ml-1">
                 {data.address}
             </span>
-          </span>
+          <StartRating 
+            point={data.stars}
+          />
         </div>
-
-        {/* 4 */}
-        {/* <div className="flex items-center">
-          <Avatar hasChecked sizeClass="h-10 w-10" radius="rounded-full" />
-          <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
-            Hosted by{" "}
-            <span className="text-neutral-900 dark:text-neutral-200 font-medium">
-              Kevin Francis
-            </span>
-          </span>
-        </div> */}
-
-        {/* 5 */}
         <div className="w-full border-b border-neutral-100 dark:border-neutral-700" />
-
-        {/* 6 */}
         <div className="flex items-center justify-between xl:justify-start space-x-8 xl:space-x-12 text-sm text-neutral-700 dark:text-neutral-300">
-          <div className="flex items-center space-x-3 ">
-            <i className=" las la-user text-2xl "></i>
-            <span className="">
-              6 <span className="hidden sm:inline-block">guests</span>
-            </span>
-          </div>
           <div className="flex items-center space-x-3">
             <i className=" las la-bed text-2xl"></i>
             <span className=" ">
-              6 <span className="hidden sm:inline-block">beds</span>
+              Gym <span className="hidden sm:inline-block">beds</span>
             </span>
           </div>
           <div className="flex items-center space-x-3">
             <i className=" las la-bath text-2xl"></i>
             <span className=" ">
-              3 <span className="hidden sm:inline-block">baths</span>
+              Ballroom <span className="hidden sm:inline-block">baths</span>
             </span>
           </div>
           <div className="flex items-center space-x-3">
             <i className=" las la-door-open text-2xl"></i>
             <span className=" ">
-              2 <span className="hidden sm:inline-block">bedrooms</span>
+              Spa <span className="hidden sm:inline-block">bedrooms</span>
             </span>
           </div>
         </div>
@@ -280,23 +186,10 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
     return (
       <div className="listingSection__wrap">
         <h2 className="text-2xl font-semibold">Hotel information</h2>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         <div className="text-neutral-6000 dark:text-neutral-300">
           <span className="text-justify">
             {data.description}
           </span>
-          {/* <br />
-          <br />
-          <span>
-            There is a private bathroom with bidet in all units, along with a
-            hairdryer and free toiletries.
-          </span>
-          <br /> <br />
-          <span>
-            The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental
-            service and a car rental service are available at the accommodation,
-            while cycling can be enjoyed nearby.
-          </span> */}
         </div>
       </div>
     );
@@ -304,99 +197,34 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
 
   const renderSection3 = () => {
     return (
-      <div className="listingSection__wrap">
-        <div>
-          <h2 className="text-2xl font-semibold">Hotel Facilities </h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            About the facilities in hotel
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        {/* 6 */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
-          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
-            <div key={item.name} className="flex items-center space-x-3">
-              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
-              <i className={`text-3xl las`}>i</i>
-              <span className=" ">{item.name}</span>
+      <div>
+        { allFacilities && allFacilities.map ((a, index) => (
+          <div className="listingSection__wrap mb-4">
+            <div>
+              <h2 className="text-2xl font-semibold">{a.name} </h2>
+              <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
+                About the facilities in hotel
+              </span>
             </div>
-          ))}
-        </div>
-
-        {/* ----- */}
-        <div className="w-14 border-b border-neutral-200"></div>
-        <div>
-          <ButtonSecondary onClick={openModalAmenities}>
-            View more 20 amenities
-          </ButtonSecondary>
-        </div>
-        {renderMotalAmenities()}
-      </div>
-    );
-  };
-
-  const renderSection4 = () => {
-    return (
-      <div className="listingSection__wrap">
-        <div>
-          <h2 className="text-2xl font-semibold">Room Facilities </h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            About the facilities in room
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        {/* 6 */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
-          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
-            <div key={item.name} className="flex items-center space-x-3">
-              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
-              <i className={`text-3xl las`}>i</i>
-              <span className=" ">{item.name}</span>
+            <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
+              {a.facilities.filter((_, i) => i < 12).map((item) => (
+                <div key={item.name} className="flex items-center space-x-3">
+                  <i className={`text-3xl las la-bed`}></i>
+                  <span className=" ">{item.name}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* ----- */}
-        <div className="w-14 border-b border-neutral-200"></div>
-        <div>
-          <ButtonSecondary onClick={openModalAmenities}>
-            View more 20 amenities
-          </ButtonSecondary>
-        </div>
-        {renderMotalAmenities()}
-      </div>
-    );
-  };
-
-  const renderSection5 = () => {
-    return (
-      <div className="listingSection__wrap">
-        <div>
-          <h2 className="text-2xl font-semibold">Bathroom Amenities </h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            About the facilities in bathroom
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        {/* 6 */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
-          {hotelFacilities.filter((_, i) => i < 12).map((item) => (
-            <div key={item.name} className="flex items-center space-x-3">
-              {/* <i className={`text-3xl las ${item.icon}`}></i> */}
-              <i className={`text-3xl las`}>i</i>
-              <span className=" ">{item.name}</span>
+            <div className="w-14 border-b border-neutral-200"></div>
+            <div>
+              <ButtonSecondary onClick={openModalAmenities}>
+                View more 20 amenities
+              </ButtonSecondary>
             </div>
-          ))}
-        </div>
-
-        {/* ----- */}
-        <div className="w-14 border-b border-neutral-200"></div>
-        <div>
-          <ButtonSecondary onClick={openModalAmenities}>
-            View more 20 amenities
-          </ButtonSecondary>
-        </div>
-        {renderMotalAmenities()}
+            {renderMotalAmenities()}
+          </div>
+        ))
+        }
       </div>
     );
   };
@@ -421,8 +249,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
             >
               <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
             </Transition.Child>
-
-            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -452,26 +278,14 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
                     </span>
                   </div>
                   <div className="px-8 overflow-auto text-neutral-700 dark:text-neutral-300 divide-y divide-neutral-200">
-                    {/* {Amenities_demos.filter((_, i) => i < 1212).map((item) => (
-                      <div
-                        key={item.name}
-                        className="flex items-center py-6 space-x-8"
-                      >
-                        <i
-                          className={`text-4xl text-neutral-6000 las ${item.icon}`}
-                        ></i>
-                        <span>{item.name}</span>
-                      </div>
-                    ))} */}
                     {hotelFacilities.map((a, index) => (
                        <div
                        key={a.name}
                        className="flex items-center py-6 space-x-8"
                      >
                        <i
-                        //  className={`text-4xl text-neutral-6000 las ${item.icon}`}
-                         className={`text-4xl text-neutral-6000 las`}
-                       >i</i>
+                         className={`text-4xl text-neutral-6000 las la-coffee`}
+                       ></i>
                        <span>{a.name}</span>
                      </div>
                     ))}
@@ -485,227 +299,10 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
     );
   };
 
-  // const renderSection4 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <div>
-  //         <h2 className="text-2xl font-semibold">Room Rates </h2>
-  //         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-  //           Prices may increase on weekends or holidays
-  //         </span>
-  //       </div>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-  //       {/* CONTENT */}
-  //       <div className="flow-root">
-  //         <div className="text-sm sm:text-base text-neutral-6000 dark:text-neutral-300 -mb-4">
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Monday - Thursday</span>
-  //             <span>$199</span>
-  //           </div>
-  //           <div className="p-4  flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Monday - Thursday</span>
-  //             <span>$199</span>
-  //           </div>
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Friday - Sunday</span>
-  //             <span>$219</span>
-  //           </div>
-  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Rent by month</span>
-  //             <span>-8.34 %</span>
-  //           </div>
-  //           <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Minimum number of nights</span>
-  //             <span>1 night</span>
-  //           </div>
-  //           <div className="p-4 flex justify-between items-center space-x-4 rounded-lg">
-  //             <span>Max number of nights</span>
-  //             <span>90 nights</span>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  const renderSectionCheckIndate = () => {
-    return (
-      <div className="listingSection__wrap overflow-hidden">
-        {/* HEADING */}
-        <div>
-          <h2 className="text-2xl font-semibold">Availability</h2>
-          <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            Prices may increase on weekends or holidays
-          </span>
-        </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        {/* CONTENT */}
-
-        <div className="listingSection__wrap__DayPickerRangeController flow-root">
-          <div className="-mx-4 sm:mx-auto xl:mx-[-22px]">
-            <DayPickerRangeController
-              startDate={selectedDate.startDate}
-              endDate={selectedDate.endDate}
-              onDatesChange={(date) => setSelectedDate(date)}
-              focusedInput={focusedInputSectionCheckDate}
-              onFocusChange={(focusedInput) =>
-                setFocusedInputSectionCheckDate(focusedInput || "startDate")
-              }
-              initialVisibleMonth={null}
-              numberOfMonths={windowSize.width < 1280 ? 1 : 2}
-              daySize={getDaySize()}
-              hideKeyboardShortcutsPanel={false}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // const renderSection5 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <h2 className="text-2xl font-semibold">Host Information</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       {/* host */}
-  //       <div className="flex items-center space-x-4">
-  //         <Avatar
-  //           hasChecked
-  //           hasCheckedClass="w-4 h-4 -top-0.5 right-0.5"
-  //           sizeClass="h-14 w-14"
-  //           radius="rounded-full"
-  //         />
-  //         <div>
-  //           <a className="block text-xl font-medium" href="##">
-  //             Kevin Francis
-  //           </a>
-  //           <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
-  //             <StartRating />
-  //             <span className="mx-2">·</span>
-  //             <span> 12 places</span>
-  //           </div>
-  //         </div>
-  //       </div>
-
-  //       {/* desc */}
-  //       <span className="block text-neutral-6000 dark:text-neutral-300">
-  //         Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-  //         accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-  //         garden and barbecue facilities...
-  //       </span>
-
-  //       {/* info */}
-  //       <div className="block text-neutral-500 dark:text-neutral-400 space-y-2.5">
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-  //             />
-  //           </svg>
-  //           <span>Joined in March 2016</span>
-  //         </div>
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-  //             />
-  //           </svg>
-  //           <span>Response rate - 100%</span>
-  //         </div>
-  //         <div className="flex items-center space-x-3">
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             className="h-6 w-6"
-  //             fill="none"
-  //             viewBox="0 0 24 24"
-  //             stroke="currentColor"
-  //           >
-  //             <path
-  //               strokeLinecap="round"
-  //               strokeLinejoin="round"
-  //               strokeWidth={1.5}
-  //               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-  //             />
-  //           </svg>
-
-  //           <span>Fast response - within a few hours</span>
-  //         </div>
-  //       </div>
-
-  //       {/* == */}
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-  //       <div>
-  //         <ButtonSecondary href="##">See host profile</ButtonSecondary>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
-  // const renderSection6 = () => {
-  //   return (
-  //     <div className="listingSection__wrap">
-  //       {/* HEADING */}
-  //       <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-  //       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-  //       {/* Content */}
-  //       <div className="space-y-5">
-  //         <FiveStartIconForRate iconClass="w-6 h-6" className="space-x-0.5" />
-  //         <div className="relative">
-  //           <Input
-  //             fontClass=""
-  //             sizeClass="h-16 px-4 py-3"
-  //             rounded="rounded-3xl"
-  //             placeholder="Share your thoughts ..."
-  //           />
-  //           <ButtonCircle
-  //             className="absolute right-2 top-1/2 transform -translate-y-1/2"
-  //             size=" w-12 h-12 "
-  //           >
-  //             <ArrowRightIcon className="w-5 h-5" />
-  //           </ButtonCircle>
-  //         </div>
-  //       </div>
-
-  //       {/* comment */}
-  //       <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <CommentListing className="py-8" />
-  //         <div className="pt-8">
-  //           <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   const renderSection6 = () => {
     return (
       <div>
-        <SectionGridHasMap/>
+        <SectionGridHasMap {...location}/>
       </div>
     )
   }
@@ -713,7 +310,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
   const renderSidebar = () => {
     return (
       <div className="listingSectionSidebar__wrap shadow-xl">
-        {/* PRICE */}
         <div className="flex justify-between">
           <span className="text-3xl font-semibold">
             $119
@@ -724,7 +320,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
           <StartRating />
         </div>
 
-        {/* FORM */}
         <form className="flex flex-col border border-neutral-200 dark:border-neutral-700 rounded-3xl ">
           <StayDatesRangeInput
             wrapClassName="divide-x divide-neutral-200 dark:divide-neutral-700"
@@ -744,8 +339,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
             }}
           />
         </form>
-
-        {/* SUM */}
         <div className="flex flex-col space-y-4">
           <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
             <span>$119 x 3 night</span>
@@ -761,8 +354,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
             <span>$199</span>
           </div>
         </div>
-
-        {/* SUBMIT */}
         <ButtonPrimary>Reserve</ButtonPrimary>
       </div>
     );
@@ -773,7 +364,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
       className={`nc-ListingStayDetailPage  ${className}`}
       data-nc-id="ListingStayDetailPage"
     >
-      {/* SINGLE HEADER */}
       <>
         <header className="container 2xl:px-14 rounded-md sm:rounded-xl">
           <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
@@ -801,7 +391,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
                   src={item || ""}
                 />
 
-                {/* OVERLAY */}
                 <div
                   className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
                   onClick={() => handleOpenModal(index + 1)}
@@ -834,13 +423,13 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
           </div>
         </header>
         {/* MODAL PHOTOS */}
-        <ModalPhotos
+        {/* <ModalPhotos
           imgs={PHOTOS}
           isOpen={isOpen}
           onClose={handleCloseModal}
           initFocus={openFocusIndex}
           uniqueClassName="nc-ListingStayDetailPage-modalPhotos"
-        />
+        /> */}
       </>
 
       {/* MAIn */}
@@ -850,8 +439,6 @@ const ListingHotelDetailPage: FC<ListingStayDetailPageProps> = ({
           {renderSection1()}
           {renderSection2()}
           {renderSection3()}
-          {renderSection4()}
-          {renderSection5()}
           {renderSection6()}
         </div>
         <div className="block flex-grow mt-14 lg:mt-0">

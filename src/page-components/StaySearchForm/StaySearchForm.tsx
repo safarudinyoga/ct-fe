@@ -74,6 +74,7 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
             facilities: data.facilities,
             stars: data.stars,
             slug: data.slug,
+            room_groups: data.room_groups
           }
           history.push({
             pathname: '/listing-hotel-detail',
@@ -132,7 +133,6 @@ const StaySearchForm: FC<StaySearchFormProps> = ({
           />
         </div>
       </div>
-      {/* <button onClick={handleListHotel}>tes</button> */}
       </>
     );
   };
