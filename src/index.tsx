@@ -14,6 +14,11 @@ import "./fonts/line-awesome-1.3.0/css/line-awesome.css";
 //
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory({
+  basename: '/caritempat/v2/',
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

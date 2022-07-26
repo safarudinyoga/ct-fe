@@ -8,12 +8,20 @@ import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { TextError } from "shared/TextError";
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from 'state/action-creators/login'
+import { RootState } from 'state/reducers';
+
 export interface PageLoginProps {
   className?: string;
 }
 
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
+  const dispatch = useDispatch();
   const ref = useRef<any>(null)
+  const { postLogin } = bindActionCreators(actionCreators, dispatch)
+  const state = useSelector((state: RootState) => state.authLogin)
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: {
@@ -25,7 +33,8 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
       password: Yup.string().required('Password is Required!')
     }),
     onSubmit: (val) => {
-      console.log(val);
+
+      postLogin(val)
     }
   })
 

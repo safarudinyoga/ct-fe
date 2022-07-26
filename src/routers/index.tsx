@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { Page } from "./types";
+import { Switch, Route } from "react-router-dom";
+import { Router } from "react-router";
+import { Page } from './types';
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
 import Page404 from "containers/Page404/Page404";
@@ -49,6 +50,7 @@ import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
 import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
+import { history } from "index";
 
 export const pages: Page[] = [
   //dev
@@ -122,7 +124,7 @@ export const pages: Page[] = [
 
 const Routes = () => {
   return (
-    <BrowserRouter basename="/caritempat/v2/">
+    <Router history={history} >
       <ScrollToTop />
       <SiteHeader />
 
@@ -140,7 +142,7 @@ const Routes = () => {
         <Route component={Page404} />
       </Switch>
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 };
 

@@ -8,12 +8,18 @@ import MenuBar from "shared/MenuBar/MenuBar";
 import Navbar from "shared/Navigation/Navbar";
 import LangDropdown from "components/Header/LangDropdown";
 import CurrencyDropdown from "components/Header/CurrencyDropdown";
-
+import { COOKIES, SITE_COOKIES } from "utils/cookies";
+import { RootState } from 'state/reducers';
+import { useSelector } from 'react-redux';
 export interface MainNav1Props {
   isTop: boolean;
 }
 
 const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
+  // const auth = COOKIES.get(SITE_COOKIES.ACCESSTOKEN)
+  const state = useSelector((state: RootState) => state.authOTP)
+  console.log(state);
+
   return (
     <div
       className={`nc-MainNav1 relative z-10 ${isTop ? "onTop " : "notOnTop backdrop-filter"
@@ -29,7 +35,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
             <div className="px-1" />
             <CurrencyDropdown />
             <LangDropdown />
-            <ButtonPrimary href="/login">Sign In</ButtonPrimary>
+            {!state.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
           </div>
           <div className="flex items-center xl:hidden">
             <div className="px-1" />

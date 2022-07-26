@@ -3,24 +3,20 @@ import googleSvg from "images/Google.svg";
 import { Helmet } from "react-helmet";
 import Input from "shared/Input/Input";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextError } from "shared/TextError";
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { postRegister } from "state/action-creators/register";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/register'
-import { RootState } from 'state/reducers';
-
 export interface PageSignUpProps {
   className?: string;
 }
 
 const PageSignUp: FC<PageSignUpProps> = ({ className = "" }) => {
   const dispatch = useDispatch();
-  const history = useHistory()
 
   const ref = useRef<any>(null)
   const { postRegister } = bindActionCreators(actionCreators, dispatch)
