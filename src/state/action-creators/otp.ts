@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
 import { _axios, authUrl } from "utils/_axios";
-import { ActionTypeOTP, ClearDataType } from "../action-types/auth-types"
-import { ActionOTP, ClearData } from "../actions/auth-actions-types"
+import { ActionTypeOTP } from "../action-types/auth-types"
+import { ActionOTP } from "../actions/auth-actions-types"
 import { RESPONSE_STATUS } from '../../utils/apiHelper';
 import { history } from "index";
 import { setCookie, SITE_COOKIES } from '../../utils/cookies';
@@ -15,12 +15,7 @@ export const postOTP = (payload: any) => {
     try {
       const { data: { data }, status } = await _axios.post(`${authUrl}/user/verify-otp`, payload)
       if (RESPONSE_STATUS.includes(status)) {
-        dispatch({
-          type: ActionTypeOTP.POST_OTP_SUCCESS,
-          payload: data
-        })
-        setCookie(SITE_COOKIES.ACCESSTOKEN, data.access_token, 1)
-        history.replace('/')
+        dispatch(getUserData(data.access_token))
       }
     } catch (error: any) {
       dispatch({
@@ -31,10 +26,39 @@ export const postOTP = (payload: any) => {
   }
 }
 
-export const clearData = () => {
-  return (dispatch: Dispatch<ClearData>) => {
-    dispatch({
-      type: ClearDataType.CLEAR_DATA
-    })
+const getUserData = (token: any) => {
+  return async (dispatch: Dispatch<ActionOTP>) => {
+    try {
+      const { data: { data }, status } = await _axios.post(`${authUrl}/validation-token/user`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      if (RESPONSE_STATUS.includes(status)) {
+        let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+        let initials = [...data.name.matchAll(rgx)] || [];
+
+        initials = (
+          (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+        ).toUpperCase();
+
+        dispatch({
+          type: ActionTypeOTP.POST_OTP_SUCCESS,
+          payload: {
+            ...data,
+            access_token: token,
+            initials_name: initials
+          }
+        })
+        setCookie(SITE_COOKIES.ACCESSTOKEN, token, 1)
+        history.replace('/')
+      }
+    } catch (error) {
+      dispatch({
+        type: ActionTypeOTP.POST_OTP_FAILED,
+        message: error
+      })
+    }
   }
 }

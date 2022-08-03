@@ -1,24 +1,72 @@
-import React, { FC } from "react";
+import React, { FC, useState, useRef } from "react";
 import Logo from "shared/Logo/Logo";
 import Navigation from "shared/Navigation/Navigation";
-// import SearchDropdown from "./SearchDropdown";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import MenuBar from "shared/MenuBar/MenuBar";
-// import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import Navbar from "shared/Navigation/Navbar";
 import LangDropdown from "components/Header/LangDropdown";
 import CurrencyDropdown from "components/Header/CurrencyDropdown";
 import { COOKIES, SITE_COOKIES } from "utils/cookies";
 import { RootState } from 'state/reducers';
 import { useSelector } from 'react-redux';
+import { Menu, Dropdown } from "antd";
+
+import './header.sass'
+
+
+
 export interface MainNav1Props {
   isTop: boolean;
 }
 
 const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
-  // const auth = COOKIES.get(SITE_COOKIES.ACCESSTOKEN)
   const state = useSelector((state: RootState) => state.authOTP)
-  console.log(state);
+
+  // const [modalVisible, setModalVisible] = useState(false)
+
+  const ref = useRef<any>(null)
+
+  const menu = (
+    <Menu items={[
+      {
+        key: 'summary_profile',
+        label: (
+          <div className="summary_profile">
+            <h5>safarudin yoga</h5>
+          </div>
+        )
+      },
+      {
+        key: 'orders',
+        label: 'Your Orders'
+      },
+      {
+        key: 'smart_profile',
+        label: 'Smart Profile'
+      },
+      {
+        key: 'smart_pay',
+        label: 'Smart Pay'
+      },
+      {
+        key: 'refund',
+        label: 'Daftar Refund'
+      },
+      {
+        key: 'reviews',
+        label: 'My Reviews'
+      },
+      {
+        key: 'settings',
+        label: 'Pengaturan'
+      },
+      {
+        key: 'logout',
+        label: 'Keluar'
+      },
+    ]}>
+    </Menu>
+  )
 
   return (
     <div
@@ -35,7 +83,22 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
             <div className="px-1" />
             <CurrencyDropdown />
             <LangDropdown />
-            {!state.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
+            {!state.user_logged?.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
+            {state.user_logged?.initials_name && (
+              <div className="header-dropdown">
+                <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight'>
+                  <a className="ant-dropdown-link" href="#">
+                    <div className="rounded-profile">
+                      {state.user_logged?.initials_name}
+                    </div>
+                    <span className="header-dropdown__username">
+                      {/* {COOKIES.get(SITE_COOKIES.NAME)} */}
+                    </span>
+                  </a>
+                </Dropdown>
+              </div>
+            )
+            }
           </div>
           <div className="flex items-center xl:hidden">
             <div className="px-1" />

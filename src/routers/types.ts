@@ -60,6 +60,7 @@ export interface LocationStates {
   "/page404"?: {};
   "/subscription"?: {};
   "/otp"?: {};
+  "/forgot-password"?: {};
 }
 
 export type PathName = keyof LocationStates;

@@ -1,4 +1,4 @@
-import { ActionTypeRegister, ActionTypeLogin, ActionTypeOTP, ClearDataType } from '../action-types/auth-types';
+import { ActionTypeRegister, ActionTypeLogin, ActionTypeOTP, ActionTypeForgotPassword } from '../action-types/auth-types';
 
 interface PostRegisterPending {
   type: ActionTypeRegister.POST_REGISTER_PENDING
@@ -42,15 +42,26 @@ interface PostOTPFailed {
   message: any
 }
 
-export interface ClearData {
-  type: ClearDataType.CLEAR_DATA
+interface PostForgotPasswordPending {
+  type: ActionTypeForgotPassword.POST_FORGOTPASSWORD_PENDING
+}
+
+interface PostForgotPasswordSuccess {
+  type: ActionTypeForgotPassword.POST_FORGOTPASSWORD_SUCCESS,
+}
+
+interface PostForgotPasswordFailed {
+  type: ActionTypeForgotPassword.POST_FORGOTPASSWORD_FAILED,
+  message: any
 }
 
 export type ActionRegister = PostRegisterPending | PostRegisterSuccess | PostRegisterFailed
 
-export type ActionLogin = PostLoginPending | PostLoginSuccess |PostLoginFailed
+export type ActionLogin = PostLoginPending | PostLoginSuccess | PostLoginFailed
 
-export type ActionOTP = PostOTPPending | PostOTPSuccess |PostOTPFailed | ClearData
+export type ActionOTP = PostOTPPending | PostOTPSuccess | PostOTPFailed | any
+
+export type ActionForgotPassword = PostForgotPasswordPending | PostForgotPasswordSuccess | PostForgotPasswordFailed
 
 // Reducers
 export interface LoginReducers {
@@ -69,5 +80,17 @@ export interface OTPReducers {
   message: string,
   isLoading: boolean,
   isError: boolean,
-  access_token: string
+  user_logged: User_Logged
+}
+
+interface User_Logged {
+  access_token: string,
+  initials_name: string
+  email: string
+}
+
+export interface ForgotPasswordReducers {
+  message: string,
+  isLoading: boolean,
+  isError: boolean
 }

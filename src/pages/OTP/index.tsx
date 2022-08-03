@@ -13,7 +13,7 @@ export interface OTPProps {
 
 const OTP: FC<OTPProps> = ({ className = "" }) => {
   const dispatch = useDispatch();
-  const { postOTP, clearData } = bindActionCreators(actionCreators, dispatch)
+  const { postOTP } = bindActionCreators(actionCreators, dispatch)
   const state = useSelector((state: RootState) => state.authOTP)
 
   const [otp, setOtp] = useState<any>('')
@@ -24,10 +24,6 @@ const OTP: FC<OTPProps> = ({ className = "" }) => {
     if (otp.length === 6) {
       postOTP({otp})
     }
-
-    // return () => {
-    //   clearData()
-    // }
   }, [otp])
 
   return (
@@ -49,9 +45,9 @@ const OTP: FC<OTPProps> = ({ className = "" }) => {
           />
           {state.isError && <TextError>Masukkan kode yang kami kirim.</TextError>}
         </div>
-        <h5 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+        {/* <h5 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
           Butuh kode baru? <span className="resend_code">KIRIM KODE BARU</span>
-        </h5>
+        </h5> */}
       </div>
     </div>
   );

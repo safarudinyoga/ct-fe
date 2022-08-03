@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useEffect } from "react";
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import googleSvg from "images/Google.svg";
@@ -7,21 +7,25 @@ import Input from "shared/Input/Input";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { TextError } from "shared/TextError";
-import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/login'
 import { RootState } from 'state/reducers';
-
+import { signInWithGoogle, auth } from '../../services/firebase';
 export interface PageLoginProps {
   className?: string;
 }
 
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const dispatch = useDispatch();
-  const ref = useRef<any>(null)
   const { postLogin } = bindActionCreators(actionCreators, dispatch)
   const state = useSelector((state: RootState) => state.authLogin)
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      console.log(user);
+    })
+  }, [])
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: {
@@ -38,10 +42,6 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
     }
   })
 
-  const googleResponse = (response: GoogleLoginResponse) => {
-    console.log(response);
-  }
-
   return (
     <div className={`nc-PageLogin ${className}`} data-nc-id="PageLogin">
       <Helmet>
@@ -55,7 +55,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
           <div className="grid gap-3">
             <div
               className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px] cursor-pointer"
-              onClick={() => ref.current.querySelector('button').click()}
+              onClick={signInWithGoogle}
             >
               <img
                 className="flex-shrink-0"
@@ -65,18 +65,6 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
               <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
                 Continue with Google
               </h3>
-            </div>
-            <div ref={ref}>
-              <GoogleLogin
-                clientId="617246850621-95f9qhmehd380g2df86pjhrqc84n8nij.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={(response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-                  googleResponse(response as GoogleLoginResponse)
-                }}
-                onFailure={googleResponse}
-                cookiePolicy={'single_host_origin'}
-                className='hidden'
-              />
             </div>
           </div>
           {/* OR */}
@@ -108,7 +96,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
-                <Link to="/forgot-pass" className="text-sm">
+                <Link to="/forgot-password" className="text-sm">
                   Forgot password?
                 </Link>
               </span>

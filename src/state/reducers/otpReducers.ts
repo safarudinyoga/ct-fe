@@ -1,11 +1,15 @@
-import { ActionTypeOTP, ClearDataType } from '../action-types/auth-types'
+import { ActionTypeOTP } from '../action-types/auth-types'
 import { OTPReducers, ActionOTP } from 'state/actions/auth-actions-types'
 
 const initialState = {
   isLoading: false,
   isError: false,
   message: '',
-  access_token: ''
+  user_logged: {
+    access_token: '',
+    initials_name: '',
+    email: ''
+  }
 }
 
 const reducer = (state: OTPReducers = initialState, action: ActionOTP): OTPReducers => {
@@ -21,7 +25,7 @@ const reducer = (state: OTPReducers = initialState, action: ActionOTP): OTPReduc
       return {
         ...state,
         isLoading: false,
-        access_token: action.payload.access_token
+        user_logged: action.payload
       }
 
     case ActionTypeOTP.POST_OTP_FAILED:
@@ -31,9 +35,6 @@ const reducer = (state: OTPReducers = initialState, action: ActionOTP): OTPReduc
         isError: true,
         message: action.message
       }
-
-    case ClearDataType.CLEAR_DATA:
-      return initialState
 
     default:
       return state;

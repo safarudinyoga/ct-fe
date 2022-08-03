@@ -2,6 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Router } from "react-router";
 import { Page } from './types';
+import { history } from "index";
+
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
 import Page404 from "containers/Page404/Page404";
@@ -50,7 +52,7 @@ import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
 import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
-import { history } from "index";
+import ForgotPassword from "pages/ForgotPassword";
 
 export const pages: Page[] = [
   //dev
@@ -118,6 +120,7 @@ export const pages: Page[] = [
   { path: "/signup", component: Register },
   { path: "/login", component: PageLogin },
   { path: "/otp", component: OTP },
+  { path: '/forgot-password', component: ForgotPassword }
   // { path: "/subscription", component: PageSubcription },
   //
 ];
