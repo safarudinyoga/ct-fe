@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, useEffect } from "react";
 import Logo from "shared/Logo/Logo";
 import Navigation from "shared/Navigation/Navigation";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
@@ -13,18 +13,20 @@ import { Menu, Dropdown } from "antd";
 
 import './header.sass'
 
-
-
 export interface MainNav1Props {
   isTop: boolean;
+  isAuth: boolean
 }
 
-const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
+const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
   const state = useSelector((state: RootState) => state.authOTP)
 
-  // const [modalVisible, setModalVisible] = useState(false)
-
   const ref = useRef<any>(null)
+
+  // const [isAuth, setIsAuth] = useState<any>(false)
+  // useEffect(() => {
+  //   setIsAuth(COOKIES.get(SITE_COOKIES.ACCESSTOKEN))
+  // }, [COOKIES])
 
   const menu = (
     <Menu items={[
@@ -83,7 +85,8 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
             <div className="px-1" />
             <CurrencyDropdown />
             <LangDropdown />
-            {!state.user_logged?.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
+            {/* {!state.user_logged?.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>} */}
+            {!isAuth && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
             {state.user_logged?.initials_name && (
               <div className="header-dropdown">
                 <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight'>
@@ -97,8 +100,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
                   </a>
                 </Dropdown>
               </div>
-            )
-            }
+            )}
           </div>
           <div className="flex items-center xl:hidden">
             <div className="px-1" />

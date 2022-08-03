@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { Router } from "react-router";
 import { Page } from './types';
 import { history } from "index";
+import { COOKIES, SITE_COOKIES } from "utils/cookies";
 
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
@@ -53,6 +54,7 @@ import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
+import ResetPassword from "pages/ResetPassword";
 
 export const pages: Page[] = [
   //dev
@@ -120,19 +122,46 @@ export const pages: Page[] = [
   { path: "/signup", component: Register },
   { path: "/login", component: PageLogin },
   { path: "/otp", component: OTP },
-  { path: '/forgot-password', component: ForgotPassword }
   // { path: "/subscription", component: PageSubcription },
   //
 ];
 
+// here the components already added main
+const pagesNoLayout: Page[] = [
+  { path: "/", exact: true, component: PageHome },
+  { path: "/login", component: PageLogin },
+  { path: "/otp", component: OTP },
+  { path: '/forgot-password', component: ForgotPassword },
+  { path: '/reset-password', component: ResetPassword }
+]
+
+// const noLayout = () => (
+//   <Router history={history}>
+//     <ScrollToTop />
+//     <SiteHeader />
+
+//     <Switch>
+//       {pages.map(({ component, path, exact }) => {
+//         return (
+//           <Route
+//             key={path}
+//             component={component}
+//             exact={!!exact}
+//             path={path}
+//           />
+//         );
+//       })}
+//       <Route component={Page404} />
+//     </Switch>
+//     <Footer />
+//   </Router>
+// )
+
 const Routes = () => {
   return (
     <Router history={history} >
-      <ScrollToTop />
-      <SiteHeader />
-
       <Switch>
-        {pages.map(({ component, path, exact }) => {
+        {pagesNoLayout.map(({ component, path, exact }) => {
           return (
             <Route
               key={path}
@@ -144,7 +173,6 @@ const Routes = () => {
         })}
         <Route component={Page404} />
       </Switch>
-      <Footer />
     </Router>
   );
 };

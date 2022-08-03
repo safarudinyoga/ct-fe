@@ -61,6 +61,7 @@ export interface LocationStates {
   "/subscription"?: {};
   "/otp"?: {};
   "/forgot-password"?: {};
+  "/reset-password"?: {};
 }
 
 export type PathName = keyof LocationStates;

@@ -51,8 +51,8 @@ const getUserData = (token: any) => {
             initials_name: initials
           }
         })
-        setCookie(SITE_COOKIES.ACCESSTOKEN, token, 1)
-        history.replace('/')
+        await setCookie(SITE_COOKIES.ACCESSTOKEN, token, 1)
+        await history.push('/')
       }
     } catch (error) {
       dispatch({
