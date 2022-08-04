@@ -3,7 +3,6 @@ import BgGlassmorphism from "page-components/BgGlassmorphism/BgGlassmorphism";
 import { Helmet } from "react-helmet";
 import Main from "page-components/Main";
 
-
 function PageHome() {
   return (
     <Main>

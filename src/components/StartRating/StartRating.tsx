@@ -7,20 +7,16 @@ export interface StartRatingProps {
   reviewCount?: number;
 }
 
-const StartRating: FC<StartRatingProps> = ({
-  className = "",
-  point = 4.5,
-  reviewCount = 112,
-}) => {
+const StartRating: FC<StartRatingProps> = p => {
   return (
     <div
-      className={`nc-StartRating flex items-center space-x-1 text-sm  ${className}`}
+      className={`nc-StartRating flex items-center space-x-1 text-sm  ${p.className}`}
       data-nc-id="StartRating"
     >
       <StarIcon className="w-5 h-5 text-red-500" />
-      <span className="font-medium ">{point}</span>
+      <span className="font-medium ">{p.point}</span>
       <span className="text-neutral-500 dark:text-neutral-400">
-        ({reviewCount})
+        {/* ({p.reviewCount}) */}
       </span>
     </div>
   );

@@ -2,7 +2,6 @@ import BgGlassmorphism from "page-components/BgGlassmorphism/BgGlassmorphism";
 import SectionHeroArchivePage from "page-components/SectionHeroArchivePage/SectionHeroArchivePage";
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-
 export interface ListingStayPageProps {
   className?: string;
 }

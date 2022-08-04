@@ -1,0 +1,35 @@
+.list-hotel {
+    a {
+        color: black;
+    }
+    .img-hotel {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        width: 100%;
+        max-height: 175px;
+        box-sizing: inherit;
+        object-fit: cover;
+    }
+    .hotel-content {
+        .card-data {
+            padding: 10px 25px 10px 25px;
+            .title {
+                font-size: 22px;
+                font-weight: 500;
+            }
+            .address {
+                font-size: 12px;
+            }
+            .price {
+                font-size: 16px;
+                font-weight: 500;
+            }
+            .per-price {
+                font-size: 12px;
+            }
+        }
+    }
+    .hotel-content:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}

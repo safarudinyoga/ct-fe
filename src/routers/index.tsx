@@ -48,9 +48,12 @@ import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage
 
 //dev
 import PageHome from "pages/HomePage/HomePage";
-import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
-import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
-import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
+// import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
+// import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
+// import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
+import HotelHome from "pages/Hotel";
+import HotelDetail from "pages/Hotel/HotelDetail";
+import HotelList from "pages/Hotel/HotelList";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
@@ -59,9 +62,12 @@ import ResetPassword from "pages/ResetPassword";
 export const pages: Page[] = [
   //dev
   { path: "/", exact: true, component: PageHome },
-  { path: "/listing-hotels", component: ListingHotel },
-  { path: "/listing-hotel-map", component: ListingHotelMap },
-  { path: "/listing-hotel-detail", component: ListingHotelDetail },
+  { path: "/hotels", exact: true, component: HotelHome },
+  { path: "/hotels/:id", component: HotelDetail },
+  { path: "/hotel/list", component: HotelList },
+  // { path: "/listing-hotels", component: ListingHotel },
+  // { path: "/listing-hotel-map", component: ListingHotelMap },
+  // { path: "/listing-hotel-detail", component: ListingHotelDetail },
   //
 
 

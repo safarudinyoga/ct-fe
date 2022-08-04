@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
               </a>
               <br />
               <a href="mailto:contact@caritempat.co.id" target="_blank">
-                contact@caritempat.co.id
+                contact@
               </a>
             </span>
           </div>
