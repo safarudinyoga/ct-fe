@@ -5,6 +5,7 @@ import { ActionOTP } from "../actions/auth-actions-types"
 import { RESPONSE_STATUS } from '../../utils/apiHelper';
 import { history } from "index";
 import { setCookie, SITE_COOKIES } from '../../utils/cookies';
+import { initials } from '../../utils/initials';
 
 export const postOTP = (payload: any) => {
   return async (dispatch: Dispatch<ActionOTP>) => {
@@ -35,23 +36,17 @@ const getUserData = (token: any) => {
         }
       })
       if (RESPONSE_STATUS.includes(status)) {
-        let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
-
-        let initials = [...data.name.matchAll(rgx)] || [];
-
-        initials = (
-          (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
-        ).toUpperCase();
 
         dispatch({
           type: ActionTypeOTP.POST_OTP_SUCCESS,
           payload: {
             ...data,
             access_token: token,
-            initials_name: initials
+            initials_name: initials(data.name)
           }
         })
         await setCookie(SITE_COOKIES.ACCESSTOKEN, token, 1)
+        await setCookie(SITE_COOKIES.NAME, initials(data.name), 1)
         await history.push('/')
       }
     } catch (error) {

@@ -10,6 +10,8 @@ import { COOKIES, SITE_COOKIES } from "utils/cookies";
 import { RootState } from 'state/reducers';
 import { useSelector } from 'react-redux';
 import { Menu, Dropdown } from "antd";
+import googlePlay from "images/google-play.png";
+import appStore from "images/app-store.png";
 
 import './header.sass'
 
@@ -20,13 +22,6 @@ export interface MainNav1Props {
 
 const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
   const state = useSelector((state: RootState) => state.authOTP)
-
-  const ref = useRef<any>(null)
-
-  // const [isAuth, setIsAuth] = useState<any>(false)
-  // useEffect(() => {
-  //   setIsAuth(COOKIES.get(SITE_COOKIES.ACCESSTOKEN))
-  // }, [COOKIES])
 
   const menu = (
     <Menu items={[
@@ -70,6 +65,24 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
     </Menu>
   )
 
+  const menuUnduhAplikasi = (
+    <Menu items={[
+      {
+        key: 'play_store',
+        label: (
+          <img src={googlePlay} alt="" className="block max-h-12" />
+        )
+      },
+      {
+        key: 'app_store',
+        label: (
+          <img src={appStore} alt="" className="block max-h-12" />
+        )
+      },
+    ]}>
+    </Menu>
+  )
+
   return (
     <div
       className={`nc-MainNav1 relative z-10 ${isTop ? "onTop " : "notOnTop backdrop-filter"
@@ -83,23 +96,32 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="items-center xl:flex space-x-1">
             <div className="px-1" />
+
+            <div className="pr-2 pl-2">
+              <Dropdown overlay={menuUnduhAplikasi} trigger={["click"]} placement='bottomRight'>
+                <a className="ant-dropdown-link" href="#">
+                  Unduh Aplikasi
+                </a>
+              </Dropdown>
+            </div>
+
+            <div className="pr-2 pl-2">
+              <a className="ant-dropdown-link" href="#">
+                Jadi Partner Traveloka
+              </a>
+            </div>
+
             <CurrencyDropdown />
             <LangDropdown />
-            {/* {!state.user_logged?.access_token && <ButtonPrimary href="/login">Sign In</ButtonPrimary>} */}
             {!isAuth && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
-            {state.user_logged?.initials_name && (
-              <div className="header-dropdown">
-                <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight'>
-                  <a className="ant-dropdown-link" href="#">
-                    <div className="rounded-profile">
-                      {state.user_logged?.initials_name}
-                    </div>
-                    <span className="header-dropdown__username">
-                      {/* {COOKIES.get(SITE_COOKIES.NAME)} */}
-                    </span>
-                  </a>
-                </Dropdown>
-              </div>
+            {isAuth && (
+              <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight' overlayClassName="menus">
+                <a className="ant-dropdown-link" href="#">
+                  <div className="rounded-profile">
+                    {COOKIES.get(SITE_COOKIES.NAME)}
+                  </div>
+                </a>
+              </Dropdown>
             )}
           </div>
           <div className="flex items-center xl:hidden">

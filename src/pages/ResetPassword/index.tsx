@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/forgotpassword'
 import { RootState } from 'state/reducers';
-// import './forgotpassword.sass'
 import Input from "shared/Input/Input";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { useFormik } from 'formik'
@@ -26,7 +25,7 @@ const ResetPassword: FC<ResetPasswordProps> = ({ className = "" }) => {
     },
     validationSchema: Yup.object({
       newPassword: Yup.string().required(),
-      confirmPassword: Yup.string().required(),
+      confirmPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Passwords must match'),
     }),
     onSubmit: (val) => {
     }

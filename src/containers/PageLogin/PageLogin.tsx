@@ -10,9 +10,11 @@ import { TextError } from "shared/TextError";
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/login'
-import { RootState } from 'state/reducers';
 import { signInWithGoogle, auth } from '../../services/firebase';
 import Main from "page-components/Main";
+import { setCookie, SITE_COOKIES } from '../../utils/cookies';
+import { history } from "index";
+import { initials } from '../../utils/initials';
 export interface PageLoginProps {
   className?: string;
 }
@@ -20,11 +22,16 @@ export interface PageLoginProps {
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const dispatch = useDispatch();
   const { postLogin } = bindActionCreators(actionCreators, dispatch)
-  const state = useSelector((state: RootState) => state.authLogin)
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      console.log(user);
+    auth.onAuthStateChanged(async user => {
+      await user?.getIdToken().then((idToken) => {
+        setCookie(SITE_COOKIES.ACCESSTOKEN, idToken, 1)
+      })
+      await setCookie(SITE_COOKIES.EMAIL, user?.email, 1)
+      await setCookie(SITE_COOKIES.NAME, initials(user?.displayName), 1)
+
+      history.push('/')
     })
   }, [])
 

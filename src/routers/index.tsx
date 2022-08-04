@@ -119,9 +119,6 @@ export const pages: Page[] = [
   //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
-  { path: "/signup", component: Register },
-  { path: "/login", component: PageLogin },
-  { path: "/otp", component: OTP },
   // { path: "/subscription", component: PageSubcription },
   //
 ];
@@ -129,10 +126,11 @@ export const pages: Page[] = [
 // here the components already added main
 const pagesNoLayout: Page[] = [
   { path: "/", exact: true, component: PageHome },
-  { path: "/login", component: PageLogin },
-  { path: "/otp", component: OTP },
-  { path: '/forgot-password', component: ForgotPassword },
-  { path: '/reset-password', component: ResetPassword }
+  { path: "/signup", exact: true, component: Register },
+  { path: "/login", exact: true, component: PageLogin },
+  { path: "/otp", exact: true, component: OTP },
+  { path: '/forgot-password', exact: true, component: ForgotPassword },
+  { path: '/reset-password', exact: true, component: ResetPassword }
 ]
 
 // const noLayout = () => (
