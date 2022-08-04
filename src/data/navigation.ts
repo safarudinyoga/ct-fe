@@ -194,8 +194,8 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    // href: "/",
-    href: "/listing-hotels",
+    // href: "/listing-hotels",
+    href: "/hotels",
     name: "Hotel",
     isNew: true,
   },

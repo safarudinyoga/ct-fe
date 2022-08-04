@@ -1,6 +1,8 @@
 import SectionHero from "page-components/SectionHero/SectionHero";
 import BgGlassmorphism from "page-components/BgGlassmorphism/BgGlassmorphism";
 import { Helmet } from "react-helmet";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function PageHome() {
   return (
