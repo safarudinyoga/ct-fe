@@ -5,7 +5,8 @@
 @import "./_dates";
 //
 @import "./header";
-@import './_mixins.sass';
+@import './mixins.sass';
+@import '~antd/dist/antd.css';
 
 @import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
 
