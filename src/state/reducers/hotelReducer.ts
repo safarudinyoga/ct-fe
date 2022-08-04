@@ -17,71 +17,79 @@ export interface dataHotelTypes {
 export interface DataListHotelSuccess {
     id?: number,
     name?: string,
+    slug?: string,
+    description?: string,
+    price?: number,
+    stars?: number,
+    additionalInfo?: string,
+    images?: string,
+    facilities?: []
+    // id?: number,
+    // name?: string,
+    // description?: string,
+    // slug?: string,
+    // stars?: number,
+    // address?: string,
+    // images?: string,
+    // facilities?: [
+        // id: number,
+        // group_id: number,
+        // name: string,
+        // active: boolean,
+        // created_at: "string",
+        // updated_at: "string"
+    // ],
+}
+
+export interface HotelFacilities {
+    id?: number,
+    group_id?: number,
+    name?: string,
+    active?: boolean,
+    created_at?: string,
+    updated_at?: string,
+}
+
+export interface Facilities {
+    id?: number,
+    name?: string,
+    active?: boolean,
+    created_at?: string,
+    updated_at?: string,
+    facilities?: HotelFacilities[]
+}
+
+export interface Rooms {
+    name?: string,
+    code?: string,
+    provider?: string,
+    breakfast?: boolean,
+    refundable?: boolean,
+    reschedule?: boolean,
+    price?: number,
+    ratekey?: string,
+    search_id?: number
+}
+
+export interface DataRoom {
+    id?: number,
+    name?: string,
+    code?: string,
+    size?: number,
+    description?: string,
+    thumbnail?: string,
+    rooms?: Rooms[]
+}
+export interface DataListDetailHotelProps {
+    id?: number,
+    name?: string,
     description?: string,
     slug?: string,
     stars?: number,
-    address?: string,
+    address?: string
     images?: string,
-    facilities?: [
-        id: number,
-        group_id: number,
-        name: string,
-        active: boolean,
-        created_at: "string",
-        updated_at: "string"
-    ],
-}
-
-export interface DataListDetailHotelProps {
-    id: number | string,
-    name: string,
-    description: string,
-    slug: string,
-    stars: number | string,
-    address: string
-    images: string,
-    facilities: [
-        id: number | string,
-        name: string,
-        active: boolean,
-        created_at: string,
-        updated_at: string,
-        facilities: [
-            id: number | string,
-            group_id: number | string,
-            name: string,
-            active: boolean,
-            created_at: string,
-            updated_at: string,
-        ]
-    ],
-    // vendors?: [
-    //     created_at: string,
-    //     // default: boolean,
-    //     id: number,
-    //     updated_at: string,
-    //     vendor_code: string,
-    //     vendor_name: string
-    // ],
-    // room_groups?: [
-    //     code: string,
-    //     description: string,
-    //     id: number,
-    //     name: string,
-    //     size: string,
-    //     thumbnail: string,
-    //     rooms: [
-    //         breakfast: boolean,
-    //         code: string,
-    //         name: string,
-    //         price: number,
-    //         provider: string,
-    //         ratekey: string,
-    //         refundable: boolean,
-    //         reschedule: boolean,
-    //         search_id: number
-    //     ]
-    // ]
+    facilities?: Facilities[],
+    room_groups?: DataRoom[]
 }
 export interface HotelReducer {
     inputValue: string,
@@ -139,10 +147,12 @@ const reducer = (state: HotelReducer = initialState, action: Action): HotelReduc
         case ActionType.FETCH_SEARCH_SUCCESS:
             let data = action.payload.data
             let newData = [...data.areaContent, ...data.hotelContent]
+            let dataListHotel = data.hotelContent
             return {
                 ...state,
                 loading: false,
-                dataHotel: newData
+                dataHotel: newData,
+                dataListHotel: dataListHotel
             }
         case ActionType.FETCH_SEARCH_FAILED:
             return {
@@ -165,7 +175,8 @@ const reducer = (state: HotelReducer = initialState, action: Action): HotelReduc
                 stars: dataObj.stars,
                 address: dataObj.address,
                 images: dataObj.images,
-                facilities: dataObj.facilities
+                facilities: dataObj.facilities,
+                room_groups: dataObj.room_groups
             }
             return {
                 ...state,
@@ -186,16 +197,19 @@ const reducer = (state: HotelReducer = initialState, action: Action): HotelReduc
                 inputValue: action.payload
             }
         case ActionType.ONCHANGE_ADULT:
+            localStorage.setItem('adult', JSON.stringify(action.payload))
             return {
                 ...state,
                 adult: action.payload
             }
         case ActionType.ONCHANGE_CHILDREN:
+            localStorage.setItem('children', JSON.stringify(action.payload))
             return {
                 ...state,
                 children: action.payload
             }
         case ActionType.ONCHANGE_ROOM:
+            localStorage.setItem('room', JSON.stringify(action.payload))
             return {
                 ...state,
                 room: action.payload
@@ -214,6 +228,9 @@ const reducer = (state: HotelReducer = initialState, action: Action): HotelReduc
             else {
                 dateDiff = null
             }
+            localStorage.setItem('dateString', JSON.stringify(stringDate))
+            localStorage.setItem('dateMoment', JSON.stringify(action.payload))
+            localStorage.setItem('dateDuration', JSON.stringify(dateDiff))
             return {
                 ...state,
                 dateMoment: action.payload,
