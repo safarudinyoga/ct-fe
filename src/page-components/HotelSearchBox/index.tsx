@@ -56,7 +56,7 @@ const HotelSearchBox: FC<HotelSearchBoxProps> = p => {
       let slug = JSON.parse(localStorage.getItem('hotelSlug') || '')
       if (slug == null) {
         history.push({
-          pathname: '/hotel/list',
+          pathname: '/hotel-list',
         })
       }
       else {
