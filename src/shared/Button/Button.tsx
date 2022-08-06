@@ -16,6 +16,7 @@ export interface ButtonProps {
   targetBlank?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;
+  style?: React.CSSProperties
 }
 
 const Button: FC<ButtonProps> = ({

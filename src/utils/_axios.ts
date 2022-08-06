@@ -1,6 +1,21 @@
 import axios from "axios";
 
-export const _axios = axios.create({ baseURL: "https://api.caritempat.id" })
+const authUrl = '/auth'
+const userUrl = '/user'
+const adminUrl = '/admin'
+const paymentUrl = '/payment'
+const orderUrl = '/order'
+
+const _axios = axios.create({ baseURL: "https://api.caritempat.id" })
+
+export {
+  _axios,
+  authUrl,
+  userUrl,
+  adminUrl,
+  paymentUrl,
+  orderUrl
+}
 
 // _axios.interceptors.request.use(
 //   (config) => {

@@ -3,6 +3,7 @@ import MainNav1 from "./MainNav1";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import { useState } from "react";
+import { COOKIES, SITE_COOKIES } from "utils/cookies";
 
 export interface HeaderProps { }
 
@@ -14,6 +15,12 @@ const Header: FC<HeaderProps> = () => {
       scrollFunction();
     };
   }, []);
+
+  const [isAuth, setIsAuth] = useState<any>(false)
+
+  useEffect(() => {
+    setIsAuth(COOKIES.get(SITE_COOKIES.ACCESSTOKEN))
+  }, [])
 
   function scrollFunction() {
     const $head = document.getElementById("nc-chifis-header");
@@ -38,7 +45,7 @@ const Header: FC<HeaderProps> = () => {
       </Helmet>
 
       {/* NAV */}
-      <MainNav1 isTop={isTop} />
+      <MainNav1 isTop={isTop} isAuth={isAuth} />
     </div>
   );
 };
