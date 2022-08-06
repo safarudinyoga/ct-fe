@@ -6,9 +6,14 @@ export interface LocationStates {
   "/home-2"?: {};
   "/home-1-header-2"?: {};
 
-  "/listing-hotels"?: {};
-  "/listing-hotel-map"?: {};
-  "/listing-hotel-detail"?: {};
+  // "/listing-hotels"?: {};
+  // "/listing-hotel-map"?: {};
+  // "/listing-hotel-detail"?: {};
+  "/hotels"?: {};
+  "/hotels/:id"?: {};
+  "/hotel-list"?: {};
+  "/hotel-reservation/:id/:bookingId"?: {};
+  "/hotel-reservation/:id/:bookingId/payment"?: {};
   //
   "/listing-flights"?: {};
   //

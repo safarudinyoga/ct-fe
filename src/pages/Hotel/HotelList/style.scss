@@ -1,0 +1,49 @@
+.text-result {
+    font-size: 35px;
+}
+.list-hotel {
+    a {
+        color: black;
+    }
+    .hotel-content {
+        padding: 0px;
+        .row-content {
+            padding: 0px;
+            .card-hotel-img {
+                // padding: 1px;
+                // max-width: 100px;
+                .hotel-img {
+                    border-radius: 5px;
+                    width: 400px;
+                    height: 175px;
+                    object-fit: cover;
+                }
+                
+            }
+            .card-data {
+                padding: 10px 25px 10px 25px;
+                .title {
+                    font-size: 22px;
+                    font-weight: 500;
+                }
+                .address {
+                    font-size: 12px;
+                }
+                .price {
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                .per-price {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .hotel-content:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}
+
+.btn-loadmore {
+    width: 200px;
+}

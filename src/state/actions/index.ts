@@ -41,32 +41,47 @@ interface CallAPISearchFailed {
 interface GetListHotelPending {
     type: ActionType.FETCH_LIST_HOTEL_PENDING
 };
+
+export interface HotelFacilities {
+    id: number,
+    group_id: number,
+    name: string,
+    active: boolean,
+    created_at: string,
+    updated_at: string
+}
+export interface Facilities {
+    id: number,
+    name: string,
+    active: boolean,
+    created_at: string,
+    updated_at: string,
+    facilities: HotelFacilities[]
+}
+
+export interface Rooms {
+    name?: string,
+    code?: string,
+    provider?: string,
+    breakfast?: boolean,
+    refundable?: boolean,
+    reschedule?: boolean,
+    price?: number,
+    ratekey?: string,
+    search_id?: number
+  }
+
+  export interface DataRoom {
+    id?: number,
+    name?: string,
+    code?: string,
+    size?: number,
+    description?: string,
+    thumbnail?: string,
+    rooms?: Rooms[]
+  }
 export interface GetListHotelSuccessPayload {
     success: boolean,
-    search: [
-        {
-            id: number,
-            name: string,
-            code: string,
-            size: string,
-            description: string,
-            thumbnail: string,
-            rooms: [
-                {
-                    name: string,
-                    code: string,
-                    provider: string,
-                    breakfast: boolean,
-                    refundable: boolean,
-                    reschedule: boolean,
-                    price: number,
-                    ratekey: string,
-                    search_id: number
-                }
-            ]
-        },
-    ],
-    // data: [
     data: {
         id: number,
         name: string,
@@ -75,21 +90,8 @@ export interface GetListHotelSuccessPayload {
         stars: number,
         address: string,
         images: string,
-        facilities: [
-            id: number,
-            name: string,
-            active: boolean,
-            created_at: "string",
-            updated_at: "string",
-            facilities: [
-                id: number,
-                group_id: number,
-                name: string,
-                active: boolean,
-                created_at: string,
-                updated_at: string
-            ]
-        ],
+        facilities: Facilities[],
+        room_groups: DataRoom[]
     }
     // ]
 }

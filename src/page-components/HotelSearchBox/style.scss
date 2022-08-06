@@ -1,0 +1,13 @@
+.alert-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .alert {
+        position: absolute;
+        top: 0px;
+    }
+}
+
+.alert-wrapper-inactive {
+    display: none;
+}
