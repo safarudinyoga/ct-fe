@@ -1,0 +1,31 @@
+.text-small {
+    font-size: 16px;
+}
+
+.text-medium {
+    font-size: 18px;
+}
+
+.reservation-wrapper {
+    padding: 10px 100px 10px 100px;
+    .btn-next {
+        width: 100%;
+        border-radius: 50px;
+        height: 50px;
+        margin-bottom: 20px;
+    }
+    .total-price {
+        font-size: 20px;
+    }
+    .price {
+        font-size: 20px;
+        font-weight: 500;
+        color: #45539F;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .reservation-wrapper {
+        padding: 50px;
+    }
+  }
