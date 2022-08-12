@@ -9,7 +9,7 @@ import { Modal } from "react-bootstrap";
 import { priceDecimal } from "utils/helper";
 import Axios from "axios";
 import './style.scss';
-import axios from "axios";
+import BgGlassmorphism from "page-components/BgGlassmorphism/BgGlassmorphism";
 
 const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
@@ -43,10 +43,6 @@ export interface RoomListProps {
 }
 
 const RoomList: FC<RoomListProps> = p => {
-  useEffect(() => {
-    // console.log('paramsRoom: ', p.room_groups)
-    localStorage.setItem('accomodationId', JSON.stringify(p.id))
-  }, [])
   const history = useHistory() 
   const [room, setRoom] = useState<DataRooms>({});
   const [showModal, setShowModal] = useState(false)
@@ -93,33 +89,29 @@ const RoomList: FC<RoomListProps> = p => {
   }
 
   const handleClickRoom = (params: RoomParamsClick) => {
-    alert('mashok')
-    // let dateString = JSON.parse(localStorage.getItem('dateString') || '')
-    // let data = {
-    //     accommodation_id : JSON.parse(localStorage.getItem('accomodationId') || ''),
-    //     room_id : JSON.parse(localStorage.getItem('roomId') || ''),
-    //     start_date : dateString.startDate,
-    //     duration : JSON.parse(localStorage.getItem('dateDuration') || '1'),
-    //     total_room : JSON.parse(localStorage.getItem('room') || '1'),
-    //     total_adult : JSON.parse(localStorage.getItem('adult') || '1'),
-    //     total_child : JSON.parse(localStorage.getItem('children') || '0')
-    // }
-    // console.log('dataLcl: ', data)
-    console.log('params: ', params)
-    // return Axios.get(`https://api.caritempat.id/user` + `/guest/hotel/accommodation/booking`, {
-    //     params: data
-    // })
-    // .then((res: any) => {
-    //   let data = res.data
-    //   console.log('suksesBooking: ', data)
+    let dateString = JSON.parse(localStorage.getItem('dateString') || '')
+    let dataPost = {
+        accommodation_id : JSON.parse(localStorage.getItem('accomodationId') || ''),
+        // accommodation_id : params.code,
+        // room_id : JSON.parse(localStorage.getItem('roomId') || ''),
+        room_id : params.code,
+        start_date : dateString.startDate,
+        duration : JSON.parse(localStorage.getItem('dateDuration') || '1'),
+        total_room : JSON.parse(localStorage.getItem('room') || '1'),
+        total_adult : JSON.parse(localStorage.getItem('adult') || '1'),
+        total_child : JSON.parse(localStorage.getItem('children') || '0')
+    }
+    Axios.post(`https://api.caritempat.id/user` + `/guest/hotel/booking`, dataPost)
+    .then((res: any) => {
+      let data = res.data.data
       history.push({
-        pathname: `/hotel-reservation/${p.id}/112mockbookingid`,
+        pathname: `/hotel-reservation/${p.id}/${data.booking_id}`,
         state: params
       })
-    // })
-    // .catch((err:any) => {
-    //     throw(err)
-    // });
+    })
+    .catch((err:any) => {
+        throw(err)
+    });
   }
 
   const renderTienIch = () => {
@@ -352,6 +344,7 @@ const RoomList: FC<RoomListProps> = p => {
               <Modal.Body>
                 { room.rooms && room.rooms.map((a, index) => (
                   <div>
+                    <BgGlassmorphism/>
                     <div className="modal-title">
                       <span className="title-text">List Rooms</span>
                     </div>
@@ -382,8 +375,8 @@ const RoomList: FC<RoomListProps> = p => {
                         </div>
                         <div className="col col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center" onClick={()=> {
                           handleClickRoom(a)
-                          // console.log('clickroom: ', a)
                           localStorage.setItem('roomId', JSON.stringify(a.code))
+                          // console.log('a: ', a)
                         }}
                         >
                           <button className="btn btn-warning btn-sm btn-select-room">Pilih Kamar</button>
