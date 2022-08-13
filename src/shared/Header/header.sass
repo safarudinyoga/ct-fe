@@ -1,12 +1,28 @@
 @use '../../styles/mixins'
 
+.signin_button
+  padding: 0.5rem 1.5rem !important
+
 .rounded-profile
-  padding: 10px 12px
+  width: 45px
+  height: 45px
   letter-spacing: 1px
   border-radius: 50%
   text-align: center
   background: #dee2ee
   @include mixins.flex($flexDirection: row, $justifyDirection: center, $alignDirection: center)
+  cursor: pointer
+
+.rounded-profile-dashboard
+  width: 64px
+  height: 64px
+  letter-spacing: 1px
+  border-radius: 50%
+  text-align: center
+  background: #dee2ee
+  @include mixins.flex($flexDirection: row, $justifyDirection: center, $alignDirection: center)
+  @include mixins.typograph($size: 20px, $weight: 500, $lineHeight: 64px )
+
   cursor: pointer
 
 .menus
@@ -35,5 +51,15 @@
 
   h5
     @include mixins.typograph($size: 18px, $weight: 700, $color: #fff, $lineHeight: 24px)
+
+.dashboard_profile
+  background: #fff
+  min-height: 150px
+  padding: 15px
+  @include mixins.flex($flexDirection: column, $justifyDirection: center, $alignDirection: center)
+
+  h3
+    @include mixins.typograph($size: 20px, $weight: 500, $lineHeight: 24px)
+    margin-top: 20px
 
 

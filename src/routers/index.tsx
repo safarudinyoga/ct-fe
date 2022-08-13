@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { Router } from "react-router";
 import { Page } from './types';
 import { history } from "index";
 import { COOKIES, SITE_COOKIES } from "utils/cookies";
+import PrivateRouter from "./privateRouter";
 
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
@@ -62,9 +63,12 @@ import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
 import ResetPassword from "pages/ResetPassword";
 
+// dashboard
+import MyOrder from "pages/DashboardUser/MyOrder";
+
 export const pages: Page[] = [
   //dev
-  { path: "/", exact: true, component: PageHome },
+  // { path: "/", exact: true, component: PageHome },
   { path: "/hotels", exact: true, component: HotelHome },
   { path: "/hotels/:id", component: HotelDetail },
   { path: "/hotel-list", component: HotelList },
@@ -142,34 +146,44 @@ const pagesNoLayout: Page[] = [
   { path: "/login", exact: true, component: PageLogin },
   { path: "/otp", exact: true, component: OTP },
   { path: '/forgot-password', exact: true, component: ForgotPassword },
-  { path: '/reset-password', exact: true, component: ResetPassword }
+  { path: '/reset-password', exact: true, component: ResetPassword },
+
+  // dashboard
+  { path: '/dashboard/my-order', exact: true, component: MyOrder }
 ]
 
-// const noLayout = () => (
-//   <Router history={history}>
-//     <ScrollToTop />
-//     <SiteHeader />
+const noLayout = () => (
+  <>
+    <ScrollToTop />
+    <SiteHeader />
+    {pages.map(({ component, path, exact }) => {
+      return (
+        <Route
+          key={path}
+          component={component}
+          exact={!!exact}
+          path={path}
+        />
+      );
+    })}
+    <Route component={Page404} />
+    <Footer />
+  </>
+)
 
-//     <Switch>
-//       {pages.map(({ component, path, exact }) => {
-//         return (
-//           <Route
-//             key={path}
-//             component={component}
-//             exact={!!exact}
-//             path={path}
-//           />
-//         );
-//       })}
-//       <Route component={Page404} />
-//     </Switch>
-//     <Footer />
-//   </Router>
-// )
+// Private Route that needed logged user
+const privateRouteList: Page[] = [
+  // { path: '', exact: true, component: null }
+  // { path: '/dashboard/my-order', exact: true, component: MyOrder }
+]
 
 const Routes = () => {
   return (
-    <Router history={history} >
+    <Router history={history}>
+
+      {/* <ScrollToTop />
+      <SiteHeader /> */}
+
       <Switch>
         {pagesNoLayout.map(({ component, path, exact }) => {
           return (
@@ -181,6 +195,17 @@ const Routes = () => {
             />
           );
         })}
+        {privateRouteList.map(({ component, path, exact }) => {
+          return (
+            <PrivateRouter
+              key={path}
+              component={component}
+              // exact={!!exact}
+              // path={path}
+            />
+          );
+        })}
+        {noLayout()}
         <Route component={Page404} />
       </Switch>
     </Router>

@@ -1,4 +1,5 @@
 import { ComponentType } from "react";
+import { RouteComponentProps } from '@reach/router';
 
 export interface LocationStates {
   "/"?: {};
@@ -68,12 +69,16 @@ export interface LocationStates {
   "/otp"?: {};
   "/forgot-password"?: {};
   "/reset-password"?: {};
+
+  // dashboard
+  "/dashboard/my-order"?: {};
 }
 
 export type PathName = keyof LocationStates;
 
 export interface Page {
-  path: PathName;
+  // path: PathName;
+  path: any,
   exact?: boolean;
   component: ComponentType<Object>;
 }

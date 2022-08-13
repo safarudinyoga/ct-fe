@@ -1,28 +1,23 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Cookies from 'universal-cookie'
+import { SITE_COOKIES, COOKIES } from '../../utils/cookies';
 
-// import { SITE_COOKIES, MENU } from '@config'
-
-const cookies = new Cookies()
-
-export interface IPrivateRouterProps {
-  component: React.ComponentType<any>
+interface IPrivateRouterProps {
+  component: React.ElementType
 }
 
 const PrivateRouter = ({ component: Component, ...rest }: IPrivateRouterProps) => (
   <Route
     {...rest}
     render={(props) =>
-      // cookies.get(SITE_COOKIES.TOKEN) || cookies.get(SITE_COOKIES.SESSIONID) ? (
-      true ? (
+      COOKIES.get(SITE_COOKIES.ACCESSTOKEN) ? (
         <Component {...props} />
       ) : (
         <Redirect
           to={{
-            // pathname: MENU.LOGIN,
-            // state: { from: props.location },
+            pathname: '/login',
+            state: { from: props.location },
           }}
         />
       )

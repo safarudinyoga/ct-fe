@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = () => {
     };
   }, []);
 
-  const [isAuth, setIsAuth] = useState<any>(false)
+  const [isAuth, setIsAuth] = useState<boolean>(COOKIES.get(SITE_COOKIES.ACCESSTOKEN) || false)
 
   useEffect(() => {
     setIsAuth(COOKIES.get(SITE_COOKIES.ACCESSTOKEN))
