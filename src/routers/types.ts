@@ -1,5 +1,4 @@
 import { ComponentType } from "react";
-import { RouteComponentProps } from '@reach/router';
 
 export interface LocationStates {
   "/"?: {};
