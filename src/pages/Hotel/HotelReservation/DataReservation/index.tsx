@@ -13,6 +13,10 @@ export interface DataProps {
   email: string
 }
 
+export interface SalutationErrProps {
+  isFilled?: string
+}
+
 export interface DataReservationProps {
   title?: string,
   state?: string,
@@ -22,6 +26,7 @@ export interface DataReservationProps {
   setSalutation: React.Dispatch<React.SetStateAction<any>>;
   setIsRadio: React.Dispatch<React.SetStateAction<any>>;
   setData: React.Dispatch<React.SetStateAction<any>>;
+  salutationErr?: SalutationErrProps
 }
 
 const DataReservation: FC<DataReservationProps> = (p) => {
@@ -80,6 +85,7 @@ const DataReservation: FC<DataReservationProps> = (p) => {
                   />
               </div>
           </Form>
+
           <Form>
             <div className="mb-3">
               <span>Nama Pemesan</span>

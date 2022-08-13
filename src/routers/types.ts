@@ -15,6 +15,7 @@ export interface LocationStates {
   "/hotel-list"?: {};
   "/hotel-reservation/:id/:bookingId"?: {};
   "/hotel-reservation/:id/:bookingId/payment"?: {};
+  "/hotel-reservation/:id/:bookingId/payment-result"?: {};
   //
   "/listing-flights"?: {};
   //

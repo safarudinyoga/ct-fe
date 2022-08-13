@@ -57,6 +57,7 @@ import HotelDetail from "pages/Hotel/HotelDetail";
 import HotelList from "pages/Hotel/HotelList";
 import HotelReservation from "pages/Hotel/HotelReservation";
 import HotelPayment from "pages/Hotel/HotelPayment";
+import HotelPaymentResult from "pages/Hotel/HotelPaymentResult";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
@@ -73,6 +74,7 @@ export const pages: Page[] = [
   { path: "/hotel-list", component: HotelList },
   { path: "/hotel-reservation/:id/:bookingId", exact: true, component: HotelReservation},
   { path: "/hotel-reservation/:id/:bookingId/payment", component: HotelPayment},
+  { path: "/hotel-reservation/:id/:bookingId/payment-result", component: HotelPaymentResult},
   // { path: "/listing-hotels", component: ListingHotel },
   // { path: "/listing-hotel-map", component: ListingHotelMap },
   // { path: "/listing-hotel-detail", component: ListingHotelDetail },
