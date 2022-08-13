@@ -8,12 +8,13 @@ import LangDropdown from "components/Header/LangDropdown";
 import CurrencyDropdown from "components/Header/CurrencyDropdown";
 import { COOKIES, SITE_COOKIES } from "utils/cookies";
 import { RootState } from 'state/reducers';
-import { useSelector } from 'react-redux';
 import { Menu, Dropdown } from "antd";
 import googlePlay from "images/google-play.png";
 import appStore from "images/app-store.png";
 
 import './header.sass'
+import { signOut } from "services/firebase";
+import { Link } from "react-router-dom";
 
 export interface MainNav1Props {
   isTop: boolean;
@@ -21,7 +22,7 @@ export interface MainNav1Props {
 }
 
 const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
-  const state = useSelector((state: RootState) => state.authOTP)
+  // const state = useSelector((state: RootState) => state.authOTP)
 
   const menu = (
     <Menu items={[
@@ -35,7 +36,11 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
       },
       {
         key: 'orders',
-        label: 'Your Orders'
+        label: (
+          <Link to='/dashboard/my-order'>
+            Your Orders
+          </Link>
+        )
       },
       {
         key: 'smart_profile',
@@ -59,7 +64,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
       },
       {
         key: 'logout',
-        label: 'Keluar'
+        label: <a onClick={signOut}>Keluar</a>
       },
     ]}>
     </Menu>
@@ -113,7 +118,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
 
             <CurrencyDropdown />
             <LangDropdown />
-            {!isAuth && <ButtonPrimary href="/login">Sign In</ButtonPrimary>}
+            {(!isAuth || isAuth === undefined) && <ButtonPrimary className="signin_button" href="/login">Sign In</ButtonPrimary>}
             {isAuth && (
               <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight' overlayClassName="menus">
                 <a className="ant-dropdown-link" href="#">

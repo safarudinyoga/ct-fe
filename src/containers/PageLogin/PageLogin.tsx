@@ -7,7 +7,7 @@ import Input from "shared/Input/Input";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { TextError } from "shared/TextError";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/login'
 import { signInWithGoogle, auth } from '../../services/firebase';
@@ -25,13 +25,14 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {
-      await user?.getIdToken().then((idToken) => {
-        setCookie(SITE_COOKIES.ACCESSTOKEN, idToken, 1)
-      })
-      await setCookie(SITE_COOKIES.EMAIL, user?.email, 1)
-      await setCookie(SITE_COOKIES.NAME, initials(user?.displayName), 1)
-
-      history.push('/')
+      if (user) {
+        await user?.getIdToken().then((idToken) => {
+          setCookie(SITE_COOKIES.ACCESSTOKEN, idToken, 1)
+        })
+        await setCookie(SITE_COOKIES.EMAIL, user?.email, 1)
+        await setCookie(SITE_COOKIES.NAME, initials(user?.displayName), 1)
+        history.push('/')
+      }
     })
   }, [])
 

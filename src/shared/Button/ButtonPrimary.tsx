@@ -11,6 +11,7 @@ const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({
     <Button
       className={`ttnc-ButtonPrimary disabled:bg-opacity-50 bg-primary-700 hover:bg-primary-700 text-neutral-50 ${className}`}
       {...args}
+      // style={{ padding: '20px !important' }}
     />
   );
 };
