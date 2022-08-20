@@ -11,7 +11,14 @@ import { priceDecimal } from 'utils/helper';
 import { useHistory, useLocation } from 'react-router-dom';
 import BgGlassmorphism from 'components/BgGlassmorphism/BgGlassmorphism';
 
-export interface State {
+interface RoomPostProps {
+  room_id?: number,
+  room_name?: string,
+  room_code?: string,
+  qty?: number
+}
+
+interface RoomProps {
   name?: string,
   code?: string,
   default_occupancy?: number,
@@ -22,7 +29,12 @@ export interface State {
   price?: number,
   ratekey?: string,
   allotment?: number,
-  search_id?: number
+  search_id?: number,
+  count?: number,
+}
+export interface State {
+  room?: RoomProps,
+  roomPost?: RoomPostProps
 }
 
 export interface LocationProps {
@@ -43,8 +55,13 @@ export interface HotelReservationProps {
   match?: MatchProps
 }
 const HotelReservation: FC<HotelReservationProps> = p => {
+
   let state = p?.location?.state
   const history = useHistory()
+
+  useEffect(() => {
+    console.log('PARAM: ', p)
+  }, [])
 
   const [salutation, setSalutation] = useState('Mr')
   const [salutationGuest, setSalutationGuest] = useState('Mr')
@@ -75,18 +92,26 @@ const HotelReservation: FC<HotelReservationProps> = p => {
   })
   const [isGuest, setIsGuest] = useState(false)
   const [salutationErr, setSalutationErr] = useState({});
+  const [dataBooking, setDataBooking] = useState<any[]>([])
+
+  useEffect(() => {
+    console.log('DATA: ', state)
+  }, [])
 
   useEffect(() => {
     if(p?.location?.state == undefined) {
       history.push('/hotels')
+    }
+    else {
+      localStorage.setItem("dataBooking", JSON.stringify(p?.location?.state?.room))
     }
   })
 
   useEffect(() => {
     console.log('specialRequest: ', specialRequest)
     console.log('dataSpecial: ', dataSpecial)
-    console.log('p: ', p?.location?.state?.price)
-    localStorage.setItem('price', JSON.stringify(p?.location?.state?.price))
+    // console.log('p: ', p?.location?.state?.price)
+    // localStorage.setItem('price', JSON.stringify(p?.location?.state?.price))
   }, [dataSpecial])
 
   useEffect(() => {
@@ -156,30 +181,13 @@ const HotelReservation: FC<HotelReservationProps> = p => {
       guest_name : dataGuest.name,
       guest_phone : dataGuest.hp,
       special_request: specialRequest,
+      guest_rooms: state?.roomPost,
       note_request: "",
       payment_method: "",
       bank_code: ""
     }
 
   console.log('postData: ', postData)
-  
-  // const formValidation = () => {
-  //   const salutationErr = {
-  //     isFilled: ''
-  //   }
-
-  //   let isValid = true;
-
-  //   if(salutation.trim().length < 100) {
-  //     salutationErr.isFilled = "Required";
-  //     isValid = false;
-  //   }
-
-  //   setSalutationErr(salutationErr)
-  //   return isValid;
-  // }
-
-  // const isValid = formValidation()
 
     history.push({
       pathname: `/hotel-reservation/${p?.match?.params?.id}/${p?.match?.params?.bookingId}/payment`,
@@ -197,7 +205,7 @@ const HotelReservation: FC<HotelReservationProps> = p => {
       <div className="row d-flex justify-content-center">
           <div className="col col-md-6 col-sm-12 col-xs-12">
             <HeaderData 
-              {...state}
+              {...state?.room}
               page="reservation"
             />
             <DataReservation
@@ -214,7 +222,8 @@ const HotelReservation: FC<HotelReservationProps> = p => {
                 <span className="total-price">Total</span>
               </div>
               <div className="col text-end">
-                <span className="price">Rp {priceDecimal(state?.price?.toString())}</span>
+                <span className="price">Rp -</span>
+                {/* <span className="price">Rp {priceDecimal(state?.price?.toString())}</span> */}
               </div>
             </div>
             <div className="">

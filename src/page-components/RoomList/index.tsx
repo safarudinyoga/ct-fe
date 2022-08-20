@@ -22,7 +22,8 @@ export interface Rooms {
     reschedule?: boolean,
     price?: number,
     ratekey?: string,
-    search_id?: number
+    search_id?: number,
+    count?: number
 }
 
 export interface DataRooms {
@@ -42,15 +43,40 @@ export interface RoomListProps {
   onClick?: React.MouseEventHandler
 }
 
+
 const RoomList: FC<RoomListProps> = p => {
   const history = useHistory() 
   const [room, setRoom] = useState<DataRooms>({});
   const [showModal, setShowModal] = useState(false)
 
+  useEffect(() => {
+    console.log('room: ', room)
+  }, [room])
+  // const [counter, setCounter] = useState(0)
+
   const handleClickSee = (data: DataRoom) => {
     // localStorage.setItem('roomId', JSON.stringify(data.id))
     console.log('handleclicksee: ', data)
-    setRoom(data)
+    let newData = data?.rooms?.map((a, index) => (
+      {
+        name: a.name,
+        code: a.code,
+        price: a.price,
+        refundable: a.refundable,
+        breakfast: a.breakfast,
+        reschedule: a.reschedule,
+        count: 0
+      }
+    ))
+    let destructureData = {
+      id: data.id,
+      name: data.name,
+      code: data.code,
+      description: data.description,
+      rooms: newData
+    }
+    // setRoom(data)
+    setRoom(destructureData)
     setShowModal(true)
   }
 
@@ -88,6 +114,54 @@ const RoomList: FC<RoomListProps> = p => {
     search_id?: number
   }
 
+  const handleClickNext = () => {
+    let dateString = JSON.parse(localStorage.getItem('dateString') || '')
+    let RoomItems = room?.rooms?.map((a, index) => (
+      {
+        room_id: room?.id,
+        room_name: a.name,
+        room_code: a.code,
+        qty: a.count
+      }
+    ))
+    let RoomItemsParams = room?.rooms?.map((a, index) => (
+      {
+        room_id: room?.id,
+        guest_name: '',
+        guest_email: '',
+      }
+    ))
+    let dataPost = {
+      accommodation_id : JSON.parse(localStorage.getItem('accomodationId') || ''),
+      room_id: room?.id,
+      start_date : dateString.startDate,
+      duration : JSON.parse(localStorage.getItem('dateDuration') || '1'),
+      total_room : JSON.parse(localStorage.getItem('room') || '1'),
+      total_adult : JSON.parse(localStorage.getItem('adult') || '1'),
+      total_child : JSON.parse(localStorage.getItem('children') || '0'),
+      room_items: RoomItems
+    }
+    console.log('dataPost: ', dataPost)
+    // console.log('room: ', room)
+    // const config = {
+    //   headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY2MDkyOTYxNiwiZXhwIjoxNjkyNDY1NjE2fQ.PzQ_OigdD4pml91Dvr4JaIgoQ-a6xLX9p2cgwNX2M-c` }
+    // };
+    Axios.post(`https://api.caritempat.id/user` + `/guest/hotel/booking`, dataPost)
+    .then((res: any) => {
+      let data = res.data.data
+      history.push({
+        pathname: `/hotel-reservation/${p.id}/${data.booking_id}`,
+        state: {
+          room: room?.rooms,
+          roomPost: RoomItemsParams
+        }
+      })
+    })
+    .catch((err:any) => {
+        throw(err)
+    });
+  }
+
   const handleClickRoom = (params: RoomParamsClick) => {
     let dateString = JSON.parse(localStorage.getItem('dateString') || '')
     let dataPost = {
@@ -113,6 +187,54 @@ const RoomList: FC<RoomListProps> = p => {
         throw(err)
     });
   }
+
+  interface DataClickCounter {
+    code?: string,
+    name?: string
+  }
+
+  const handleCounterMin = (data:DataClickCounter, index: number) => {
+    let dataRooms = room.rooms
+    if(dataRooms?.[index].count == 0) {
+
+    }
+    else {
+      let newData = dataRooms?.map((a, index) => (
+        {
+          name: a.name,
+          code: a.code,
+          price: a.price,
+          refundable: a.refundable,
+          breakfast: a.breakfast,
+          reschedule: a.reschedule,
+          count: Number(a.count) - 1
+        }
+      ))
+      setRoom({
+        ...room,
+        rooms: newData
+      })
+    }
+  } 
+
+  const handleCounterPlus = (data:DataClickCounter, index: number) => {
+    let dataRooms = room.rooms
+    let newData = dataRooms?.map((a, index) => (
+      {
+        name: a.name,
+        code: a.code,
+        price: a.price,
+        refundable: a.refundable,
+        breakfast: a.breakfast,
+        reschedule: a.reschedule,
+        count: Number(a.count) + 1
+      }
+    ))
+    setRoom({
+      ...room,
+      rooms: newData
+    })
+  } 
 
   const renderTienIch = () => {
     return (
@@ -172,7 +294,8 @@ const RoomList: FC<RoomListProps> = p => {
     reschedule?: boolean,
     price?: number,
     ratekey?: string,
-    search_id?: number
+    search_id?: number,
+    count?: number
   }
 
   interface DataRoom {
@@ -341,10 +464,10 @@ const RoomList: FC<RoomListProps> = p => {
               onHide={()=> setShowModal(!showModal)}
               keyboard={false}
             >
-              <Modal.Body>
+              <Modal.Body className="p-4">
                 { room.rooms && room.rooms.map((a, index) => (
                   <div>
-                    <BgGlassmorphism/>
+                    {/* <BgGlassmorphism/> */}
                     <div className="modal-title">
                       <span className="title-text">List Rooms</span>
                     </div>
@@ -367,24 +490,29 @@ const RoomList: FC<RoomListProps> = p => {
                       </div>
                       <div className="row">
                         <div className="col">
-                          {/* <span className="room-price">{priceDecimal(numbea.price)}</span> */}
                           <span className="room-price">Rp {priceDecimal(a.price?.toString())}</span>
                           <div className="room-per">
                             <span>Perkamar permalam</span>
                           </div>
                         </div>
-                        <div className="col col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center" onClick={()=> {
+                        <div className="col col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center">
+                          {/* <button className="btn btn-warning btn-sm btn-select-room" onClick={()=> {
                           handleClickRoom(a)
                           localStorage.setItem('roomId', JSON.stringify(a.code))
-                          // console.log('a: ', a)
-                        }}
-                        >
-                          <button className="btn btn-warning btn-sm btn-select-room">Pilih Kamar</button>
+                        }}>Pilih Kamar</button> */}
+                          <div className="room-counter">
+                            <div className="btn btn-count" onClick={()=> handleCounterMin(a, index)}><span>-</span></div>
+                            <span>{a.count}</span>
+                            <div className="btn btn-count" onClick={()=> handleCounterPlus(a, index)}>+</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
+                <div className="">
+                  <button className="btn btn-warning btn-sm btn-select-room" onClick={handleClickNext}>Lanjutkan</button>
+                </div>
               </Modal.Body>
             </Modal>
             </>
