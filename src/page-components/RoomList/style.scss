@@ -47,8 +47,28 @@
         font-size: 14px;
     }
 
-    .btn-select-room {
-        width: 150px;
-        border-radius: 25px;
+    // .btn-select-room {
+    //     width: 100%;
+    //     border-radius: 25px;
+    // }
+}
+
+.room-counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0px 10px 0px;
+    color: #374577;
+
+    .btn-count {
+        // border: 1px solid red;
+        background-color: #F2F4F3;
+        margin: 0px 10px 0px 10px;
+        // height: 4px;
     }
+}
+
+.btn-select-room {
+    width: 100%;
+    border-radius: 25px;
 }

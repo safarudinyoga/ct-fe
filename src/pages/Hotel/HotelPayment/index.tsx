@@ -73,7 +73,8 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
   }, [])
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem('price') || '')
+    // let data = JSON.parse(localStorage.getItem('price') || '')
+    let data = 10000
     setPrice(data)
   }, [])
 
