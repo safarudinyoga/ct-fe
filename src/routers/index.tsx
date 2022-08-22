@@ -65,6 +65,7 @@ import ResetPassword from "pages/ResetPassword";
 
 // dashboard
 import MyOrder from "pages/DashboardUser/MyOrder";
+import Account from "pages/DashboardUser/Account";
 
 export const pages: Page[] = [
   //dev
@@ -149,7 +150,8 @@ const pagesNoLayout: Page[] = [
   { path: '/reset-password', exact: true, component: ResetPassword },
 
   // dashboard
-  { path: '/dashboard/my-order', exact: true, component: MyOrder }
+  { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  { path: '/dashboard/my-account', exact: true, component: Account }
 ]
 
 const noLayout = () => (

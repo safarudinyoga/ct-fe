@@ -2,6 +2,11 @@
 
 .layout-dashboard
 
+  .ant-layout-sider
+    width: auto !important
+    min-width: auto !important
+    max-width: none !important
+
   .ant-layout-sider-children
     background: #fff
 
@@ -9,6 +14,170 @@
     border-radius: 4px
 
     .ant-menu-item
-      padding: 16px 24px
+      padding: 16px 24px !important
       height: auto
       margin: 0
+
+      &:first-child
+        padding: 16px 34px !important
+
+        .profile
+          .profile_name
+            @include mixins.typograph($size: 25px, $weight: 600, $color: #35405a, $lineHeight: 1.52)
+            text-transform: capitalize
+
+          .verified
+            margin: 12px 0
+            padding-right: 10px
+
+          .point
+
+  .ant-layout-content
+    // padding: 24px
+    // min-height: 280px
+    // background-color: #fff
+    // border-radius: 4px
+    margin-left: 30px
+
+// ------------------ Account ------------------
+
+.account
+  background: #fff
+  border-radius: 4px
+  padding: 24px
+
+  h3
+    @include mixins.typograph($size: 20px, $weight: 600)
+    margin-bottom: 12px
+
+  h4
+    @include mixins.typograph($size: 14px, $weight: 400)
+    margin-bottom: 20px
+
+  .ant-row
+    .ant-col
+      flex: 1 1 auto
+
+      &:first-child
+        margin: 0 15px 0 0
+
+      &:last-child
+        margin: 0 0 0 15px
+
+  .detail-account
+    background-color: #f5f6fa
+    padding: 24px
+
+    .title
+      @include mixins.typograph($size: 14px, $weight: 400, $color: #58627a)
+      margin-bottom: 8px
+
+    .content
+      @include mixins.typograph($size: 16px, $weight: 400, $color: #35405a)
+      margin-bottom: 24px
+
+    .settings
+      @include mixins.typograph($size: 16px, $weight: 500, $color: #0064d2)
+      text-transform: uppercase
+      text-align: right
+      cursor: pointer
+
+  .button-save
+    background: #0064d2
+    padding: 12px 0
+    min-width: 128px
+    @include mixins.typograph($size: 16px, $weight: 600, $color: #fff, $lineHeight: 1.5)
+    height: auto
+    width: auto
+    border-radius: 24px
+
+// ------------------ My Order ------------------
+.my-order
+
+  &_header
+    background: #fff
+    border-radius: 4px
+    padding: 24px
+    @include mixins.flex($flexDirection: column)
+
+    .first_content
+      h2
+        @include mixins.typograph($size: 20px, $weight: 400, $color: #35405a, $lineHeight: 1.4em)
+
+      .riwayat
+        @include mixins.typograph($size: 16px, $weight: 600, $color: #0064d2, $lineHeight: 1.4em)
+
+    .second_content
+      cursor: pointer
+      @include mixins.flex($flexDirection: row, $justifyDirection: space-between, $alignDirection: center)
+
+      .ant-dropdown-trigger
+        padding: 12px 16px
+        width: 280px
+        border: 1px solid #c6cbda
+        background: #fff
+        border-radius: 4px
+        cursor: pointer
+        @include mixins.flex($flexDirection: row, $justifyDirection: space-between, $alignDirection: center)
+        @include mixins.typograph($size: 14px, $weight: 400, $color: #35405a, $lineHeight: 1.4em)
+
+      .filter-group
+        p
+          margin-right: 16px
+          @include mixins.typograph($size: 14px, $weight: 600, $color: #8a93a7)
+
+        button
+          outline: none
+          border: none
+          background: transparent
+          margin-left: 16px
+          @include mixins.typograph($size: 14, $weight: 600, $color: #0064d2)
+
+  &_content
+    min-height: 280px
+    margin-top: 16px
+    background: #fff
+    border-radius: 4px
+    padding: 24px
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    .title
+      @include mixins.typograph($size: 18px, $weight: 600, $color: #35405a)
+      text-align: center
+
+    .caption
+      @include mixins.typograph($size: 16px, $weight: 400, $color: #8a93a7)
+      text-align: center
+      margin: 12px 0 45px
+
+    .button-area
+      @include mixins.flex($flexDirection: row, $justifyDirection: center, $alignDirection: center)
+
+      button
+        @include mixins.flex($flexDirection: row, $justifyDirection: center, $alignDirection: center)
+        @include mixins.typograph($size: 16px, $weight: 600)
+        text-transform: uppercase
+        height: 48px
+        border-radius: 24px
+        padding: 0 24px
+
+        &:first-child
+          margin-right: 16px
+
+      .yellow
+        background-color: #fedd00
+        border: 1px solid #fedd00
+        color: #0064d2
+
+      .grey
+        background-color: #f7f7f7
+        border: 1px solid #f7f7f7
+        color: #0064d2
+
+.verified
+  @include mixins.typograph($size: 16px, $weight: 600, $color: #0064d2, $lineHeight: 1.52)
+
+
+

@@ -27,7 +27,7 @@ export const postOTP = (payload: any) => {
   }
 }
 
-const getUserData = (token: any) => {
+export const getUserData = (token: any) => {
   return async (dispatch: Dispatch<ActionOTP>) => {
     try {
       const { data: { data }, status } = await _axios.post(`${authUrl}/validation-token/user`, null, {
@@ -46,7 +46,10 @@ const getUserData = (token: any) => {
           }
         })
         await setCookie(SITE_COOKIES.ACCESSTOKEN, token, 1)
+        await setCookie(SITE_COOKIES.FULLNAME, data.name, 1)
+        await setCookie(SITE_COOKIES.PHONE, data.phone, 1)
         await setCookie(SITE_COOKIES.NAME, initials(data.name), 1)
+        await setCookie(SITE_COOKIES.EMAIL, data.email, 1)
         await history.push('/')
       }
     } catch (error) {

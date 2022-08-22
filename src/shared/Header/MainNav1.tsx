@@ -30,7 +30,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop, isAuth }) => {
         key: 'summary_profile',
         label: (
           <div className="summary_profile">
-            <h5>safarudin yoga</h5>
+            <h5>{COOKIES.get(SITE_COOKIES.FULLNAME)}</h5>
           </div>
         )
       },

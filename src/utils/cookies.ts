@@ -5,7 +5,9 @@ export const COOKIES = new Cookies()
 export const SITE_COOKIES = {
   ACCESSTOKEN: '_cariTempatToken',
   NAME: '__cariTempatName',
+  FULLNAME: '__cariTempatFullname',
   EMAIL: '__cariTempatEmail',
+  PHONE: '__cariTempatPhone',
   DATA: '_cariTempat'
 }
 
