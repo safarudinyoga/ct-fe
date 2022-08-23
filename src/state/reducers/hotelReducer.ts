@@ -167,6 +167,7 @@ const reducer = (state: HotelReducer = initialState, action: Action): HotelReduc
             }
         case ActionType.FETCH_LIST_HOTEL_SUCCESS:
             let dataObj = action.payload.data
+            localStorage.setItem('accomodationId', JSON.stringify(dataObj.id))
             let modifData = {
                 id: dataObj.id,
                 name: dataObj.name,

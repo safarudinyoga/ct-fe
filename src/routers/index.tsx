@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { Router } from "react-router";
 import { Page } from './types';
 import { history } from "index";
 import { COOKIES, SITE_COOKIES } from "utils/cookies";
+import PrivateRouter from "./privateRouter";
 
 import ScrollToTop from "./ScrollToTop";
 import Footer from "shared/Footer/Footer";
@@ -56,19 +57,25 @@ import HotelDetail from "pages/Hotel/HotelDetail";
 import HotelList from "pages/Hotel/HotelList";
 import HotelReservation from "pages/Hotel/HotelReservation";
 import HotelPayment from "pages/Hotel/HotelPayment";
+import HotelPaymentResult from "pages/Hotel/HotelPaymentResult";
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
 import ResetPassword from "pages/ResetPassword";
 
+// dashboard
+import MyOrder from "pages/DashboardUser/MyOrder";
+import Account from "pages/DashboardUser/Account";
+
 export const pages: Page[] = [
   //dev
-  { path: "/", exact: true, component: PageHome },
+  // { path: "/", exact: true, component: PageHome },
   { path: "/hotels", exact: true, component: HotelHome },
   { path: "/hotels/:id", component: HotelDetail },
   { path: "/hotel-list", component: HotelList },
   { path: "/hotel-reservation/:id/:bookingId", exact: true, component: HotelReservation},
   { path: "/hotel-reservation/:id/:bookingId/payment", component: HotelPayment},
+  { path: "/hotel-reservation/:id/:bookingId/payment-result", component: HotelPaymentResult},
   // { path: "/listing-hotels", component: ListingHotel },
   // { path: "/listing-hotel-map", component: ListingHotelMap },
   // { path: "/listing-hotel-detail", component: ListingHotelDetail },
@@ -140,34 +147,45 @@ const pagesNoLayout: Page[] = [
   { path: "/login", exact: true, component: PageLogin },
   { path: "/otp", exact: true, component: OTP },
   { path: '/forgot-password', exact: true, component: ForgotPassword },
-  { path: '/reset-password', exact: true, component: ResetPassword }
+  { path: '/reset-password', exact: true, component: ResetPassword },
+
+  // dashboard
+  { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  { path: '/dashboard/my-account', exact: true, component: Account }
 ]
 
-// const noLayout = () => (
-//   <Router history={history}>
-//     <ScrollToTop />
-//     <SiteHeader />
+const noLayout = () => (
+  <>
+    <ScrollToTop />
+    <SiteHeader />
+    {pages.map(({ component, path, exact }) => {
+      return (
+        <Route
+          key={path}
+          component={component}
+          exact={!!exact}
+          path={path}
+        />
+      );
+    })}
+    <Route component={Page404} />
+    <Footer />
+  </>
+)
 
-//     <Switch>
-//       {pages.map(({ component, path, exact }) => {
-//         return (
-//           <Route
-//             key={path}
-//             component={component}
-//             exact={!!exact}
-//             path={path}
-//           />
-//         );
-//       })}
-//       <Route component={Page404} />
-//     </Switch>
-//     <Footer />
-//   </Router>
-// )
+// Private Route that needed logged user
+const privateRouteList: Page[] = [
+  // { path: '', exact: true, component: null }
+  // { path: '/dashboard/my-order', exact: true, component: MyOrder }
+]
 
 const Routes = () => {
   return (
-    <Router history={history} >
+    <Router history={history}>
+
+      {/* <ScrollToTop />
+      <SiteHeader /> */}
+
       <Switch>
         {pagesNoLayout.map(({ component, path, exact }) => {
           return (
@@ -179,6 +197,17 @@ const Routes = () => {
             />
           );
         })}
+        {privateRouteList.map(({ component, path, exact }) => {
+          return (
+            <PrivateRouter
+              key={path}
+              component={component}
+              // exact={!!exact}
+              // path={path}
+            />
+          );
+        })}
+        {noLayout()}
         <Route component={Page404} />
       </Switch>
     </Router>

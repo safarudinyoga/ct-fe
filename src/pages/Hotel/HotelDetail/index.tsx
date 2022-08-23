@@ -79,6 +79,10 @@ const HotelDetail: FC<HotelDetailProps> = (p) => {
   const dataRoom = {
     ...data.room_groups
   }
+
+  useEffect(() => {
+    console.log('data: ', data)
+  }, [data])
   // const [focusedInputSectionCheckDate, setFocusedInputSectionCheckDate] =
   //   useState<FocusedInputShape>("startDate");
 
@@ -178,7 +182,7 @@ const HotelDetail: FC<HotelDetailProps> = (p) => {
       </div>
     );
   };
-
+ 
   const renderSection4 = () => {
     return (
       <div className="listingSection__wrap mb-4">

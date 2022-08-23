@@ -14,6 +14,7 @@ export interface LocationStates {
   "/hotel-list"?: {};
   "/hotel-reservation/:id/:bookingId"?: {};
   "/hotel-reservation/:id/:bookingId/payment"?: {};
+  "/hotel-reservation/:id/:bookingId/payment-result"?: {};
   //
   "/listing-flights"?: {};
   //
@@ -67,12 +68,16 @@ export interface LocationStates {
   "/otp"?: {};
   "/forgot-password"?: {};
   "/reset-password"?: {};
+
+  // dashboard
+  "/dashboard/my-order"?: {};
 }
 
 export type PathName = keyof LocationStates;
 
 export interface Page {
-  path: PathName;
+  // path: PathName;
+  path: any,
   exact?: boolean;
   component: ComponentType<Object>;
 }

@@ -7,9 +7,10 @@ import Input from "shared/Input/Input";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { TextError } from "shared/TextError";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/login'
+import * as actionCreatorsOTP from 'state/action-creators/otp'
 import { signInWithGoogle, auth } from '../../services/firebase';
 import Main from "page-components/Main";
 import { setCookie, SITE_COOKIES } from '../../utils/cookies';
@@ -22,16 +23,22 @@ export interface PageLoginProps {
 const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const dispatch = useDispatch();
   const { postLogin } = bindActionCreators(actionCreators, dispatch)
+  const { getUserData } = bindActionCreators(actionCreatorsOTP, dispatch)
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {
-      await user?.getIdToken().then((idToken) => {
-        setCookie(SITE_COOKIES.ACCESSTOKEN, idToken, 1)
-      })
-      await setCookie(SITE_COOKIES.EMAIL, user?.email, 1)
-      await setCookie(SITE_COOKIES.NAME, initials(user?.displayName), 1)
-
-      history.push('/')
+      if (user) {
+        await user?.getIdToken().then((idToken): any => {
+          console.log({ idToken });
+          getUserData(idToken)
+          setCookie(SITE_COOKIES.ACCESSTOKEN, idToken, 1)
+        })
+        await setCookie(SITE_COOKIES.EMAIL, user?.email, 1)
+        // await setCookie(SITE_COOKIES.FULLNAME, user?.name, 1)
+        // await setCookie(SITE_COOKIES.PHONE, user?.phone, 1)
+        await setCookie(SITE_COOKIES.NAME, initials(user?.displayName), 1)
+        history.push('/')
+      }
     })
   }, [])
 

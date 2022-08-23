@@ -9,6 +9,7 @@ import HeaderData from './HeaderData';
 import { Form } from 'react-bootstrap';
 import { priceDecimal } from 'utils/helper';
 import { useHistory, useLocation } from 'react-router-dom';
+import BgGlassmorphism from 'components/BgGlassmorphism/BgGlassmorphism';
 
 export interface State {
   name?: string,
@@ -73,6 +74,13 @@ const HotelReservation: FC<HotelReservationProps> = p => {
     lainnya: false
   })
   const [isGuest, setIsGuest] = useState(false)
+  const [salutationErr, setSalutationErr] = useState({});
+
+  useEffect(() => {
+    if(p?.location?.state == undefined) {
+      history.push('/hotels')
+    }
+  })
 
   useEffect(() => {
     console.log('specialRequest: ', specialRequest)
@@ -108,7 +116,8 @@ const HotelReservation: FC<HotelReservationProps> = p => {
     isRadio,
     setIsRadio,
     data,
-    setData
+    setData,
+    salutationErr
   }
 
   const guestData = {
@@ -152,14 +161,39 @@ const HotelReservation: FC<HotelReservationProps> = p => {
       bank_code: ""
     }
 
+  console.log('postData: ', postData)
+  
+  // const formValidation = () => {
+  //   const salutationErr = {
+  //     isFilled: ''
+  //   }
+
+  //   let isValid = true;
+
+  //   if(salutation.trim().length < 100) {
+  //     salutationErr.isFilled = "Required";
+  //     isValid = false;
+  //   }
+
+  //   setSalutationErr(salutationErr)
+  //   return isValid;
+  // }
+
+  // const isValid = formValidation()
+
     history.push({
       pathname: `/hotel-reservation/${p?.match?.params?.id}/${p?.match?.params?.bookingId}/payment`,
       state: postData
     })
   }
 
+  useEffect(() => {
+    console.log('Error: ', salutationErr)
+  }, [salutationErr])
+
   return (
     <div className="reservation-wrapper">
+      <BgGlassmorphism/>
       <div className="row d-flex justify-content-center">
           <div className="col col-md-6 col-sm-12 col-xs-12">
             <HeaderData 
