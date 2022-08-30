@@ -33,8 +33,9 @@ interface RoomProps {
   count?: number,
 }
 export interface State {
-  room?: RoomProps,
-  roomPost?: RoomPostProps
+  room?: RoomProps[],
+  roomPost?: RoomPostProps,
+  totalPrice?: number
 }
 
 export interface LocationProps {
@@ -191,7 +192,12 @@ const HotelReservation: FC<HotelReservationProps> = p => {
 
     history.push({
       pathname: `/hotel-reservation/${p?.match?.params?.id}/${p?.match?.params?.bookingId}/payment`,
-      state: postData
+      // state: postData
+      state: {
+        room: state?.room,
+        postData: postData,
+        totalPrice: state?.totalPrice
+      }
     })
   }
 
@@ -222,7 +228,7 @@ const HotelReservation: FC<HotelReservationProps> = p => {
                 <span className="total-price">Total</span>
               </div>
               <div className="col text-end">
-                <span className="price">Rp -</span>
+                <span className="price">Rp {priceDecimal(state?.totalPrice)}</span>
                 {/* <span className="price">Rp {priceDecimal(state?.price?.toString())}</span> */}
               </div>
             </div>

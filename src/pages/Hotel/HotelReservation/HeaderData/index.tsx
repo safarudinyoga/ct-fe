@@ -82,8 +82,8 @@ const HeaderData: FC<HeaderDataProps> = p => {
                 dataHeader && dataHeader.map((a, index) => (
                 <div key={index}>
                     <hr/>
-                        <p className="mt-3 text-medium purple">(x{a.count}) {a.name}</p>
-                        <p className="mt-3 text-medium purple">Rp {priceDecimal(a.price.toString() * a.count.toString())}</p>
+                        <p className="mt-3 text-medium purple">(x{a.default_occupancy}) {a.name}</p>
+                        {/* <p className="mt-3 text-medium purple">Rp {priceDecimal(a.price.toString() * a.count.toString())}</p> */}
                     <hr className="mt-3"/>
                     <div className="mt-3">
                         <i className={`text-2xl text-neutral-6000 las la-utensils mr-1`}></i>
