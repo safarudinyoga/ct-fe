@@ -25,7 +25,7 @@
 
 .room-list {
     padding: 20px;
-    box-shadow: 0px 1px 10px rgba(189, 189, 189, 0.5);
+    // box-shadow: 0px 1px 10px rgba(189, 189, 189, 0.5);
 
     .room-title {
         font-size: 22px;
@@ -71,4 +71,49 @@
 .btn-select-room {
     width: 100%;
     border-radius: 25px;
+}
+
+.modal-total {
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    background-color: #374577;
+    padding: 40px 10px 40px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .total-wrapper {
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: center;
+        // align-items: center;
+        .total-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h3 {
+                // font-size: 25px;
+                font-size: 20px;
+                color: white;
+                font-weight: 500;
+            }
+        }
+
+        .total-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .btn-pilih {
+                // width: 200px !important;
+                width: 100px !important;
+            }
+        }
+    }
 }

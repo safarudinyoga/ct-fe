@@ -8,18 +8,7 @@ import PaymentMethod from './PaymentMethod';
 import { priceDecimal } from 'utils/helper';
 import Axios from 'axios';
 
-export interface State {
-  // name?: string,
-  // code?: string,
-  // default_occupancy?: number,
-  // provider?: string,
-  // breakfast?: boolean,
-  // refundable?: boolean,
-  // reschedule?: boolean,
-  // price?: number,
-  // ratekey?: string,
-  // allotment?: number,
-  // search_id?: number
+interface PostDataProps {
   booking_id?: number,
   salutation?: string,
   name?: string,
@@ -33,6 +22,37 @@ export interface State {
   note_request?: string,
   payment_method?: string,
   bank_code?: string
+}
+
+export interface Rooms {
+  allotment?: number,
+  default_occupancy?: number,
+  name?: string,
+  code?: string,
+  provider?: string,
+  breakfast?: boolean,
+  refundable?: boolean,
+  reschedule?: boolean,
+  price?: number,
+  ratekey?: string,
+  search_id?: number,
+  count?: number,
+}
+
+export interface RoomProps {
+  id?: number,
+  name?: string,
+  code?: string,
+  size?: number,
+  max_occupancy?: number,
+  description?: string,
+  thumbnail?: string,
+  rooms?: Rooms[]
+}
+export interface State {
+  room?: RoomProps[],
+  postData?: PostDataProps,
+  totalPrice?: number
 }
 
 export interface LocationProps {
@@ -56,7 +76,7 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
   const history = useHistory()
   let state = params?.location?.state
   const [showModal, setShowModal] = useState(false);
-  const [price, setPrice] = useState(0);
+  // const [price, setPrice] = useState(0);
   const [bankCode, setBankCode] = useState('')
   const p = {
     page: 'payment',
@@ -67,16 +87,19 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
   }
 
   useEffect(() => {
-    if(state == undefined) {
+    if(state?.postData == undefined) {
       history.push('/hotels')
     }
   }, [])
 
   useEffect(() => {
-    // let data = JSON.parse(localStorage.getItem('price') || '')
-    let data = 10000
-    setPrice(data)
+    console.log('paramsS: ', params)
   }, [])
+
+  // useEffect(() => {
+  //   let data = 10000
+  //   setPrice(data)
+  // }, [])
 
   const handleClickNext = () => {
     if(!bankCode) {
@@ -84,7 +107,7 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
     }
     else {
       let dataPost = {
-        ...state,
+        ...state?.postData,
         payment_method: 'virtual_account',
         bank_code: bankCode,
       }
@@ -95,7 +118,11 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
         // localStorage.setItem('paymentResult', JSON.stringify(data))
         history.push({
           pathname: `/hotel-reservation/${params?.match?.params?.id}/${params?.match?.params?.bookingId}/payment-result`,
-          state: data
+          // state: data
+          state: {
+            data: data,
+            room: state?.room
+          }
         })
       })
       .catch((err:any) => {
@@ -122,7 +149,7 @@ const HotelPayment: FC<HotelPaymentProps> = params => {
                 <span className="total-price">Total</span>
               </div>
               <div className="col text-end">
-                <span className="price-room purple">Rp {priceDecimal(price.toString())}</span>
+                <span className="price-room purple">Rp {priceDecimal(state?.totalPrice)}</span>
               </div>
             </div>
             <div className="">

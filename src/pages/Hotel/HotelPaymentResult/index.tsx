@@ -5,12 +5,30 @@ import { priceDecimal } from 'utils/helper';
 import Regulation from '../HotelReservation/Regulation';
 import './style.scss';
 
-interface StateProps {
+interface DataProps {
   expired_at?: string
   method_payment?: string
   name?: string
   total?: number
   virtual_account_number?: string
+}
+interface RoomProps {
+  name?: string,
+  code?: string,
+  default_occupancy?: number,
+  provider?: string,
+  breakfast?: boolean,
+  refundable?: boolean,
+  reschedule?: boolean,
+  price?: number,
+  ratekey?: string,
+  allotment?: number,
+  search_id?: number,
+  count?: number,
+}
+interface StateProps {
+  data?: DataProps,
+  room?: RoomProps[]
 }
 
 interface LocationProps {
@@ -37,8 +55,8 @@ const HotelPaymentResult: FC<ParamsProps> = p => {
     console.log('p.locationState: ', p?.location?.state)
     console.log('p: ', p)
   }, [p])
-  const data = p?.location?.state
-  const time = p?.location?.state?.expired_at
+  const data = p?.location?.state?.data
+  const time = p?.location?.state?.data?.expired_at
 
   useEffect(() => {
     if(data == undefined) {
