@@ -37,7 +37,7 @@
     // min-height: 280px
     // background-color: #fff
     // border-radius: 4px
-    margin-left: 30px
+    margin-left: 20px
 
 // ------------------ Account ------------------
 
@@ -175,6 +175,58 @@
         background-color: #f7f7f7
         border: 1px solid #f7f7f7
         color: #0064d2
+
+  &_content_order_not_found
+    margin-top: 16px
+    background: #fff
+    border-radius: 4px
+    padding: 24px
+    @include mixins.flex($flexDirection: column)
+
+    .header
+      @include mixins.flex($flexDirection: row, $justifyDirection: space-between, $alignDirection: center)
+
+      h2
+        font-size: 18px
+        font-weight: 600
+        color: #35405a
+
+    .wrapper_content
+      margin-top: 24px
+      @include mixins.flex($flexDirection: row, $justifyDirection: space-between, $alignDirection: center)
+
+      .card_content
+        @include mixins.flex($flexDirection: row, $justifyDirection: flex-start, $alignDirection: center)
+        padding: 16px
+        border-radius: 4px
+        border: .5px solid #dee2ee
+        cursor: pointer
+        width: 100%
+
+        &:first-child
+          margin-right: 16px
+
+        img
+          display: inline-block
+          height: 24px
+          width: 24px
+          background-position: 50%
+          background-repeat: no-repeat
+          background-size: contain
+
+        .text
+          margin-left: 20px
+
+          .title
+            font-size: 16px
+            font-weight: 400
+            color: #35405a
+            margin-bottom: 5px
+
+          .desc
+            font-size: 12px
+            font-weight: 400
+            color: #35405a
 
 .verified
   @include mixins.typograph($size: 16px, $weight: 600, $color: #0064d2, $lineHeight: 1.52)
