@@ -1,4 +1,4 @@
-export const priceDecimal = (string: string | undefined) => {
+export const priceDecimal = (string: string | undefined | number) => {
     if (string !== null && string !== undefined) {
         string = string.toString().replace(".00", "");
 
