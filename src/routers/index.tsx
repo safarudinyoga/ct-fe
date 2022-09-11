@@ -63,6 +63,9 @@ import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
 import ResetPassword from "pages/ResetPassword";
 
+// trains
+import TrainsMainPage from "pages/Trains";
+
 // dashboard
 import MyOrder from "pages/DashboardUser/MyOrder";
 import Account from "pages/DashboardUser/Account";
@@ -136,6 +139,9 @@ export const pages: Page[] = [
   //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
+
+  // trains
+  { path: "/trains", component: TrainsMainPage }
   // { path: "/subscription", component: PageSubcription },
   //
 ];
@@ -149,9 +155,9 @@ const pagesNoLayout: Page[] = [
   { path: '/forgot-password', exact: true, component: ForgotPassword },
   { path: '/reset-password', exact: true, component: ResetPassword },
 
-  // dashboard
-  { path: '/dashboard/my-order', exact: true, component: MyOrder },
-  { path: '/dashboard/my-account', exact: true, component: Account }
+  // dashboard private
+  // { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  // { path: '/dashboard/my-account', exact: true, component: Account }
 ]
 
 const noLayout = () => (
@@ -176,7 +182,8 @@ const noLayout = () => (
 // Private Route that needed logged user
 const privateRouteList: Page[] = [
   // { path: '', exact: true, component: null }
-  // { path: '/dashboard/my-order', exact: true, component: MyOrder }
+  { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  { path: '/dashboard/my-account', exact: true, component: Account }
 ]
 
 const Routes = () => {
@@ -202,8 +209,8 @@ const Routes = () => {
             <PrivateRouter
               key={path}
               component={component}
-              // exact={!!exact}
-              // path={path}
+              exact={!!exact}
+              path={path}
             />
           );
         })}

@@ -5,27 +5,30 @@ import StaySearchForm from "./StaySearchForm";
 import RentalCarSearchForm from "./RentalCarSearchForm";
 import FlightSearchForm from "./FlightSearchForm";
 
-export type SearchTab = "Pesawat";
+export type SearchTab = "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 
 export interface HeroSearchFormLengthProps {
   className?: string;
-  currentTab?: SearchTab;
+  currentTab?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
   currentPage?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 }
 
 const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
   className = "",
-  currentTab = "Pesawat",
+  currentTab = "",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Pesawat"];
-  const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
+  console.log(currentTab);
+
+  const tabs: SearchTab[] = ["Pesawat", "Kereta"];
+  const [tabActive, setTabActive] = useState<string>(currentTab);
 
   const renderTab = () => {
     return (
       <ul className="ml-2 sm:ml-6 md:ml-12 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
         {tabs.map((tab) => {
           const active = tab === tabActive;
+
           return (
             // <li
             //   onClick={() => setTabActive(tab)}
@@ -52,6 +55,10 @@ const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
     switch (tabActive) {
       case "Pesawat":
         return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+
+      case "Kereta":
+        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+
       default:
         return null;
     }
