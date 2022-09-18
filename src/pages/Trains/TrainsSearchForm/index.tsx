@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import LocationInput from "./LocationInput";
 import { FocusedInputShape } from "react-dates";
-import RentalCarDatesRangeInput from "./RentalCarDatesRangeInput";
-import ButtonSubmit from "./ButtonSubmit";
 import { FC } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
 import moment from "moment";
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
+import LocationInput from "components/HeroSearchForm/LocationInput";
+import ButtonSubmit from "../ButtonSubmit";
+import RentalCarDatesRangeInput from "components/HeroSearchForm/RentalCarDatesRangeInput";
 
 export interface DateRage {
   startDate: moment.Moment | null;
@@ -20,13 +20,13 @@ export interface TimeRage {
   endTime: string;
 }
 
-export interface FlightSearchFormProps {
+export interface TrainsSearchFormProps {
   haveDefaultValue?: boolean;
   placeholder?: string;
   description?: string;
 }
 
-const flightClass = [
+const trainsClass = [
   {
     name: "Economy",
     href: "##",
@@ -41,7 +41,7 @@ const flightClass = [
   },
 ];
 
-const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeholder, description }) => {
+const TrainsSearchForm: FC<TrainsSearchFormProps> = ({ haveDefaultValue, placeholder, description }) => {
   // DEFAULT DATA FOR ARCHIVE PAGE
   const defaultPickUpInputValue = "Tokyo, Jappan";
   const defaultDropOffInputValue = "Paris, France";
@@ -64,7 +64,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
     "roundTrip" | "oneWay" | ""
   >("roundTrip");
   const [guests, setGuests] = useState(1);
-  const [flightClassState, setFlightClassState] = useState("Economy");
+  const [trainsClassState, setTrainsClassState] = useState("Economy");
+  const [isRoundTrip, setisRoundTrip] = useState(true)
 
   // USER EFFECT
   useEffect(() => {
@@ -139,7 +140,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
            ${open ? "" : ""}
             px-4 py-1.5 rounded-md inline-flex items-center font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 text-xs`}
               >
-                <span>{`${flightClassState}`}</span>
+                <span>{`${trainsClassState}`}</span>
                 <ChevronDownIcon
                   className={`${
                     open ? "" : "text-opacity-70"
@@ -159,13 +160,13 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
                 <Popover.Panel className="absolute z-10 w-screen max-w-[200px] sm:max-w-[220px] px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 ">
                   <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10 ">
                     <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-7 ">
-                      {flightClass.map((item) => (
+                      {trainsClass.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
                           onClick={(e) => {
                             e.preventDefault();
-                            setFlightClassState(item.name);
+                            setTrainsClassState(item.name);
                             close();
                           }}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -193,7 +194,10 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
               ? "bg-black shadow-black/10 shadow-lg text-white"
               : "border border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("roundTrip")}
+          onClick={(e) => {
+            setDropOffLocationType("roundTrip")
+            setisRoundTrip(true)
+          }}
         >
           Round-trip
         </div>
@@ -203,7 +207,10 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
               ? "bg-black text-white shadow-black/10 shadow-lg"
               : "border border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("oneWay")}
+          onClick={(e) => {
+            setDropOffLocationType("oneWay")
+            setisRoundTrip(false)
+          }}
         >
           One-way
         </div>
@@ -251,6 +258,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
                 setDateRangeValue(data.stateDate);
                 setTimeRangeValue(data.stateTimeRage);
               }}
+              isRoundTrip={isRoundTrip}
             />
             {/* BUTTON SUBMIT OF FORM */}
             <div className="px-4 py-3 flex items-center justify-center">
@@ -265,4 +273,4 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeho
   return renderForm();
 };
 
-export default FlightSearchForm;
+export default TrainsSearchForm;

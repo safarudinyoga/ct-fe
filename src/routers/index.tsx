@@ -69,6 +69,7 @@ import TrainsMainPage from "pages/Trains";
 // dashboard
 import MyOrder from "pages/DashboardUser/MyOrder";
 import Account from "pages/DashboardUser/Account";
+import ListingTrainsMapPage from "pages/Trains/ListingTrainsMapPage";
 
 export const pages: Page[] = [
   //dev
@@ -141,7 +142,8 @@ export const pages: Page[] = [
   { path: "/about", component: PageAbout },
 
   // trains
-  { path: "/trains", component: TrainsMainPage }
+  { path: "/trains", component: TrainsMainPage },
+  { path: "/listing-trains", component: ListingTrainsMapPage }
   // { path: "/subscription", component: PageSubcription },
   //
 ];
@@ -174,7 +176,6 @@ const noLayout = () => (
         />
       );
     })}
-    <Route component={Page404} />
     <Footer />
   </>
 )
