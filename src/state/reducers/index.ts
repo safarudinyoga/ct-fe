@@ -3,12 +3,14 @@ import hotelReducer from "./hotelReducer"
 import loginReducer from "./loginReducers"
 import registerReducer from './registerReducers'
 import otpReducers from './otpReducers'
+import trainReducers from './trainReducers'
 
 const reducers = combineReducers({
     hotel: hotelReducer,
     authLogin: loginReducer,
     authRegister: registerReducer,
-    authOTP: otpReducers
+    authOTP: otpReducers,
+    trainState: trainReducers
 })
 
 export default reducers

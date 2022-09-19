@@ -21,7 +21,6 @@ const reducer = (state: OTPReducers = initialState, action: ActionOTP): OTPReduc
       }
 
     case ActionTypeOTP.POST_OTP_SUCCESS:
-      console.log(action, 'act');
       return {
         ...state,
         isLoading: false,
