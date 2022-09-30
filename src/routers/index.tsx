@@ -67,9 +67,10 @@ import ResetPassword from "pages/ResetPassword";
 import TrainsMainPage from "pages/Trains";
 
 // dashboard
+import ListingTrainsMapPage from "pages/Trains/ListingTrainsMapPage";
 import MyOrder from "pages/DashboardUser/MyOrder";
 import Account from "pages/DashboardUser/Account";
-import ListingTrainsMapPage from "pages/Trains/ListingTrainsMapPage";
+import SmartProfile from "pages/DashboardUser/SmartProfile";
 
 export const pages: Page[] = [
   //dev
@@ -184,7 +185,8 @@ const noLayout = () => (
 const privateRouteList: Page[] = [
   // { path: '', exact: true, component: null }
   { path: '/dashboard/my-order', exact: true, component: MyOrder },
-  { path: '/dashboard/my-account', exact: true, component: Account }
+  { path: '/dashboard/my-account', exact: true, component: Account },
+  { path: '/dashboard/smart-profile', exact: true, component: SmartProfile },
 ]
 
 const Routes = () => {

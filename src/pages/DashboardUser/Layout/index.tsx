@@ -1,4 +1,4 @@
-import { FC, ReactNode, createElement, MouseEventHandler, ReactEventHandler } from 'react';
+import { FC, ReactNode, createElement, useState } from 'react';
 import Footer from 'shared/Footer/Footer';
 import HeaderDashboard from './Header'
 import { Layout, Menu } from 'antd';
@@ -12,6 +12,7 @@ const { Content, Sider } = Layout;
 
 interface ILayoutDashboardProps {
   children: ReactNode
+  activeKey: string
 }
 
 interface SidebarType {
@@ -34,7 +35,7 @@ const sidebarItem: SidebarType[] = [
         <h4 className='profile_name'>{COOKIES.get(SITE_COOKIES.FULLNAME)}</h4>
         <h4 className='verified'>Verified</h4>
       </div>
-    )
+    ),
   },
   {
     icon: LaptopOutlined,
@@ -49,7 +50,7 @@ const sidebarItem: SidebarType[] = [
   {
     icon: LaptopOutlined,
     label: 'Elite Rewards',
-    link: ''
+    link: 'elite-rewards'
   },
   {
     type: 'divider'
@@ -57,22 +58,22 @@ const sidebarItem: SidebarType[] = [
   {
     icon: LaptopOutlined,
     label: 'Smart Profile',
-    link: ''
+    link: 'smart-profile'
   },
   {
     icon: LaptopOutlined,
     label: 'Smart Pay',
-    link: ''
+    link: 'smart-pay'
   },
   {
     icon: LaptopOutlined,
     label: 'Daftar Refund',
-    link: ''
+    link: 'daftar-refund'
   },
   {
     icon: LaptopOutlined,
     label: 'My Review',
-    link: ''
+    link: 'my-review'
   },
   {
     type: 'divider'
@@ -80,17 +81,17 @@ const sidebarItem: SidebarType[] = [
   {
     icon: LaptopOutlined,
     label: 'Loyalty Program',
-    link: ''
+    link: 'loyalty-program'
   },
   {
     icon: LaptopOutlined,
     label: 'Pengaturan',
-    link: ''
+    link: 'pengaturan'
   },
   {
     icon: LaptopOutlined,
     label: 'Pusat Bantuan',
-    link: ''
+    link: 'pusat-bantuan'
   },
   {
     type: 'divider'
@@ -98,7 +99,7 @@ const sidebarItem: SidebarType[] = [
   {
     icon: LaptopOutlined,
     label: 'Keluar',
-    link: ''
+    link: 'keluar'
   },
 ]
 
@@ -110,17 +111,19 @@ const listMenu: MenuProps['items'] = sidebarItem.map(
 
     return {
       key: item.link || key,
+      // key: item.link,
       icon: createElement(item.icon),
       label: item.label,
     };
   },
 );
 
-const LayoutDashboard: FC<ILayoutDashboardProps> = ({ children }) => {
+const LayoutDashboard: FC<ILayoutDashboardProps> = ({ children, activeKey }) => {
   const history = useHistory()
 
   const handleClick = (e: IButtonProps) => {
     const { key } = e
+    console.log(key);
 
     history.push(`/dashboard/${key}`)
   }
@@ -139,6 +142,7 @@ const LayoutDashboard: FC<ILayoutDashboardProps> = ({ children }) => {
               items={listMenu}
               className='sidebar'
               onClick={handleClick}
+              activeKey={activeKey}
             />
           </Sider>
           <Content>{children}</Content>

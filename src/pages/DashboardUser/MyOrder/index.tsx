@@ -53,7 +53,7 @@ const MyOrder: FC<IMyOrderProps> = (props) => {
   );
 
   return (
-    <LayoutDashboard>
+    <LayoutDashboard activeKey='my-order'>
       <div className='my-order'>
         <div className='my-order_header'>
           <div className='first_content flex justify-between'>
