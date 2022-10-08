@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
-import { ActionType } from "../action-types/train-type"
-import { ActionTrains } from '../actions/trains-actions-types';
+import { ActionType, ActionTypeAvailability } from "../action-types/train-type"
+import { ActionTrains, ActionTrainAvailability } from '../actions/trains-actions-types';
 import { _axios, transportUrl, defaultConfig, userUrl } from "utils/_axios";
 import { RESPONSE_STATUS } from '../../utils/apiHelper';
 
@@ -13,7 +13,7 @@ export const callApiSearchTrain = () => {
     })
 
     try {
-      const { data: { data }, status } = await _axios.get(`${userUrl}${transportUrl}/train/stations`, {
+      const { data: { data }, status } = await _axios.get(`${userUrl}/guest${transportUrl}/train/stations`, {
         ...defaultConfig()
       })
       if (RESPONSE_STATUS.includes(status)) {
@@ -25,6 +25,25 @@ export const callApiSearchTrain = () => {
     } catch (error) {
       dispatch({
         type: ActionType.GET_LIST_STATION_FAILED,
+        message: error
+      })
+    }
+  }
+}
+
+export const getAvailability = () => {
+  return async (dispatch: Dispatch<ActionTrainAvailability>) => {
+    dispatch({
+      type: ActionTypeAvailability.POST_STATION_AVAILABILITY_LOADING
+    })
+
+    try {
+      const data = await _axios.post(`${userUrl}${transportUrl}/train/availability`, {
+        ...defaultConfig()
+      })
+    } catch (error) {
+      dispatch({
+        type: ActionTypeAvailability.POST_STATION_AVAILABILITY_FAILED,
         message: error
       })
     }

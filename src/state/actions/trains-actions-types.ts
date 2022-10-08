@@ -1,4 +1,4 @@
-import { ActionType } from '../action-types/train-type'
+import { ActionType, ActionTypeAvailability } from '../action-types/train-type'
 
 interface GetListStationPending {
   type: ActionType.GET_LIST_STATION_PENDING
@@ -15,6 +15,22 @@ interface GetListStationFailed {
 }
 
 export type ActionTrains = GetListStationPending | GetListStationSuccess | GetListStationFailed
+
+interface PostStationAvailability {
+  type: ActionTypeAvailability.POST_STATION_AVAILABILITY,
+  payload: any
+}
+
+interface PostStationPending {
+  type: ActionTypeAvailability.POST_STATION_AVAILABILITY_LOADING
+}
+
+interface PostStationFailed {
+  type: ActionTypeAvailability.POST_STATION_AVAILABILITY_FAILED,
+  message: any
+}
+
+export type ActionTrainAvailability = PostStationAvailability | PostStationPending | PostStationFailed
 
 export interface GetTrainReducers {
   message: string,

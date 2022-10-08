@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { FocusedInputShape } from "react-dates";
 import { FC } from "react";
+import { Button, DatePicker, Input, Switch } from 'antd';
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
@@ -14,6 +15,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from 'state/action-creators/train'
 import { RootState } from 'state/reducers';
+import useWindowDimensions from "utils/useWindowDimension";
+
+import '../trains.sass'
+
 var debounce = require('lodash.debounce');
 export interface DateRage {
   startDate: moment.Moment | null;
@@ -47,6 +52,8 @@ const trainsClass = [
 ];
 
 const TrainsSearchForm: FC<TrainsSearchFormProps> = ({ haveDefaultValue, placeholder, description }) => {
+  const { isMobile } = useWindowDimensions()
+
   const dispatch = useDispatch();
   const { list_station, isLoading, isError } = useSelector((state: RootState) => state.trainState)
   const { callApiSearchTrain } = bindActionCreators(actionCreators, dispatch)
@@ -329,7 +336,40 @@ const TrainsSearchForm: FC<TrainsSearchFormProps> = ({ haveDefaultValue, placeho
     );
   };
 
-  return renderForm();
+  const renderFormMobile = () => {
+    return (
+      <div className="mobile-view-trains">
+        <div className="flex flex-column gap-3">
+          <div className="flex flex-column gap-2 justify-content-start">
+            <h4>Dari</h4>
+            <Input placeholder="Jakarta" />
+          </div>
+          <div className="flex flex-column gap-2 justify-content-start">
+            <h4>Ke</h4>
+            <Input placeholder="Surabaya" />
+          </div>
+          <div className="flex flex-column gap-2 justify-content-start">
+            <h4>Tanggal Berangkat</h4>
+            <div className="flex align-items-center gap-4 w-100">
+              <DatePicker onChange={(date) => console.log(date)} className='w-3/4' />
+              <Switch />
+            </div>
+          </div>
+          <div className="flex flex-column gap-2 justify-content-start">
+            <h4>Tanggal Pulang</h4>
+            <DatePicker onChange={(date) => console.log(date)} className='w-3/4' />
+          </div>
+          <div className="flex flex-column gap-2 justify-content-start">
+            <h4>Jumlah Penumpang</h4>
+            <Input placeholder="1" />
+          </div>
+        </div>
+        <Button className='mt-4'>Cari Kereta</Button>
+      </div>
+    )
+  }
+
+  return isMobile ? renderFormMobile() : renderForm();
 };
 
 export default TrainsSearchForm;

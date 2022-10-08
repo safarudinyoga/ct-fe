@@ -10,6 +10,7 @@ interface ITrainsMainPageProps {
 }
 
 const TrainsMainPage: FC<ITrainsMainPageProps> = ({ className = "" }) => {
+
   return (
     <div className={`nc-listingtrainspage relative overflow-hidden ${className}`}
     data-nc-id="listingtrainspage">
