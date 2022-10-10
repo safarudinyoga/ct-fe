@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import { SITE_COOKIES, COOKIES } from '../../utils/cookies';
 
 interface IPrivateRouterProps {
-  component: React.ElementType
+  component: React.ElementType,
+  path: string,
+  exact: boolean
 }
 
 const PrivateRouter = ({ component: Component, ...rest }: IPrivateRouterProps) => (

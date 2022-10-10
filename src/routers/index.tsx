@@ -63,8 +63,14 @@ import OTP from "pages/OTP";
 import ForgotPassword from "pages/ForgotPassword";
 import ResetPassword from "pages/ResetPassword";
 
+// trains
+import TrainsMainPage from "pages/Trains";
+
 // dashboard
+import ListingTrainsMapPage from "pages/Trains/ListingTrainsMapPage";
 import MyOrder from "pages/DashboardUser/MyOrder";
+import Account from "pages/DashboardUser/Account";
+import SmartProfile from "pages/DashboardUser/SmartProfile";
 
 export const pages: Page[] = [
   //dev
@@ -135,6 +141,10 @@ export const pages: Page[] = [
   //
   { path: "/contact", component: PageContact },
   { path: "/about", component: PageAbout },
+
+  // trains
+  { path: "/trains", component: TrainsMainPage },
+  { path: "/listing-trains", component: ListingTrainsMapPage }
   // { path: "/subscription", component: PageSubcription },
   //
 ];
@@ -148,8 +158,9 @@ const pagesNoLayout: Page[] = [
   { path: '/forgot-password', exact: true, component: ForgotPassword },
   { path: '/reset-password', exact: true, component: ResetPassword },
 
-  // dashboard
-  { path: '/dashboard/my-order', exact: true, component: MyOrder }
+  // dashboard private
+  // { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  // { path: '/dashboard/my-account', exact: true, component: Account }
 ]
 
 const noLayout = () => (
@@ -166,7 +177,6 @@ const noLayout = () => (
         />
       );
     })}
-    <Route component={Page404} />
     <Footer />
   </>
 )
@@ -174,7 +184,9 @@ const noLayout = () => (
 // Private Route that needed logged user
 const privateRouteList: Page[] = [
   // { path: '', exact: true, component: null }
-  // { path: '/dashboard/my-order', exact: true, component: MyOrder }
+  { path: '/dashboard/my-order', exact: true, component: MyOrder },
+  { path: '/dashboard/my-account', exact: true, component: Account },
+  { path: '/dashboard/smart-profile', exact: true, component: SmartProfile },
 ]
 
 const Routes = () => {
@@ -200,8 +212,8 @@ const Routes = () => {
             <PrivateRouter
               key={path}
               component={component}
-              // exact={!!exact}
-              // path={path}
+              exact={!!exact}
+              path={path}
             />
           );
         })}

@@ -65,7 +65,7 @@ const HeaderDashboard: FC<IHeaderDashboardProps> = (props) => {
             <div className="rounded-profile-dashboard">
               {COOKIES.get(SITE_COOKIES.NAME)}
             </div>
-            <h3>safarudin yoga</h3>
+            <h3>{COOKIES.get(SITE_COOKIES.FULLNAME)}</h3>
           </div>
         )
       },
@@ -121,7 +121,7 @@ const HeaderDashboard: FC<IHeaderDashboardProps> = (props) => {
     },
     {
       name: (
-        <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight' overlayClassName="menus">
+        <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight' overlayClassName="menus" key='key'>
           <a style={{ marginLeft: 20 }} className="ant-dropdown-link" href="#">
             <div className="rounded-profile">
               {COOKIES.get(SITE_COOKIES.NAME)}

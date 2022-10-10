@@ -23,7 +23,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
   const state = useSelector((state: RootState) => state.hotel)
   const dispatch = useDispatch();
   const { callApiSearch, onChangeInputValue } = bindActionCreators(actionCreators, dispatch)
-  
+
   return (
     <div
       className={`nc-ListingStayMapPage relative ${className}`}

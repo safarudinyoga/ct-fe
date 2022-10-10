@@ -201,7 +201,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/trains",
     name: "Kereta",
     isNew: true,
   },

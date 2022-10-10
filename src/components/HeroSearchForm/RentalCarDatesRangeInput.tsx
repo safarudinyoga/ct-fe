@@ -24,6 +24,7 @@ export interface RentalCarDatesRangeInputProps {
   className?: string;
   numberOfMonths?: number;
   anchorDirection?: AnchorDirectionShape;
+  isRoundTrip?: boolean;
 }
 
 const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
@@ -37,6 +38,7 @@ const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
   wrapFieldClassName = "flex flex-col xl:flex-row xl:items-center w-full flex-shrink-0 relative [ nc-divide-field ]",
   numberOfMonths,
   anchorDirection,
+  isRoundTrip
 }) => {
   const [focusedInput, setFocusedInput] = useState(defaultFocus);
   const [stateDate, setStateDate] = useState(defaultDateValue);
@@ -284,7 +286,7 @@ const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
 
       <div className={wrapFieldClassName}>
         {renderInputpickUpDate()}
-        {renderInputdropOffDate()}
+        {isRoundTrip && renderInputdropOffDate()}
       </div>
     </div>
   );

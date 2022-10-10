@@ -4,29 +4,32 @@ import ExperiencesSearchForm from "./ExperiencesSearchForm";
 import StaySearchForm from "./StaySearchForm";
 import RentalCarSearchForm from "./RentalCarSearchForm";
 import FlightSearchForm from "./FlightSearchForm";
+import TrainsSearchForm from "pages/Trains/TrainsSearchForm";
 
-export type SearchTab = "Pesawat";
+export type SearchTab = "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 
 export interface HeroSearchFormLengthProps {
   className?: string;
-  currentTab?: SearchTab;
+  currentTab?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
   currentPage?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 }
 
 const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
   className = "",
-  currentTab = "Pesawat",
+  currentTab = "",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Pesawat"];
-  const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
+  const tabs: SearchTab[] = ["Pesawat", "Kereta"];
+  const [tabActive, setTabActive] = useState<string>(currentTab);
 
   const renderTab = () => {
     return (
       <ul className="ml-2 sm:ml-6 md:ml-12 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-        {tabs.map((tab) => {
+        {tabs.map((tab, i) => {
           const active = tab === tabActive;
+
           return (
+            <div key={i}></div>
             // <li
             //   onClick={() => setTabActive(tab)}
             //   className={`flex-shrink-0 flex items-center cursor-pointer text-sm lg:text-base font-medium ${active
@@ -40,7 +43,6 @@ const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
             //   )}
             // </li>
             // <span>{tab}</span>
-            <></>
           );
         })}
       </ul>
@@ -51,7 +53,11 @@ const HeroSearchFormLength: FC<HeroSearchFormLengthProps> = ({
     const isArchivePage = !!currentPage && !!currentTab;
     switch (tabActive) {
       case "Pesawat":
-        return <FlightSearchForm haveDefaultValue={isArchivePage} />;
+        return <FlightSearchForm haveDefaultValue={isArchivePage} placeholder='Flying' description="fly" />;
+
+      case "Kereta":
+        return <TrainsSearchForm haveDefaultValue={isArchivePage} placeholder='Trip' description="trip" />;
+
       default:
         return null;
     }
