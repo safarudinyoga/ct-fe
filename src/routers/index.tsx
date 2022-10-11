@@ -42,22 +42,28 @@ import ListingRealEstatePage from "containers/ListingRealEstatePage/ListingRealE
 import SiteHeader from "containers/SiteHeader";
 import ListingFlightsPage from "containers/ListingFlightsPage/ListingFlightsPage";
 
-//dev
+//DEV
+//Hotels
 import PageHome from "pages/HomePage/HomePage";
-// import ListingHotel from "pages/ListingHotelPage/ListingHotelPage";
-// import ListingHotelMap from "pages/ListingHotelPage/ListingHotelMapPage";
-// import ListingHotelDetail from "pages/ListingHotelPage/ListingHotelDetailPage";
 import HotelHome from "pages/Hotel";
 import HotelDetail from "pages/Hotel/HotelDetail";
 import HotelList from "pages/Hotel/HotelList";
 import HotelReservation from "pages/Hotel/HotelReservation";
 import HotelPayment from "pages/Hotel/HotelPayment";
 import HotelPaymentResult from "pages/Hotel/HotelPaymentResult";
+
+//Flights
+import FlightHome from "pages/Flight";
+import FlightList from "pages/Flight/ListSearch";
+import FlightReservation from "pages/Flight/FlightReservation";
+
+
 import Register from "pages/Register";
 import OTP from "pages/OTP";
 
 export const pages: Page[] = [
-  //dev
+  //DEV
+  //Hotels
   { path: "/", exact: true, component: PageHome },
   { path: "/hotels", exact: true, component: HotelHome },
   { path: "/hotels/:id", component: HotelDetail },
@@ -65,6 +71,11 @@ export const pages: Page[] = [
   { path: "/hotel-reservation/:id/:bookingId", exact: true, component: HotelReservation},
   { path: "/hotel-reservation/:id/:bookingId/payment", component: HotelPayment},
   { path: "/hotel-reservation/:id/:bookingId/payment-result", component: HotelPaymentResult},
+
+  //Flights
+  { path: "/flights", exact: true, component: FlightHome },
+  { path: "/flights/list", component: FlightList },
+  { path: "/flights/reservation", component: FlightReservation },
   // { path: "/listing-hotels", component: ListingHotel },
   // { path: "/listing-hotel-map", component: ListingHotelMap },
   // { path: "/listing-hotel-detail", component: ListingHotelDetail },

@@ -9,12 +9,21 @@ export interface LocationStates {
   // "/listing-hotels"?: {};
   // "/listing-hotel-map"?: {};
   // "/listing-hotel-detail"?: {};
+
+  //DEV
+  //Hotels
   "/hotels"?: {};
   "/hotels/:id"?: {};
   "/hotel-list"?: {};
   "/hotel-reservation/:id/:bookingId"?: {};
   "/hotel-reservation/:id/:bookingId/payment"?: {};
   "/hotel-reservation/:id/:bookingId/payment-result"?: {};
+
+  //Flights
+  "/flights"?: {};
+  "/flights/list"?: {};
+  "/flights/reservation"?: {};
+
   //
   "/listing-flights"?: {};
   //
