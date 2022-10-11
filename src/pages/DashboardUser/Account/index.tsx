@@ -11,7 +11,7 @@ interface IAccountProps {
 
 const Account: FC<IAccountProps> = (props) => {
   return (
-    <LayoutDashboard>
+    <LayoutDashboard activeKey='my-account'>
       <div className='account'>
         <h3>Detail Akun</h3>
         <h4>Di sini kamu bisa mengatur detail akunmu.</h4>

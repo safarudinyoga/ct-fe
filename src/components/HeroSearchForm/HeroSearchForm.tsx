@@ -10,7 +10,7 @@ export type SearchTab = "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Pesawat" | "Hotel" | "Villa" | "Mobil" | "Kereta";
+  currentPage?: SearchTab;
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({

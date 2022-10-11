@@ -22,6 +22,8 @@ export interface TimeRage {
 
 export interface FlightSearchFormProps {
   haveDefaultValue?: boolean;
+  placeholder?: string;
+  description?: string;
 }
 
 const flightClass = [
@@ -39,7 +41,7 @@ const flightClass = [
   },
 ];
 
-const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
+const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue, placeholder, description }) => {
   // DEFAULT DATA FOR ARCHIVE PAGE
   const defaultPickUpInputValue = "Tokyo, Jappan";
   const defaultDropOffInputValue = "Paris, France";
@@ -226,15 +228,15 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
                 defaultValue={pickUpInputValue}
                 onChange={(e) => setPickUpInputValue(e)}
                 onInputDone={() => setFieldFocused("dropOffInput")}
-                placeHolder="Flying from"
-                desc="Where do you want to fly from?"
+                placeHolder={`${placeholder} from`}
+                desc={`Where you want to ${description} from?`}
               />
               <LocationInput
                 defaultValue={dropOffInputValue}
                 onChange={(e) => setDropOffInputValue(e)}
                 onInputDone={() => setFieldFocused("startDate")}
-                placeHolder="Flying to"
-                desc="Where you want to fly to?"
+                placeHolder={`${placeholder} to`}
+                desc={`Where do you want to ${description} to?`}
                 autoFocus={fieldFocused === "dropOffInput"}
               />
             </div>

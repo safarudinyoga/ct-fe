@@ -5,12 +5,30 @@ import { priceDecimal } from 'utils/helper';
 import Regulation from '../HotelReservation/Regulation';
 import './style.scss';
 
-interface StateProps {
+interface DataProps {
   expired_at?: string
   method_payment?: string
   name?: string
   total?: number
   virtual_account_number?: string
+}
+interface RoomProps {
+  name?: string,
+  code?: string,
+  default_occupancy?: number,
+  provider?: string,
+  breakfast?: boolean,
+  refundable?: boolean,
+  reschedule?: boolean,
+  price?: number,
+  ratekey?: string,
+  allotment?: number,
+  search_id?: number,
+  count?: number,
+}
+interface StateProps {
+  data?: DataProps,
+  room?: RoomProps[]
 }
 
 interface LocationProps {
@@ -37,7 +55,8 @@ const HotelPaymentResult: FC<ParamsProps> = p => {
     console.log('p.locationState: ', p?.location?.state)
     console.log('p: ', p)
   }, [p])
-  const data = p?.location?.state
+  const data = p?.location?.state?.data
+  const time = p?.location?.state?.data?.expired_at
 
   useEffect(() => {
     if(data == undefined) {
@@ -69,6 +88,43 @@ const HotelPaymentResult: FC<ParamsProps> = p => {
   const handleClickConfirm = () => {
     history.push(`/hotels/${p?.match?.params?.id}`)
   }
+
+
+  const calculateTimeLeft = () => {
+    // const difference = +new Date("2022-08-21T06:46:27.101Z") - +new Date();
+    const difference = +new Date(`${time}`) - +new Date();
+    let timeLeft = {};
+    if (difference > 0) {
+
+      timeLeft = {
+        hours: Math.floor(difference / (1000 * 60 * 60)),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  interface TimeLeftProps {
+    hours?: string,
+    minutes?: string,
+    seconds?: string
+  }
+
+  const [timeLeft, setTimeLeft] = useState<TimeLeftProps | null>(null);
+
+  useEffect(() => {
+    calculateTimeLeft()
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  });
+
+
   return (
     <div className="reservation-wrapper">
       <BgGlassmorphism/>
@@ -157,10 +213,18 @@ const HotelPaymentResult: FC<ParamsProps> = p => {
               <div className="col countdown-detail">
                 <span><strong>Selesaikan Pembayaran Sebelum</strong></span>
                 <div className="text-center purple">
-                  <span>Sabtu, 13 Agustus 2022 - 23.59</span>
+                  {/* <span>Sabtu, 13 Agustus 2022 - 23.59</span> */}
+                  <span>{data?.expired_at}</span>
                 </div>
                 <div className="text-center">
-                  <span><strong>04 : 59 : 59</strong></span>
+                  {/* <span><strong>04 : 59 : 59</strong></span> */}
+                  <p>
+                    <span><strong>{timeLeft?.hours}</strong></span>
+                    <span><strong> : </strong></span>
+                    <span><strong>{timeLeft?.minutes}</strong></span>
+                    <span><strong> : </strong></span>
+                    <span><strong>{timeLeft?.seconds}</strong></span>
+                  </p>
                 </div>
               </div>
               <div className="countdown-footer">

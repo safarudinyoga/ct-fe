@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import './style.scss';
+import { priceDecimal } from 'utils/helper';
 
 export interface HeaderDataProps {
     name?: string,
@@ -21,6 +22,7 @@ const HeaderData: FC<HeaderDataProps> = p => {
     endDate: ''
   });
   const [title, setTitle] = useState('');
+  const [dataHeader, setDataHeader] = useState<any[]>([])
   useEffect(() => {
     if(localStorage.getItem('dateString')) {
         let date = JSON.parse(localStorage.getItem('dateString') || '')
@@ -30,6 +32,19 @@ const HeaderData: FC<HeaderDataProps> = p => {
         })    
     }
   }, [])
+
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem('dataBooking')||'')
+    if(data !== undefined) {
+        setTimeout(() => {
+            setDataHeader(JSON.parse(localStorage.getItem('dataBooking')||''))
+        }, 1000)
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('dataHeader: ', dataHeader)
+  }, [dataHeader])
 
   useEffect(() => {
     if(localStorage.getItem('hotelSearchValue')) {
@@ -64,19 +79,26 @@ const HeaderData: FC<HeaderDataProps> = p => {
         { p.page == 'payment' ?
             null :
             (
-                <>
+                dataHeader && dataHeader.map((a, index) => (
+                <div key={index}>
                     <hr/>
-                        <span className="mt-3 text-medium purple">(x1) {p.name}</span>
+                        <p className="mt-3 text-medium purple">(x{a.default_occupancy}) {a.name}</p>
+                        {/* <p className="mt-3 text-medium purple">Rp {priceDecimal(a.price.toString() * a.count.toString())}</p> */}
                     <hr className="mt-3"/>
                     <div className="mt-3">
                         <i className={`text-2xl text-neutral-6000 las la-utensils mr-1`}></i>
-                        <span className="text-success">{p.refundable? '' : 'Tidak '}Bisa Refund</span>
+                        <span className="text-success">{a.breakfast? '' : 'Tidak'} Termasuk Sarapan</span>
+                      </div>
+                    <div>
+                        <i className={`text-2xl text-neutral-6000 las la-utensils mr-1`}></i>
+                        <span className="text-success">{a.refundable? '' : 'Tidak '}Bisa Refund</span>
                     </div>
                     <div>
                         <i className={`text-2xl text-neutral-6000 las la-utensils mr-1`}></i>
-                        <span className="text-success">{p.reschedule? '' : 'Tidak '}Bisa Di-reschedule</span>
+                        <span className="text-success">{a.reschedule? '' : 'Tidak '}Bisa Di-reschedule</span>
                     </div>
-                </>
+                </div>
+                ))
             )
         }
     </div>

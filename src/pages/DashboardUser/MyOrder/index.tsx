@@ -53,7 +53,7 @@ const MyOrder: FC<IMyOrderProps> = (props) => {
   );
 
   return (
-    <LayoutDashboard>
+    <LayoutDashboard activeKey='my-order'>
       <div className='my-order'>
         <div className='my-order_header'>
           <div className='first_content flex justify-between'>
@@ -88,6 +88,25 @@ const MyOrder: FC<IMyOrderProps> = (props) => {
           <div className='button-area'>
             <Button className='yellow'>pesan perjalanan</Button>
             <Button className='grey'>lihat riwayat pesanan</Button>
+          </div>
+        </div>
+        <div className='my-order_content_order_not_found'>
+          <div className='header'><h2>Pesananmu tidak ada?</h2></div>
+          <div className='wrapper_content'>
+            <div className='card_content'>
+              <img src="https://www.tiket.com/myorder/assets/3e3f2a7e.svg" alt="?" className='' />
+              <div className='text'>
+                <h2 className='title'>Pusat Bantuan</h2>
+                <h4 className='desc'>Temukan solusi dari masalahmu dengan mudah.</h4>
+              </div>
+            </div>
+            <div className='card_content'>
+              <img src="https://www.tiket.com/myorder/assets/164afc7d.svg" alt="?" className='' />
+              <div className='text'>
+                <h2 className='title'>Hubungi Customer Care</h2>
+                <h4 className='desc'>Customer Care kami 24/7 selalu ada untukmu.</h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
