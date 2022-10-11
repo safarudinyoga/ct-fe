@@ -34,12 +34,12 @@ const HeaderData: FC<HeaderDataProps> = p => {
   }, [])
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem('dataBooking')||'')
-    if(data !== undefined) {
-        setTimeout(() => {
+    setTimeout(() => {
+        let data = JSON.parse(localStorage.getItem('dataBooking')||'')
+        if(data !== undefined) {
             setDataHeader(JSON.parse(localStorage.getItem('dataBooking')||''))
-        }, 1000)
-    }
+        }
+    }, 1000)
   }, [])
 
   useEffect(() => {

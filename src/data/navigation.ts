@@ -188,7 +188,7 @@ const templatesChildrenMenus: NavItemType[] = [
 export const NAVIGATION_DEMO: NavItemType[] = [
   {
     id: ncNanoId(),
-    href: "/listing-flights",
+    href: "/flights",
     name: "Pesawat",
     isNew: true,
   },
@@ -225,7 +225,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
 
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/event",
     name: "Event",
   },
 ];

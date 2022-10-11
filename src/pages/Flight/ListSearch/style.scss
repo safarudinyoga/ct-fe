@@ -1,0 +1,100 @@
+.flight-list-empty {
+    padding: 50px 10px 50px 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .bg-flight {
+        img {
+            width: 500px;
+        }
+    }
+
+    .text-not-found {
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+.flight-list-container {
+    padding: 1px;
+
+    .body {
+        .content {
+            padding-top: 20px;
+        }
+    }
+}
+
+.flight-ticket-result {
+    padding: 5px;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0px;
+
+    .title {
+        display: flex;
+        justify-content: center;
+
+        .text {
+            font-size: 20px;
+            font-weight: 500;
+            color: #374577;
+        }
+    }
+
+    .body {
+        .detail-left {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            .total {
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+
+        .detail-right {
+            display: flex;
+            justify-content: center;
+
+            .show-button {
+                cursor: pointer;
+            }
+
+            .btn-next {
+                border-radius: 20px;
+                background-color: #374577;
+                color: white;
+            }
+        }
+    }
+
+    &.hidden {
+        display: none;
+    }
+}
+
+.modal-result {
+    text-align: center;
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .reset {
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #374577;
+        }
+    }
+}

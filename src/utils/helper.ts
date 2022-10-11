@@ -1,3 +1,5 @@
+export const BaseUrl = 'https://api.caritempat.id'
+
 export const priceDecimal = (string: string | undefined | number) => {
     if (string !== null && string !== undefined) {
         string = string.toString().replace(".00", "");
@@ -17,3 +19,7 @@ export const priceDecimal = (string: string | undefined | number) => {
         return "-";
     }
 };
+
+
+
+
