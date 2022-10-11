@@ -225,7 +225,7 @@ export const NAVIGATION_DEMO: NavItemType[] = [
 
   {
     id: ncNanoId(),
-    href: "#",
+    href: "/event",
     name: "Event",
   },
 ];

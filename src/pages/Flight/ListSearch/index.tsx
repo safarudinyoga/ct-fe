@@ -50,7 +50,13 @@ const ListSearch: FC<ListSearchProps> = (p) => {
   const [showResult, setShowResult] = useState(false)
   const [showModalResult, setShowModalResult] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
-  const isRoadTripLength = 2;
+  const [tripLength, setTripLength] = useState(1)
+
+  useEffect(() => {
+    if(state?.isRoundTrip) {
+      setTripLength(2)
+    }
+  }, [])
 
   useEffect(() => {
     console.log('selectedPrice: ', selectedPrice)
@@ -211,7 +217,7 @@ const ListSearch: FC<ListSearchProps> = (p) => {
                     <span>Show</span>
                   </a>
                 </div>
-                { isRoadTripLength == selectedTicket?.length ?
+                { tripLength == selectedTicket?.length ?
                   (
                     <div className="btn btn-next" onClick={handleClickNext}>
                       Lanjutkan
