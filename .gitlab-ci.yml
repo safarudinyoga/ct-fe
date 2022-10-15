@@ -1,19 +1,13 @@
-image: alpine:latest
-
-pages:
-  stage: deploy
+stages:
+  - build
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - name: docker:19.03.8-dind
   before_script:
-  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-  - ssh-keyscan 34.135.235.127 >> ~/.ssh/known_hosts
-  - chmod 644 ~/.ssh/known_hosts
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-  - ssh sso-ct@34.135.235.127 "cd /usr/node/ct-fe && git checkout master && git pull origin master && yarn && npm run build && pm2 restart ct-fe && exit"
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+    - echo "Build successfully!"
